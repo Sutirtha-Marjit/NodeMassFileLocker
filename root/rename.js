@@ -1,4 +1,5 @@
 (function (fs) {
+	var support = require('./support.js');
 	console.log("Mass Renameing starting ...");
 	console.log(new Date());
 	console.log("»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»");
@@ -7,8 +8,8 @@
 		folderInfo : {
 			original : []
 		},
-		root : 'outbox/',
-		processDelay:2000,
+		root : support.sourceFolderToRename+'/',
+		processDelay:support.processDelay,
 		error : {
 			fileAvailable : true
 		}
@@ -16,7 +17,7 @@
 	function MassRenameEngine() {
 		var self = this;
 		self.createOutPutFile = function () {
-			G.FileSystem.writeFile(G.root + 'job.status', JSON.stringify(G.folderInfo), function (err) {
+			G.FileSystem.writeFile(G.root + support.jobStatusFileName+'.'+support.jobStatusFileType, JSON.stringify(G.folderInfo), function (err) {
 				console.log(err);
 			});
 		};
@@ -27,7 +28,7 @@
 			}else{
 				var extension,namePartArr = fileName.split('.');
 				extension = namePartArr[namePartArr.length-1];
-				if(extension==='status'){
+				if(extension===support.jobStatusFileType){
 					return false;
 				}
 				return extension;
