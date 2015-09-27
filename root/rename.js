@@ -18,7 +18,9 @@
 		var self = this;
 		self.createOutPutFile = function () {
 			G.FileSystem.writeFile(G.root + support.jobStatusFileName+'.'+support.jobStatusFileType, JSON.stringify(G.folderInfo), function (err) {
+				if(err!==null){
 				console.log(err);
+				}
 			});
 		};
 		

@@ -1,5 +1,8 @@
 (function (fs) {
 	var support = require('./support.js');
+	console.log('Unlocking starting ...');
+	console.log(new Date());
+	console.log("»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»\n");
 	var G = {
 		FileSystem : fs,
 		folderInfo : {},
@@ -18,24 +21,24 @@
 		}
 	};
 	var createSingleFolder = function () {}
-	var createNestedFolder = function (path,writePath,callBack) {
-		var targetPath,dirPath = '',
+	var createNestedFolder = function (path, writePath, callBack) {
+		var targetPath,
+		dirPath = '',
 		i = 0;
 		pathArr = path.split(support.delimeter),
-		limit = pathArr.length-1;
-		
+		limit = pathArr.length - 1;
 		while (i < limit) {
 			dirPath = dirPath + '/' + pathArr[i];
 			targetPath = G.targetFolder + dirPath;
-				if (!G.FileSystem.existsSync(targetPath)) {
-					G.FileSystem.mkdirSync(targetPath);
-					console.log('\n...................................................................................');
-					console.log('\n'+targetPath+' created');
-				}
+			if (!G.FileSystem.existsSync(targetPath)) {
+				G.FileSystem.mkdirSync(targetPath);
+				support.showDivider('-', 3);
+				console.log(targetPath + ' created');
+			}
 			i++;
 		}
-		
-		callBack(G.targetFolder+'/'+path,writePath);
+
+		callBack(G.targetFolder + '/' + path, writePath);
 	};
 	var readStatusFile = function () {
 		createTargetFolder();
@@ -47,23 +50,14 @@
 				G.folderInfo = JSON.parse(data);
 				var modifed = G.folderInfo.modified;
 				for (var i = 0; i < modifed.length; i++) {
-					createNestedFolder(modifed[i][0],modifed[i][1],function(writeFile,readFile){
-						
-						setTimeout(function(){
-							console.log('\n')
-							console.log('\n')
-							console.log(writeFile);
-							console.log('\n')
-							console.log(readFile);
-							console.log('\n')
-							console.log('\n')
-							G.FileSystem.createReadStream(readFile).pipe(fs.createWriteStream(G.targetFolder+'/'+writeFile));
-							
-						},2500);
-						//
-						
+					createNestedFolder(modifed[i][0], modifed[i][1], function (writeFile, readFile) {
+						console.log('To read:' + readFile);
+						console.log('To write:' + writeFile);
+						var readStreamLocal = G.FileSystem.createReadStream(readFile);
+						readStreamLocal.pipe(G.FileSystem.createWriteStream(writeFile));
+
 					});
-					
+
 				}
 			}
 		});
@@ -74,11 +68,11 @@
 			found = false,
 			i = 0;
 			if (err === null) {
-				console.log('Scanning folder...');
+				console.log('\nScanning folder...\n');
 				while (i < files.length && !found) {
 					if (G.FileSystem.lstatSync(files[i]).isDirectory()) {
 						if (files[i].indexOf(support.lockFolderSign) != -1) {
-							console.log(support.lockFolderSign+' directory found :> ' + files[i]);
+							console.log(support.lockFolderSign + ' directory found :> ' + files[i]);
 							lockedFolders.push(files[i]);
 						}
 					}
