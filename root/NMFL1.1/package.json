@@ -1,0 +1,14 @@
+{
+  "name": "nodemassfilelocker",
+  "version": "1.1.0",
+  "description": "massfilelocker",
+  "main": "nmfl.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "filelocker"
+  ],
+  "author": "SutirthaMarjit",
+  "license": "ISC"
+}
