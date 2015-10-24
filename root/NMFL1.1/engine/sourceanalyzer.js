@@ -7,7 +7,8 @@ module.exports = function(){
 	var instance = this;
 	//Common code block:End
 	
-	instance.reportObject = null;
+     
+	instance.reportObject = {time:{}};
 	
 	var repeatativeAnalysis = function(folderPath){
 		
@@ -17,24 +18,34 @@ module.exports = function(){
 				elementPath = folderPath+'/'+files[i];
 				directory = fs.lstatSync(elementPath).isDirectory();
 				if(!directory){
-					c(elementPath);
-					instance.reportObject.push(elementPath);
+					instance.reportObject.files.push({file:elementPath,index:i});
 				}else{
 					repeatativeAnalysis(elementPath);	
 				}
 				i++;
 			}
-		});
-		
-		
+		});		
 	}
+
 	
 	instance.analyzeFolder = function(config){
-		instance.reportObject = [];
+		 instance.reportObject.time.initTime = new Date().getTime();
+         instance.reportObject.files = [];
 		repeatativeAnalysis(config.folderName);
-		setTimeout(function(){
-		c(instance.reportObject);
-		},2E);
+		c('Folder scan is running....');
+         setTimeout(function(){
+         instance.reportObject.time.publishTime = new Date().getTime();	
+        c('Analyzed and result is >'); 
+		if(config.showFolderAnalysis){
+			c(instance.reportObject);
+			commonlib.separator('s');
+		}
+		
+		
+        
+        config.onReportReady(instance.reportObject);
+
+		},config.forceDelay);
 		
 	};
 

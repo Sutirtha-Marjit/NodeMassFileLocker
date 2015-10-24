@@ -1,4 +1,5 @@
 module.exports = {
+	processLog:[],
 	separator : function (flg) {
 				var msg='',sprtr='-';;
 				if(flg==='L'){sprtr='•';}
@@ -11,5 +12,8 @@ module.exports = {
 			},
 			c:function(msg){
 				console.log(msg);
-			}
+			},
+		    exhibitProcessLog:function(){
+              
+		    }
 };

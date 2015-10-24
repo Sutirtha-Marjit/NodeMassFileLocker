@@ -7,14 +7,15 @@ module.exports = function (config) {
 	var instance = this;
 	//Common code block:End	
 	
-	/*Public function to copy and create files*/
+	//Public function to copy and create files
 	instance.fileCopy = function (config) {
-		var sourceFile = config.source;
-		var destinationFile = config.destination;
+		var sourceFile = config.sourceFile;
+		var destinationFile = config.destinationFile;
 		c('Reading '+sourceFile+'...');
-		fs.readFile(sourceFile, function (readinngError, content) {
-			if (readinngError) {
+		fs.readFile(sourceFile, function (readingError, content) {
+			if (readingError) {
 				c('Problem in reading file ' + sourceFile);
+				c(readingError);
 			} else {
 				fs.writeFile(destinationFile, content, function (writingError) {
 					if (writingError) {
@@ -24,6 +25,9 @@ module.exports = function (config) {
 						c(sourceFile + ' copied as ' + destinationFile);
 					}
 					commonlib.separator('S');
+					if(config.onCopyFinish!==undefined && config.onCopyFinish!==null){
+					   config.onCopyFinish();
+					}
 					});
 			}
 		});
