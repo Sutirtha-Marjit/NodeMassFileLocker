@@ -13,6 +13,7 @@ module.exports = function(config){
 	var lockFileExtn=null;
 	var singleFileCopy = new SingleFileCopy();
 	var fileCount=-1;
+	var jobResult = {f:[]};
 
 	var checkAndCreateDirectory = function(){
 		if (!fs.existsSync('./'+targetFolder)){
@@ -21,28 +22,31 @@ module.exports = function(config){
 			c('The folder "'+targetFolder+'" is already available in current location.');
 			targetFolder = targetFolder+'0'+new Date().getTime();
 			fs.mkdirSync('./'+targetFolder);
-			c('So new folder "'+targetFolder+'"" created ');
-			
+			c('So new folder "'+targetFolder+'"" created ');			
 		}				
 	};
 
 	var goforNextFileToLock = function(){
-	  if(fileCount<currentFileList.length-2){
+	  if(fileCount<currentFileList.length-1){
 	  	fileCount++;
 	  var targetFileName = targetFolder+'/K62P'+fileCount+'.'+lockFileExtn;
 	  c(targetFileName);
 	  c(currentFileList[fileCount]);
-
+	  	
 	  
 	  singleFileCopy.fileCopy({
 	  	sourceFile:currentFileList[fileCount].file,
 	  	destinationFile:targetFileName,
 	  	onCopyFinish:function(){
-	  		goforNextFileToLock();
+	  		jobResult.f.push([targetFileName,currentFileList[fileCount].file]);
+			goforNextFileToLock();
 	  	}
 	  });	  	
 
-	  }	
+	  }else{
+		c('Lock status file is initiating...');
+        c(jobResult); 
+		}
 	  
 	};
 

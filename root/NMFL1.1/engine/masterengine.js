@@ -9,7 +9,7 @@ module.exports = function () {
 	var c = commonlib.c;
 	
 	const RUNOPTIONS=[
-	 'LOCK-ONLY',
+	'LOCK-ONLY',
 	'UNLOCK-ONLY',
 	'RENAME-ONLY',
 	'COMPLETE-LOCK'
@@ -38,7 +38,7 @@ module.exports = function () {
 		c(new Date());
 		commonlib.separator('s');
 
-		var runDirection = RUNOPTIONS[2];
+		var runDirection = RUNOPTIONS[0];
         
         switch(runDirection){
 
@@ -59,6 +59,10 @@ module.exports = function () {
 									showFolderAnalysis:fStructure.showFolderAnalysis
 								    });
         	break;
+			
+			case 'UNLOCK-ONLY':
+			
+			break;
 
         }
 
