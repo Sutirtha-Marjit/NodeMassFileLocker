@@ -1,30 +1,31 @@
-module.exports = (function (config) {
-	var masterconfig = require('../config/masterconfig.js');
+module.exports = function (config) {
+	
+	//Common code block OOP:Start
+	var commonlib = require('../config/commonlib.js');
 	var fs = require('fs');
-	var fStructure = masterconfig.development.fStructure;
+	var c = commonlib.c;
 	var instance = this;
+	//Common code block:End	
 	
-	
+	/*Public function to copy and create files*/
 	instance.fileCopy = function (config) {
-		var sourceFile = fStructure.source + '/' + config.source;
-		var destinationFile = fStructure.destinationLock+'/'+config.destination;
-		
-		fs.readFile(sourceFile, function (e, content) {
-			if (e) {}
-			fs.writeFile(destinationFile, content, function (err) {
-				if (err){
-				console.log(err);
-				console.log('Error occuring while copying file '+sourceFile);
-				}else{
-				console.log(sourceFile+' copied as '+destinationFile);
-				fStructure.separator('L');
-				}
-				
-			});
+		var sourceFile = config.source;
+		var destinationFile = config.destination;
+		c('Reading '+sourceFile+'...');
+		fs.readFile(sourceFile, function (readinngError, content) {
+			if (readinngError) {
+				c('Problem in reading file ' + sourceFile);
+			} else {
+				fs.writeFile(destinationFile, content, function (writingError) {
+					if (writingError) {
+						c(writingError);
+						c('Error occuring while copying file ' + sourceFile);
+					} else {
+						c(sourceFile + ' copied as ' + destinationFile);
+					}
+					commonlib.separator('S');
+					});
+			}
 		});
-	}
-	
-	
-	
-	
-});
+		}
+	};
