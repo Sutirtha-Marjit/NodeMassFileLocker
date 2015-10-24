@@ -38,7 +38,7 @@ module.exports = function () {
 		c(new Date());
 		commonlib.separator('s');
 
-		var runDirection = RUNOPTIONS[0];
+		var runDirection = RUNOPTIONS[2];
         
         switch(runDirection){
 
@@ -70,12 +70,3 @@ module.exports = function () {
 	
 	
 };
-
-
-/*var dummyData = [
-	{source:'outbox/120.mpg',destination:'outboxlock/121.mpeg'},
-	{source:'outbox/120.mpg',destination:'outboxlock/1298.mpeg'},
-	{source:'outbox/120.mpg',destination:'outboxlock/99.mpeg'},
-	];
-	
-	*/

@@ -9,15 +9,15 @@ module.exports = function(){
 	var folderDenote='/';
 	var localFolderNameCapture=[];
 	instance.startCopyJob = function(fileList,options){
-
 		c(fileList);
 	};
 
 	instance.startStructuredRenameJob = function(fileList,options){
-			for(var i=0;i<fileList.length;i++){
-				fs.rename(fileList[i].file,getStructuredName(fileList[i],options));
-			}		
-		
+		for(var i=0;i<fileList.length;i++){
+		var targetName=getStructuredName(fileList[i],options);
+		fs.rename(fileList[i].file,targetName);
+		c(fileList[i].file+' renamed to '+targetName);
+		}
 	};
 
 	var getStructuredName = function(fileObject,options){
