@@ -8,12 +8,16 @@ module.exports = function(config){
 	//Common code block:End
 
 	var SingleFileCopy = require('./singlefilecopy.js');
+	var StatusFileManager = require('./statusfilemanager.js');
+	
 	var currentFileList=[];
 	var targetFolder=null;
 	var lockFileExtn=null;
+	var statusFile=null;
 	var singleFileCopy = new SingleFileCopy();
+	var statusFileManager = new StatusFileManager();
 	var fileCount=-1;
-	var jobResult = {f:[]};
+	var jobResult = {f:[],type:'status',creation:new Date(),author:'NMFL1.1'};
 
 	var checkAndCreateDirectory = function(){
 		if (!fs.existsSync('./'+targetFolder)){
@@ -45,7 +49,11 @@ module.exports = function(config){
 
 	  }else{
 		c('Lock status file is initiating...');
-        c(jobResult); 
+        statusFileManager.createStatusFile({
+		statusContent:JSON.stringify(jobResult),
+		targetFolder:targetFolder,
+		statusFile:statusFile
+		});	
 		}
 	  
 	};
@@ -54,6 +62,7 @@ module.exports = function(config){
 		checkAndCreateDirectory();
 		currentFileList = config.fileList;
 		lockFileExtn = config.lockFileExtn;
+		statusFile = config.statusFile;
 		goforNextFileToLock();
 	};
 

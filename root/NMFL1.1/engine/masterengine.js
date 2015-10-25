@@ -1,5 +1,5 @@
 module.exports = function () {
-	
+
 	var fs = require('fs');
 	var masterconfig = require('../config/masterconfig.js');
 	var commonlib = require('../config/commonlib.js');
@@ -7,70 +7,73 @@ module.exports = function () {
 	var MassFileRename = require('./massfilerename.js');
 	var SourceAnalyzer = require('./sourceanalyzer.js');
 	var c = commonlib.c;
-	
-	const RUNOPTIONS=[
-	'LOCK-ONLY',
-	'UNLOCK-ONLY',
-	'RENAME-ONLY',
-	'COMPLETE-LOCK'
+
+	const RUNOPTIONS = [
+		'LOCK-ONLY',
+		'UNLOCK-ONLY',
+		'RENAME-ONLY',
+		'COMPLETE-LOCK'
 	];
 
 	var fStructure = masterconfig.development.fStructure;
-    var folderAnalyze = masterconfig.development.folderAnalyze;
-    var massFileRename = new MassFileRename();
+	var folderAnalyze = masterconfig.development.folderAnalyze;
+	var massFileRename = new MassFileRename();
 	var sourceAnalyzer = new SourceAnalyzer();
 	var massFileCopy = new MassFileCopy();
-	
+
 	var instance = this;
-	
-	var executeMassRename = function(reportObject){
-	massFileRename.startStructuredRenameJob(reportObject.files,{standardRenameString:fStructure.standardRenameString});
+
+	var executeMassRename = function (reportObject) {
+		massFileRename.startStructuredRenameJob(reportObject.files, {
+			standardRenameString : fStructure.standardRenameString
+		});
 	};
 
-	var executeMassLock = function(reportObject){
-	   massFileCopy.startMassCopyJob({fileList:reportObject.files,jobMode:'lock',onJobFinish:null,targetFolder:fStructure.destinationLock,lockFileExtn:fStructure.lockFileExtn});
+	var executeMassLock = function (reportObject) {
+		massFileCopy.startMassCopyJob({
+			fileList : reportObject.files,
+			jobMode : 'lock',
+			onJobFinish : null,
+			targetFolder : fStructure.destinationLock,
+			lockFileExtn : fStructure.lockFileExtn,
+			statusFile:fStructure.statusFile
+		});
 	};
 
-
-	instance.start = function(){		
+	instance.start = function () {
 		commonlib.separator('M');
-		c('NMFL Engine is starting...');	
+		c('NMFL Engine is starting...');
 		c(new Date());
 		commonlib.separator('s');
 
 		var runDirection = RUNOPTIONS[0];
-        
-        switch(runDirection){
 
-        	case 'RENAME-ONLY':
-        		sourceAnalyzer.analyzeFolder({
-									folderName:fStructure.source,
-									forceDelay:folderAnalyze.delay,
-									showFolderAnalysis:fStructure.showFolderAnalysis,
-									onReportReady:executeMassRename
-								    });	
-        	break;
+		switch (runDirection) {
 
-        	case 'LOCK-ONLY':
-        		 sourceAnalyzer.analyzeFolder({
-									folderName:fStructure.source,
-									forceDelay:folderAnalyze.delay,
-									onReportReady:executeMassLock,
-									showFolderAnalysis:fStructure.showFolderAnalysis
-								    });
-        	break;
-			
-			case 'UNLOCK-ONLY':
-			
+		case 'RENAME-ONLY':
+			sourceAnalyzer.analyzeFolder({
+				folderName : fStructure.source,
+				forceDelay : folderAnalyze.delay,
+				showFolderAnalysis : fStructure.showFolderAnalysis,
+				onReportReady : executeMassRename
+			});
 			break;
 
-        }
+		case 'LOCK-ONLY':
+			sourceAnalyzer.analyzeFolder({
+				folderName : fStructure.source,
+				forceDelay : folderAnalyze.delay,
+				onReportReady : executeMassLock,
+				showFolderAnalysis : fStructure.showFolderAnalysis
+			});
+			break;
 
+		case 'UNLOCK-ONLY':
 
-		
+			break;
+
+		}
+
 	}
-	
-	
-	
-	
+
 };
