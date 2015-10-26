@@ -11,7 +11,11 @@ module.exports = function(){
 	instance.startCopyJob = function(fileList,options){
 		c(fileList);
 	};
-
+	
+	var spaceEraser = function(fileName){
+		return fileName.replace(' ','_');	
+	};
+	
 	instance.startStructuredRenameJob = function(fileList,options){
 		for(var i=0;i<fileList.length;i++){
 		var targetName=getStructuredName(fileList[i],options);
@@ -30,7 +34,7 @@ module.exports = function(){
 		  	var len,parentFolderName=null,patharr = pathString.split(folderDenote);
 		  	len = patharr.length;
 		  	parentFolderName = ''+patharr[len-2]
-		  	parentFolderName = parentFolderName.toLowerCase();
+		  	parentFolderName = spaceEraser(parentFolderName.toLowerCase());
 		  	patharr[len-1]=parentFolderName+options.standardRenameString+fileObject.index+'.'+extn;
 		  	return patharr.join(folderDenote);		  	
 		}
