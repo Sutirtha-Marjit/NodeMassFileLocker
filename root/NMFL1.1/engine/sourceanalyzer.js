@@ -62,5 +62,23 @@ module.exports = function () {
 			c('Process suspended!\nSource folder "' + config.folderName + '" is not available. Please inspect the location once more');
 		}
 	};
+	
+	instance.findLockedFolders = function(config){
+		
+		fs.readdir('./', function (errorWhileRead, files) {
+			var i=0,lockedFolders=[];
+			if(errorWhileRead){
+				c('Error while looking for locked folders');
+			}else{
+				while(i<files.length){
+					if(-1!==files[i].indexOf(config.folderPrefix)){
+						lockedFolders.push(files[i]);					
+					}
+				i++;
+				}
+				c(lockedFolders.length+' folders locked found in current directory');
+			}
+		});		
+	};
 
 }

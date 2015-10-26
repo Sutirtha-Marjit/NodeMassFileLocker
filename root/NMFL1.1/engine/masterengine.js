@@ -6,6 +6,8 @@ module.exports = function () {
 	var MassFileCopy = require('./massfilecopy.js');
 	var MassFileRename = require('./massfilerename.js');
 	var SourceAnalyzer = require('./sourceanalyzer.js');
+	
+	
 	var c = commonlib.c;
 
 	const RUNOPTIONS = [
@@ -20,7 +22,7 @@ module.exports = function () {
 	var massFileRename = new MassFileRename();
 	var sourceAnalyzer = new SourceAnalyzer();
 	var massFileCopy = new MassFileCopy();
-
+	
 	var instance = this;
 
 	var executeMassRename = function (reportObject) {
@@ -39,14 +41,19 @@ module.exports = function () {
 			statusFile:fStructure.statusFile
 		});
 	};
+	
+	
+	var executeMassUnlock = function(){
+	
+	};
 
-	instance.start = function () {
+	instance.start = function (option) {
 		commonlib.separator('M');
 		c('NMFL Engine is starting...');
 		c(new Date());
 		commonlib.separator('s');
 
-		var runDirection = RUNOPTIONS[0];
+		var runDirection = RUNOPTIONS[option];
 
 		switch (runDirection) {
 
@@ -69,7 +76,10 @@ module.exports = function () {
 			break;
 
 		case 'UNLOCK-ONLY':
-
+			 sourceAnalyzer.findLockedFolders({
+			 folderPrefix:fStructure.destinationLock,
+			 destinationUnlock:fStructure.destinationUnlock
+			 });	
 			break;
 
 		}
