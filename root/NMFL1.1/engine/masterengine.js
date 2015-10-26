@@ -10,12 +10,12 @@ module.exports = function () {
 	
 	var c = commonlib.c;
 
-	const RUNOPTIONS = [
-		'LOCK-ONLY',
-		'UNLOCK-ONLY',
-		'RENAME-ONLY',
-		'COMPLETE-LOCK'
-	];
+	const RUNOPTIONS = []
+		RUNOPTIONS['LO']='LOCK-ONLY';
+		RUNOPTIONS['ULO']='UNLOCK-ONLY';
+		RUNOPTIONS['RO']='RENAME-ONLY';
+		RUNOPTIONS['CL']='COMPLETE-LOCK';
+	
 
 	var fStructure = masterconfig.development.fStructure;
 	var folderAnalyze = masterconfig.development.folderAnalyze;
@@ -43,8 +43,14 @@ module.exports = function () {
 	};
 	
 	
-	var executeMassUnlock = function(){
+	var executeMassUnlock = function(config){
 	
+        massFileCopy.startMassCopyJob({
+			folderList : config.lockedFolders,
+			jobMode : 'unlock',
+			onJobFinish : null,
+			targetFolder : fStructure.destinationUnlock,			
+		});
 	};
 
 	instance.start = function (option) {
@@ -78,7 +84,8 @@ module.exports = function () {
 		case 'UNLOCK-ONLY':
 			 sourceAnalyzer.findLockedFolders({
 			 folderPrefix:fStructure.destinationLock,
-			 destinationUnlock:fStructure.destinationUnlock
+			 destinationUnlock:fStructure.destinationUnlock,
+               onReportReady:executeMassUnlock
 			 });	
 			break;
 

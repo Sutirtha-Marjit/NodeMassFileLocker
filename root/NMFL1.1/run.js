@@ -1,5 +1,5 @@
 var masterEngine = new (require('./engine/masterengine.js'))();
-masterEngine.start(1);
+masterEngine.start('ULO');
 
 /*
 var fs = require('fs');

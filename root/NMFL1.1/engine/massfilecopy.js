@@ -9,6 +9,7 @@ module.exports = function(config){
 
 	var SingleFileCopy = require('./singlefilecopy.js');
 	var StatusFileManager = require('./statusfilemanager.js');
+     var UnlockAction = require('./unlockaction.js');
 	
 	var currentFileList=[];
 	var targetFolder=null;
@@ -65,21 +66,26 @@ module.exports = function(config){
 		statusFile = config.statusFile;
 		goforNextFileToLock();
 	};
+    
+    var startNewCopyJobToUnLock = function(config){
+		c(config);
+	};
+    
 
 	instance.startMassCopyJob = function(config){
 		if(config.jobMode === 'unlock'){
-
+            commonlib.separator('s');
+            startNewCopyJobToUnLock(config);
 		}
 		if(config.jobMode === 'lock'){
 			commonlib.separator('s');
 			c('File locking initiated....');
 			targetFolder = config.targetFolder;
 			startNewCopyJobToLock(config);
-
 		}
 		if(config.jobMode === 'normal'){
 
 		}
-	}
+	};
 
 };

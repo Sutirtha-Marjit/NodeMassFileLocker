@@ -71,12 +71,16 @@ module.exports = function () {
 				c('Error while looking for locked folders');
 			}else{
 				while(i<files.length){
-					if(-1!==files[i].indexOf(config.folderPrefix)){
-						lockedFolders.push(files[i]);					
+					if(-1!==files[i].indexOf(config.folderPrefix)){                           
+                            if(fs.lstatSync('./'+files[i]).isDirectory()){
+                                lockedFolders.push(files[i]);
+                            }
+											
 					}
 				i++;
 				}
-				c(lockedFolders.length+' folders locked found in current directory');
+				c(lockedFolders.length+' locked-folders found in current directory');
+                  config.onReportReady({lockedFolders:lockedFolders});
 			}
 		});		
 	};

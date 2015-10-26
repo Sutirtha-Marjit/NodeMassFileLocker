@@ -3,6 +3,7 @@ module.exports = {
 		fStructure : {
 			showFolderAnalysis:true,
 			source : 'outbox',
+              unlockContainer:'unlocked',
 			destinationLock : 'outboxlock',
 			destinationUnlock : 'outboxunlock',
 			statusFile : 'status.nmfljson',
