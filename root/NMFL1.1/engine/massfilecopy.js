@@ -36,7 +36,7 @@ module.exports = function(config){
 	  	fileCount++;
 	  var targetFileName = targetFolder+'/K62P'+fileCount+'.'+lockFileExtn;
 	  c(targetFileName);
-	  c(currentFileList[fileCount]);
+	  c(currentFileList[fileCount].file);
 	  	
 	  
 	  singleFileCopy.fileCopy({
