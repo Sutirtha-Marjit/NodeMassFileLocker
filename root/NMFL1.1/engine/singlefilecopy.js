@@ -23,12 +23,12 @@ module.exports = function (config) {
 		writeStream = fs.createWriteStream(destinationFile);
 		readStream.pipe(writeStream);
 		readStream.on('open', function () {
-			console.log(sourceFile + ' opened');
+			console.log(sourceFile + ' copying...');
 		});
 
 		readStream.on('close', function () {
 			console.log(sourceFile + ' closed');
-			c(sourceFile + ' copied as ' + destinationFile);
+			c(sourceFile + 'successfully copied as ' + destinationFile);
 			commonlib.separator('S');
 			if (config.onCopyFinish !== undefined && config.onCopyFinish !== null) {
 				config.onCopyFinish();

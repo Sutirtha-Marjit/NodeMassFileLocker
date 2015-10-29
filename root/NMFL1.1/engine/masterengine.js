@@ -6,23 +6,21 @@ module.exports = function () {
 	var MassFileCopy = require('./massfilecopy.js');
 	var MassFileRename = require('./massfilerename.js');
 	var SourceAnalyzer = require('./sourceanalyzer.js');
-	
-	
+
 	var c = commonlib.c;
 
 	const RUNOPTIONS = []
-		RUNOPTIONS['LO']='LOCK-ONLY';
-		RUNOPTIONS['ULO']='UNLOCK-ONLY';
-		RUNOPTIONS['RO']='RENAME-ONLY';
-		RUNOPTIONS['CL']='COMPLETE-LOCK';
-	
+	RUNOPTIONS['LO'] = 'LOCK-ONLY';
+	RUNOPTIONS['ULO'] = 'UNLOCK-ONLY';
+	RUNOPTIONS['RO'] = 'RENAME-ONLY';
+	RUNOPTIONS['CL'] = 'COMPLETE-LOCK';
 
 	var fStructure = masterconfig.development.fStructure;
 	var folderAnalyze = masterconfig.development.folderAnalyze;
 	var massFileRename = new MassFileRename();
 	var sourceAnalyzer = new SourceAnalyzer();
 	var massFileCopy = new MassFileCopy();
-	
+
 	var instance = this;
 
 	var executeMassRename = function (reportObject) {
@@ -36,20 +34,20 @@ module.exports = function () {
 			fileList : reportObject.files,
 			jobMode : 'lock',
 			onJobFinish : null,
-			targetFolder : fStructure.destinationLock,
+			targetFolder : fStructure.operation + '/' + fStructure.destinationLock,
 			lockFileExtn : fStructure.lockFileExtn,
-			statusFile:fStructure.statusFile
+			statusFile : fStructure.statusFile
 		});
 	};
-	
-	
-	var executeMassUnlock = function(config){
-	
-        massFileCopy.startMassCopyJob({
+
+	var executeMassUnlock = function (config) {
+
+		massFileCopy.startMassCopyJob({
 			folderList : config.lockedFolders,
 			jobMode : 'unlock',
 			onJobFinish : null,
-			targetFolder : fStructure.destinationUnlock,			
+			targetFolder : fStructure.destinationUnlock,
+			statusFile : fStructure.statusFile
 		});
 	};
 
@@ -65,7 +63,7 @@ module.exports = function () {
 
 		case 'RENAME-ONLY':
 			sourceAnalyzer.analyzeFolder({
-				folderName : fStructure.source,
+				folderName : fStructure.operation + '/' + fStructure.source,
 				forceDelay : folderAnalyze.delay,
 				showFolderAnalysis : fStructure.showFolderAnalysis,
 				onReportReady : executeMassRename
@@ -74,7 +72,7 @@ module.exports = function () {
 
 		case 'LOCK-ONLY':
 			sourceAnalyzer.analyzeFolder({
-				folderName : fStructure.source,
+				folderName : fStructure.operation + '/' + fStructure.source,
 				forceDelay : folderAnalyze.delay,
 				onReportReady : executeMassLock,
 				showFolderAnalysis : fStructure.showFolderAnalysis
@@ -82,11 +80,12 @@ module.exports = function () {
 			break;
 
 		case 'UNLOCK-ONLY':
-			 sourceAnalyzer.findLockedFolders({
-			 folderPrefix:fStructure.destinationLock,
-			 destinationUnlock:fStructure.destinationUnlock,
-               onReportReady:executeMassUnlock
-			 });	
+			sourceAnalyzer.findLockedFolders({
+				operation : fStructure.operation,
+				folderPrefix : fStructure.destinationLock,
+				destinationUnlock : fStructure.operation + '/' + fStructure.destinationUnlock,
+				onReportReady : executeMassUnlock
+			});
 			break;
 
 		}

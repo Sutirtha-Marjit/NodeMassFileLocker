@@ -65,14 +65,18 @@ module.exports = function () {
 	
 	instance.findLockedFolders = function(config){
 		
-		fs.readdir('./', function (errorWhileRead, files) {
+		fs.readdir('./'+config.operation, function (errorWhileRead, files) {
 			var i=0,lockedFolders=[];
 			if(errorWhileRead){
 				c('Error while looking for locked folders');
 			}else{
+                  c(files);
+                  c(config.folderPrefix);
+                  
 				while(i<files.length){
-					if(-1!==files[i].indexOf(config.folderPrefix)){                           
-                            if(fs.lstatSync('./'+files[i]).isDirectory()){
+					if(-1!==files[i].indexOf(config.folderPrefix)){
+                            c('matched with config.folderPrefix='+config.folderPrefix);                        
+                            if(fs.lstatSync('./'+config.operation+'/'+files[i]).isDirectory()){
                                 lockedFolders.push(files[i]);
                             }
 											

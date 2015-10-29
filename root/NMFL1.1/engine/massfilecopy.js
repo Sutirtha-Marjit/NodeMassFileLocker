@@ -12,6 +12,7 @@ module.exports = function(config){
      var UnlockAction = require('./unlockaction.js');
 	
 	var currentFileList=[];
+     var unlockactions=null;
 	var targetFolder=null;
 	var lockFileExtn=null;
 	var statusFile=null;
@@ -68,7 +69,15 @@ module.exports = function(config){
 	};
     
     var startNewCopyJobToUnLock = function(config){
-		c(config);
+		c('reached to startNewCopyJobToUnLock');
+        c(config)
+        unlockactions = [];
+        for(var i=0;i<config.folderList.length;i++){
+            unlockactions[i] = new UnlockAction({
+                folder:config.folderList[i],
+                statusFile : config.statusFile
+            });
+        }
 	};
     
 
