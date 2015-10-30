@@ -6,8 +6,8 @@ module.exports = function (config) {
 	var c = commonlib.c;
 	var instance = this;
 	//Common code block:End
-    
-    var longFileBufferSize = 400 * 1024;
+
+	var longFileBufferSize = commonlib.getBufferSize();
 
 	instance.largeFileCopy = function (config) {
 		var readStream,
@@ -32,7 +32,7 @@ module.exports = function (config) {
 			commonlib.separator('S');
 			if (config.onCopyFinish !== undefined && config.onCopyFinish !== null) {
 				config.onCopyFinish();
-              }
+			}
 		});
 	};
 
@@ -41,26 +41,35 @@ module.exports = function (config) {
 		var sourceFile = config.sourceFile;
 		var destinationFile = config.destinationFile;
 		c('Reading ' + sourceFile + '...');
-		fs.readFile(sourceFile, function (readingError, content) {
-			if (readingError) {
-				c('Problem in reading file ' + sourceFile);
-				c(readingError);
-				config.messageForOccuredException = "Due to file read exception largeFileCopy called\nReading " + sourceFile + " again...";
-				instance.largeFileCopy(config);
-			} else {
-				fs.writeFile(destinationFile, content, function (writingError) {
-					if (writingError) {
-						c(writingError);
+		try {
+			fs.readFile(sourceFile, function (readingError, content) {
+				if (readingError) {
+					c('Problem in reading file ' + sourceFile);
+					c(readingError);
+					config.messageForOccuredException = "Due to file read exception largeFileCopy called\nReading " + sourceFile + " again...";
+					instance.largeFileCopy(config);
+				} else {
+					try{
+					fs.writeFile(destinationFile, content, function (writingError) {
+						if (writingError) {
+							c(writingError);
+							c('Error occuring while copying file ' + sourceFile);
+						} else {
+							c(sourceFile + ' copied as ' + destinationFile);
+						}
+						commonlib.separator('S');
+						if (config.onCopyFinish !== undefined && config.onCopyFinish !== null) {
+							config.onCopyFinish();
+						}
+					});
+					}catch(e){
 						c('Error occuring while copying file ' + sourceFile);
-					} else {
-						c(sourceFile + ' copied as ' + destinationFile);
 					}
-					commonlib.separator('S');
-					if (config.onCopyFinish !== undefined && config.onCopyFinish !== null) {
-						config.onCopyFinish();
-					}
-				});
-			}
-		});
+				}
+			});
+		} catch (e) {
+			c('Problem in reading file ' + sourceFile);
+		}
+
 	}
 };

@@ -15,5 +15,10 @@ module.exports = {
 			},
 		    exhibitProcessLog:function(){
               
-		    }
+		    },
+			getBufferSize:function(){
+			
+			return 1024*1000;
+					
+			}
 };

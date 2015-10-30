@@ -30,6 +30,7 @@ module.exports = function () {
 	};
 
 	var executeMassLock = function (reportObject) {
+		c(reportObject);
 		massFileCopy.startMassCopyJob({
 			fileList : reportObject.files,
 			jobMode : 'lock',
@@ -47,7 +48,9 @@ module.exports = function () {
 			jobMode : 'unlock',
 			onJobFinish : null,
 			targetFolder : fStructure.destinationUnlock,
-			statusFile : fStructure.statusFile
+			sourceLockFolder:fStructure.destinationLock,
+			statusFile : fStructure.statusFile,
+			operation : fStructure.operation
 		});
 	};
 

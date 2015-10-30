@@ -1,7 +1,7 @@
 module.exports = {
 	development : {
 		fStructure : {
-			showFolderAnalysis : true,
+			showFolderAnalysis : false,
 			operation : 'operation',
 			source : 'outbox',
 			unlockContainer : 'unlocked',

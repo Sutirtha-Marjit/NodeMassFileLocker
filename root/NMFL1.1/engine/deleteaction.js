@@ -7,8 +7,11 @@ module.exports = function(){
 	var instance = this;
 	//Common code block:End
 
-	instance.deleteFile = function(filePath){
-
+	instance.deleteFile = function(config){
+		fs.unlink(config.filePath,function(){
+			c(config.filePath+' deleted');
+			config.onDeleteCOmplete();
+		})
 	};
 
 	instance.deleteFolder = function(folderPath){

@@ -17,8 +17,7 @@ module.exports = function(config){
 				}else{
 				c('status file successfully created as '+fileName);
 				}
-			})
-			
+			});			
 		}
 		else{
 		c('Since no content is available system is unable to generate status file');
@@ -27,8 +26,15 @@ module.exports = function(config){
 	
 	
 	instance.readStatusFile = function(config){
-		
-		
+		c('readStatusFile:');
+		var statusFilePath = config.operation+'/'+config.sourceLockFolder+'/'+config.statusFile;
+		fs.readFile(statusFilePath,"utf8",function(readingError, statusContent){
+			if(readingError){c(readingError);c('problem in reading status file '+statusFilePath);}
+			else{
+				c('Reading '+statusFilePath+' ...')
+				c(JSON.parse(statusContent));
+			}
+		});	
 	
 	};
 	
