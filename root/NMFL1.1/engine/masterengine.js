@@ -47,8 +47,8 @@ module.exports = function () {
 			folderList : config.lockedFolders,
 			jobMode : 'unlock',
 			onJobFinish : null,
-			targetFolder : fStructure.destinationUnlock,
-			sourceLockFolder:fStructure.destinationLock,
+			targetFolder : fStructure.operation + '/' + fStructure.destinationUnlock,
+			sourceLockFolder : fStructure.destinationLock,
 			statusFile : fStructure.statusFile,
 			operation : fStructure.operation
 		});

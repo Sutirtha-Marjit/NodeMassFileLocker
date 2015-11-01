@@ -41,6 +41,7 @@ module.exports = function () {
 	};
 
 	instance.analyzeFolder = function (config) {
+		instance.reportObject.folderPath = config.folderName;
 		instance.reportObject.time.initTime = new Date().getTime();
 		instance.reportObject.files = [];
 
@@ -49,12 +50,12 @@ module.exports = function () {
 			c('Folder scan is running....');
 			setTimeout(function () {
 				instance.reportObject.time.publishTime = new Date().getTime();
-				
+
 				if (config.showFolderAnalysis) {
 					c('Analyzed and result is >');
 					c(instance.reportObject);
 					commonlib.separator('s');
-				}				
+				}
 				config.onReportReady(instance.reportObject);
 
 			}, config.forceDelay);
@@ -62,26 +63,29 @@ module.exports = function () {
 			c('Process suspended!\nSource folder "' + config.folderName + '" is not available. Please inspect the location once more');
 		}
 	};
-	
-	instance.findLockedFolders = function(config){
-		
-		fs.readdir('./'+config.operation, function (errorWhileRead, files) {
-			var i=0,lockedFolders=[];
-			if(errorWhileRead){
+
+	instance.findLockedFolders = function (config) {
+
+		fs.readdir('./' + config.operation, function (errorWhileRead, files) {
+			var i = 0,
+			lockedFolders = [];
+			if (errorWhileRead) {
 				c('Error while looking for locked folders');
-			}else{
-				while(i<files.length){
-					if(-1!==files[i].indexOf(config.folderPrefix)){                                                 
-                            if(fs.lstatSync('./'+config.operation+'/'+files[i]).isDirectory()){
-                                lockedFolders.push(files[i]);
-                            }											
+			} else {
+				while (i < files.length) {
+					if (-1 !== files[i].indexOf(config.folderPrefix)) {
+						if (fs.lstatSync('./' + config.operation + '/' + files[i]).isDirectory()) {
+							lockedFolders.push(files[i]);
+						}
 					}
-				i++;
+					i++;
 				}
-				c(lockedFolders.length+' locked-folders found in current directory');
-                  config.onReportReady({lockedFolders:lockedFolders});
+				c(lockedFolders.length + ' locked-folders found in current directory');
+				config.onReportReady({
+					lockedFolders : lockedFolders
+				});
 			}
-		});		
+		});
 	};
 
 }

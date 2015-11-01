@@ -13,7 +13,8 @@ module.exports = function (config) {
 	var UnlockAction = require('./unlockaction.js');
 	var DeleteAction = require('./deleteaction.js');
 
-	var currentFileList = [];
+	var currentFileToLockList = [];
+	var currentFileToUnlockList = [];
 	var unlockactions = null;
 	var targetFolder = null;
 	var lockFileExtn = null;
@@ -31,58 +32,31 @@ module.exports = function (config) {
 		author : 'NMFL1.1'
 	};
 
-	var checkAndCleanLockDirectory = function (afterCleancallback) {
+	var checkAndCleanDirectory = function (afterCleancallback) {
 		if (!fs.existsSync('./' + targetFolder)) {
 			fs.mkdirSync('./' + targetFolder);
+			afterCleancallback();
 		} else {
-
-			sourceAnalyzer.analyzeFolder({
+			c('Target locked folder "' + targetFolder + '" is already available');
+			deleteAction.folderCleanUp({
 				folderName : targetFolder,
-				forceDelay : 4500,
-				showFolderAnalysis : false,
-				onReportReady : function (reportObject) {
-					if (reportObject.files.length > 0) {
-						c('Target locked folder is available and but not cleaned');
-						c('Lock folder cleaning is going on...');
-						commonlib.separator('s');
-						var fileCount = 0;
-						function deleteNextFile() {
-
-							deleteAction.deleteFile({
-								filePath : reportObject.files[fileCount].file,
-								onDeleteCOmplete : function () {
-									fileCount++;
-									if (fileCount < reportObject.files.length) {
-										deleteNextFile();
-									} else {
-										c('Lock folder has been cleaned');
-										afterCleancallback();
-									}
-								}
-							});
-						}
-						deleteNextFile();
-					} else {
-						c('Target locked folder is available and cleaned');
-						afterCleancallback();
-					}
-				}
+				onCleanComplete : afterCleancallback
 			});
 		}
 	};
 
 	var goforNextFileToLock = function () {
-		if (fileCount < currentFileList.length - 1) {
+		if (fileCount < currentFileToLockList.length - 1) {
 			fileCount++;
 			var targetFileName = targetFolder + '/K62P' + fileCount + '.' + lockFileExtn;
 			c(targetFileName);
-			c(currentFileList[fileCount].file);
+			c(currentFileToLockList[fileCount].file);
 
 			singleFileCopy.largeFileCopy({
-				sourceFile : currentFileList[fileCount].file,
+				sourceFile : currentFileToLockList[fileCount].file,
 				destinationFile : targetFileName,
 				onCopyFinish : function () {
-					jobResult.f.push([targetFileName, currentFileList[fileCount].file]);
+					jobResult.f.push([targetFileName, currentFileToLockList[fileCount].file]);
 					goforNextFileToLock();
 				}
 			});
@@ -98,33 +72,71 @@ module.exports = function (config) {
 
 	};
 
+	var goforNextFileToUnlock=function(){
+		if (fileCount < currentFileToUnlockList.length - 1) {
+		 fileCount++;
+		 var targetFileName = targetFolder+"/"+currentFileToUnlockList[fileCount][1];
+		 var sourceFile = currentFileToUnlockList[fileCount][0];
+		 commonlib.separator('s');
+		 c(targetFileName)
+		 c(sourceFile)	 
+		 
+			singleFileCopy.largeFileCopyWidthFolders({
+				sourceFile : sourceFile,
+				destinationFile : targetFileName,
+				onCopyFinish : function () {
+					goforNextFileToUnlock();
+				}});
+				
+		 
+		}
+	};
+
 	var startNewCopyJobToLock = function (config) {
-		currentFileList = config.fileList;
+		currentFileToLockList = config.fileList;
 		lockFileExtn = config.lockFileExtn;
 		statusFile = config.statusFile;
-		checkAndCleanLockDirectory(function () {
+		checkAndCleanDirectory(function () {
 			goforNextFileToLock();
 		});
 
 	};
 
 	var startNewCopyJobToUnLock = function (config) {
-		c(config);
 		if (config.folderList.length == 1) {
-			statusFileManager.readStatusFile({
-				statusFile : config.statusFile,
-				operation:config.operation,
-				sourceLockFolder:config.sourceLockFolder,
-				
+			checkAndCleanDirectory(function () {
+				statusFileManager.readStatusFile({
+					statusFile : config.statusFile,
+					operation : config.operation,
+					sourceLockFolder : config.sourceLockFolder,
+					onReadComplete : function (statusContent) {
+						if (statusContent !== undefined && statusContent !== null) {
+							currentFileToUnlockList = statusContent.f;
+							c('Lock Status retrieved successfully');
+							c(currentFileToUnlockList.length + ' locked files are found');
+							fileCount = -1;
+
+							goforNextFileToUnlock();
+						}
+
+					}
+				});
+
 			});
 		} else {
-			c('More than one locked folder is there. Please remove all except the latest one');
+			if(config.folderList.length == 0){
+				c('No such lock folders are available. Please lock the files first');
+			}else{
+			c('More than one locked folder is there. Please remove all except the latest one. Operation aborted');
+			}
 		}
 	};
 
 	instance.startMassCopyJob = function (config) {
 		if (config.jobMode === 'unlock') {
 			commonlib.separator('s');
+			c('File unlocking initiated....');
+			targetFolder = config.targetFolder;
 			startNewCopyJobToUnLock(config);
 		}
 		if (config.jobMode === 'lock') {
