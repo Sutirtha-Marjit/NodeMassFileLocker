@@ -1,0 +1,58 @@
+
+<div class="container" style="margin-top:10%;" *ngIf="!signedIn">
+  <h1>Signin Please</h1>
+  <form (submit)="loginStatus()">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+   
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+<div class="container-fluid" *ngIf="signedIn">
+<div class="pic-resource-panel WText">
+ <h4>Resources</h4> 
+   <div class="pic-container">
+     <div class="pic">
+       <div class="bag">
+       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/16_wood_samples.jpg/350px-16_wood_samples.jpg"/>
+       </div>
+     </div>
+     
+   </div>
+</div>  
+<div class="console-resource-panel">
+<div class="container-fluid">
+  <div class="row">
+      <div class="col">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="segment" value="">  
+              <span>Model</span>      
+            </label>
+          </div>
+      </div>
+      <div class="col">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="segment" value="">  
+              <span>Outbox</span>      
+            </label>
+          </div>
+      </div>
+  </div>
+  <hr/>
+
+  
+  
+</div>  
+   
+</div>
+</div>
