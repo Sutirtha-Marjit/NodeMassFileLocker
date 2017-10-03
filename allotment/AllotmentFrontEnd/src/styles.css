@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Lato');
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower|Pacifico');
 
 *{
-   font-family: 'Lato', sans-serif !important; 
+   font-family: 'Lato', sans-serif; 
 }
 
 .WText *{
@@ -12,9 +13,11 @@ html,body{
     height:100%;
 }
 *[class *="-resource-panel"]{
-    display:inline-block;
-    padding: 2rem;
-    
+    float:left;
+}
+
+.brand-header{
+    font-family: 'Pacifico', cursive;
 }
 
 .container-fluid{
@@ -29,14 +32,43 @@ html,body{
     width:30%;
 }
 
+.console-resource-panel{
+    min-height:100%;
+    width:70%;
+}
+
+.console-resource-panel .container{
+    min-height: 100%;
+}
+
+.dimension-text{
+    padding: 0.65rem;
+    color: #ccc;
+}
+
+.form-panel{
+    padding:0.65rem;
+}
+
+.pic-resource-panel header{
+    padding:0.65rem;
+    text-align: center;
+    background: black;
+}
+
 .pic-container .pic{
-    width: 48%;
-    height:240px; 
+    width: 31.2%;
+    height:120px;
     padding: 5px;
-    background: rgba(255,255,255,0.8);
+    background: rgba(255,255,255,0.2);
     margin: 1%;
     float:left;
+    transition: all 0.3s ease-in-out;
     
+}
+
+.pic-container .pic:hover{
+    background:  rgba(255,255,255,0.7);
 }
 
 .bag{
@@ -47,6 +79,31 @@ html,body{
     cursor:pointer;
 }
 
+.preview-image-bg{
+    background: #eeeeee;
+   background: -moz-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
+   background: -webkit-linear-gradient(top, #eeeeee 0%,#cccccc 100%);
+   background: linear-gradient(to bottom, #eeeeee 0%,#cccccc 100%);
+   min-height: 100%;
+}
+
+.preview-image{
+    width:100%;
+    height:auto;
+}
+
+.preview-image-container{
+   width: 100%;
+   min-height: 100%;   
+}
+
+.pic-container .pic:hover img{
+    -webkit-filter: blur(2px);
+}
+
+
+
 .pic .bag img{
     width:100%;
+    transition: all 1.5s ease-in-out;
 }
