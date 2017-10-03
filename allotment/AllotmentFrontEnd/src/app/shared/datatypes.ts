@@ -3,5 +3,6 @@ export interface ResourceObject{
     height:number,
     sourcePath:string,
     targetPath:string,
-    loaded:boolean    
+    loaded:boolean,
+    opted:boolean    
 }
