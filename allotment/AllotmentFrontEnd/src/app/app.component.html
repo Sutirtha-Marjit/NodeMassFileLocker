@@ -19,92 +19,49 @@
 <div class="container-fluid" *ngIf="signedIn">
 <div class="pic-resource-panel WText">
   <header>
-      <div class="row">
-          <div class="col"><h3 class="brand-header">Resource Allotment</h3></div>
-          <div class="col">
-            <div class="btn-group">
-              <a href="#" class="btn btn-success btn-sm">Load fresh data</a>
-              <a href="#" class="open-panel btn btn-info btn-sm">Open panel</a>
-              <a href="#" class="btn btn-danger btn-sm">Clean & Reset </a>
-              
-            </div>
-          </div>
+      <div class="row">          <h3 class="brand-header" style="padding:0.65rem 0.55rem;">Resource Allotment <small>{{localImagePool.length}}</small></h3>
+          
       </div>
        
       
     </header>
     
    <div class="pic-container" >
-     <div class="pic rounded opted-{{currentPic.opted}}" *ngFor="let currentPic of localImagePool; let i = index;">
+     <div (click)="setCurrentObject(currentPic)" class="pic rounded" *ngFor="let currentPic of (getModifiedResourceList(false));">
        <div class="bag rounded">
-          <img (click)="setCurrentObject(i)" src="{{currentPic.sourcePath}}" class="rounded" />
+          <img  src="{{currentPic.sourcePath}}" class="rounded" />
        </div>
      </div>
      
    </div>
 </div>  
 <div class="console-resource-panel">
-    <!-- -->
-    <div class="container">
+    <!-- -->  
+    <div class="container"> 
   <div class="row">
     
     <div class="col">
-      <h5 class="dimension-text">
-        <span >
-         Only <span class="text-primary">{{CurrentSelectedObjects.length}}</span> resources selected
-        </span>
-        <a href="#" class="btn btn-sm btn-primary" (click)="resetCurrentSelectedObject()">Empty</a>
-      </h5>
-      <hr/>
-      <div class="preview-image-container round">
-        <div class="pic" *ngFor="let selectPic of CurrentSelectedObjects">
+      <div class="selection-panel-header">
+      <h3>Your selected resources</h3>
+      <h6 >
+        <span >Only <span>{{(getModifiedResourceList(true)).length}}</span> resources selected out of {{localImagePool.length}}</span>
+        <a *ngIf="(getModifiedResourceList(true)).length" href="#" (click)="resetCurrentSelectedObject()">Empty List</a>
+      </h6>
+      </div>
+      
+      <div class="preview-image-container ">
+        <div class="pic" *ngFor="let selectPic of (getModifiedResourceList(true))" >
             <div class="bag round">
               <img class="img-fluid rounded"  src="{{selectPic.sourcePath}}"/>
             </div>
+            <span class="cross" (click)="resetCurrentObject(selectPic)">˟</span>
         </div>
         
       </div>      
     </div>
 
+    <app-allotment-console class="col" ></app-allotment-console>
 
-    <div class="col form-panel" >
-      <h4>Allotment options</h4>
-      <hr/>
-      <div class="row">
-        <div class="col">
-            <div class="form-check">
-              <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                OutBox
-              </label>
-            </div>
-        </div>
-        <div class="col">
-            <div class="form-check">
-              <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                Model
-              </label>
-            </div>
-        </div>
-      </div>  
-      <hr/>
-
-      <!-- List -->
-      <ul class="list-group">
-  <li class="list-group-item active">Cras justo odio</li>
-  <li class="list-group-item">Dapibus ac facilisis in</li>
-  <li class="list-group-item">Morbi leo risus</li>
-  <li class="list-group-item">Porta ac consectetur ac</li>
-  <li class="list-group-item">Vestibulum at eros</li>
-</ul>
-      <!-- List -->
-<hr/>
-      <div class="btn-group WText">
-        <a href="#" class="btn btn-success ">Done</a>
-        
-      </div>
-    </div>
     <div class="w-100"></div>    
   </div>
 </div>

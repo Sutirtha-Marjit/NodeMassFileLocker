@@ -1,0 +1,41 @@
+<div class="col form-panel" >
+      <h4>Allotment options</h4>
+      <hr/>
+      <div class="row">
+        <div class="col">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                OutBox
+              </label>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                Model
+              </label>
+            </div>
+        </div>
+      </div>  
+      <hr/>
+      
+      <form name="auto-complete-search">
+        <div class="form-group">
+          <input id="autoCompleteText" name="autoCompleteText" [(ngModel)]="autoCompleteText" type="text" class="form-control" placeholder="Folder name">
+        </div>
+      </form>    
+      <!-- List -->
+      <ul class="list-group app-list">
+        <li *ngFor="let listitem of (getAutoCompleteList())" class="list-group-item {{getActiveClass(listitem)}}" (click)="setActiveContainer(listitem)">
+          <span class="folder-name">{{listitem.name}}</span> 
+          <span class="badge badge-secondary">30 files</span></li>
+      </ul>
+      <!-- List -->
+<hr/>
+      <div class="btn-group WText">
+        <a href="#" class="btn btn-success ">Done</a>
+        
+      </div>
+    </div>

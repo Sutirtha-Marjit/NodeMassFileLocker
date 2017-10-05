@@ -45,9 +45,9 @@ html,body{
     min-height: 100%;
 }
 
-.dimension-text{
+.selection-panel-header{
     padding: 0.65rem;
-    color: #ccc;
+    color: #888;
 }
 
 .form-panel{
@@ -57,8 +57,7 @@ html,body{
 .pic-resource-panel header{
     padding:0.65rem;
     text-align: center;
-    background: black;
-}
+    }
 
 .pic{
     width: 31.2%;
@@ -71,9 +70,6 @@ html,body{
     
 }
 
-.opted-true{
-    display:none;
-}
 
 .pic:hover{
     background:  rgba(255,255,255,0.7);
@@ -103,7 +99,9 @@ html,body{
 .preview-image-container{
    width: 100%;
    min-height: 100%;
-   background: black;   
+   border-radius: 8px;
+   border-color:#ccc; 
+
 }
 
 .pic:hover img{
@@ -117,6 +115,54 @@ html,body{
     transition: all 1.5s ease-in-out;
 }
 
+.app-list.list-group .list-group-item{
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+}
+
+.app-list.list-group .list-group-item:hover{
+    background: #DFDFDF;
+    color:#444;
+}
+
+.app-list.list-group .list-group-item.active{
+    background:#333;
+    border-color:#444;
+}
+
+
+.app-list .badge{
+    float:right;
+}
+
+.preview-image-container .pic{
+  position: relative;
+  cursor:none;
+}
+
+.preview-image-container .pic:hover img{
+  -webkit-filter: none;
+}
+
+.preview-image-container .pic .cross{
+  position: absolute;
+  width:40px;
+  height: 40px;
+  border-radius:70px;
+  background:white;
+  top:0px;
+  right:0px; 
+  display: block;
+  text-align: center;
+  font-size:30px;
+  padding-top: 3px;
+  color:#979797;
+  cursor: pointer;
+} 
+
+.preview-image-container .pic .cross:hover{
+    color:red;
+}
 
 @media screen and (max-width: 1024px){
     .pic-resource-panel{

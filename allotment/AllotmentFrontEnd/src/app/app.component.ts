@@ -1,6 +1,8 @@
 import { OnInit, Component } from '@angular/core';
 import {ResourceObject} from './shared/datatypes';
 import {MockDataProviderService} from './services/mock-data-provider.service';
+import {CommonUtilService} from './services/common-util.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,6 +17,7 @@ export class AppComponent implements OnInit{
 
   constructor(){
     this.mockInitialData = MockDataProviderService.getMockData();
+    
   }
 
   ngOnInit(){
@@ -28,17 +31,20 @@ export class AppComponent implements OnInit{
     
   }
 
+  public getModifiedResourceList(opt:boolean){
+    return CommonUtilService.getRevisedArray(this.localImagePool,opt);
+  }
+
   public resetCurrentSelectedObject(){
-    this.CurrentSelectedObjects = [];
+    CommonUtilService.resetAllResources(this.localImagePool);
   }
 
-  public setCurrentObject(index:number){
-    this.localImagePool[index].opted = true;
-    this.CurrentSelectedObjects.push(this.localImagePool[index]);
+  public setCurrentObject(obj:ResourceObject){
+    obj.opted = true;    
   }
 
-  public unSetCurrentObject(index:number){
-    
+  public resetCurrentObject(obj:ResourceObject){
+    obj.opted = false;    
   }
   
   public loginStatus(e:Event){
