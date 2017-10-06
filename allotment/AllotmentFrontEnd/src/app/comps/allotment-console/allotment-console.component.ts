@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Input} from '@angular/core';
 import {FormControl,NgForm} from '@angular/forms';
 import {CommonUtilService} from '../../services/common-util.service';
 
@@ -12,21 +12,19 @@ import {ResourceContainer} from '../../shared/datatypes';
 })
 export class AllotmentConsoleComponent implements OnInit {
   
+  @Input() allContainers:any;
+  public category = "outbox";
   public autoCompleteText:string = "";
   public lastActiveContainer:ResourceContainer = null;
-  public listOfContainers:Array<ResourceContainer>=[
-    {children:10,name:"ascorbic",path:"",opted:false},
-    {children:1,name:"Salphuric",path:"",opted:false},
-    {children:2,name:"KingAcid",path:"",opted:false},
-    {children:5,name:"Wallteir",path:"",opted:false}
-  ];
+  public listOfContainers:Array<ResourceContainer>=[];
   
   constructor() { 
     
   }
 
   ngOnInit() {
-    
+    console.log('AllotmentConsoleComponent:');
+    console.log(this.allContainers);
   }
 
   getActiveClass(folder:ResourceContainer):string{
@@ -56,7 +54,8 @@ export class AllotmentConsoleComponent implements OnInit {
   }
 
   getAutoCompleteList():Array<ResourceContainer>{
-    return CommonUtilService.getMatchedContainers(this.listOfContainers,this.autoCompleteText);
+
+    return CommonUtilService.getMatchedContainers(this.allContainers[this.category],this.autoCompleteText);
   }
 
 }

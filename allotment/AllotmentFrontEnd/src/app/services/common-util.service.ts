@@ -6,10 +6,27 @@ import {ResourceObject,ResourceContainer} from '../shared/datatypes';
 @Injectable()
 export class CommonUtilService {
 
-  
-
   constructor() { 
 
+  }
+
+  public static getCategoryList(http:HttpClient,categoryName:string,success:Function,error:Function){
+    var requestPath = this.masterConfig.connection.serviceRequestHost+'/service/basic-list/'+categoryName;
+    http.get(requestPath).subscribe(function(jsonData){
+        var resultArray:Array<ResourceContainer> = [];
+        for(var el in jsonData){
+          resultArray.push({name:jsonData[el].name,children:0,path:jsonData[el].uri,opted:false});
+          
+        }
+        success(resultArray);        
+      })
+  }
+
+  public static getResourceList(http:HttpClient,success:Function,error:Function){
+      var requestPath = this.masterConfig.connection.serviceRequestHost+'/service/basic-list/source';
+      http.get(requestPath).subscribe(function(jsonData){
+        success(jsonData);        
+      })      
   }
 
   public static getEnvironment():string{
@@ -66,6 +83,7 @@ export class CommonUtilService {
   }
 
   public static masterConfig:any =  {
+    mockDataRequired:false,
     connection:{
       locationHost:"localhost:3000",
       serviceRequestHost:""
