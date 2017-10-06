@@ -16,10 +16,11 @@
   </form>
 </div>
 
-<div class="app-container" *ngIf="signedIn">
+<div class="app-container popupOpen-{{popupOpen}}" *ngIf="signedIn">
 <div class="pic-resource-panel WText">
+  <div class="scrollable">
   <header>
-      <div class="row"><h3 class="brand-header" style="padding:0.65rem 0.55rem;">Resource Allotment <small>{{localImagePool.length}}</small></h3></div>
+      <div class="row"><h3 class="brand-header" style="padding:0.65rem 0.55rem; width:100%; text-align:center;">Resource Allotment <small>{{localImagePool.length}}</small></h3></div>
   </header>
     
    <div class="pic-container" >
@@ -27,7 +28,7 @@
        <div class="bag rounded"><img  src="{{currentPic.sourcePath}}" class="rounded" /></div>
      </div>          
    </div>
-
+   </div>  
 </div>  
 <div class="console-resource-panel">
     <!-- -->  
@@ -63,4 +64,4 @@
 </div>
 </div>
 
-<app-resource-zoom [popupImageObject]="popupImageObject" *ngIf="popupOpen"></app-resource-zoom>
+<app-resource-zoom (click)="closeImagePopup()" [popupImageObject]="popupImageObject" *ngIf="popupOpen"></app-resource-zoom>

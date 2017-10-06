@@ -3,18 +3,19 @@
     top:0px;
     left:0px;
     width:100%;
-    min-height: 100%;
-    background: rgba(0,0,0,0.7);
+    height: 100%;
+    background: rgba(0,0,0,0.8);
     z-index:90; 
 }
 
 .zoom-image-container{
-    padding:2.67rem;
+    padding:5.67rem;
     width: 100%;
-    height: auto; 
+    height: 100%; 
+    text-align: center;
 }
 
 .zoom-image-container img{
-     width: 100%;
-     height: auto;
+     width: auto;
+     height: 100%;
 }

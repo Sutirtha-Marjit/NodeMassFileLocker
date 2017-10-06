@@ -68,6 +68,11 @@ export class AppComponent implements OnInit{
     this.popupImageObject = pic;
   }
 
+  closeImagePopup(){
+    this.popupOpen = false;
+    this.popupImageObject = null;
+  }
+
   ngOnInit(){
     if(CommonUtilService.masterConfig.mockDataRequired){
       this.mockInitialData = MockDataProviderService.getMockData();
