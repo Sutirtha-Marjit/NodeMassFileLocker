@@ -1,0 +1,20 @@
+.zoom-wrap{
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    min-height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index:90; 
+}
+
+.zoom-image-container{
+    padding:2.67rem;
+    width: 100%;
+    height: auto; 
+}
+
+.zoom-image-container img{
+     width: 100%;
+     height: auto;
+}

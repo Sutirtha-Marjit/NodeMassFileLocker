@@ -5,11 +5,13 @@ import {HttpClientModule} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AllotmentConsoleComponent } from './comps/allotment-console/allotment-console.component';
+import { ResourceZoomComponent } from './comps/resource-zoom/resource-zoom.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AllotmentConsoleComponent
+    AllotmentConsoleComponent,
+    ResourceZoomComponent
   ],
   imports: [
     BrowserModule,

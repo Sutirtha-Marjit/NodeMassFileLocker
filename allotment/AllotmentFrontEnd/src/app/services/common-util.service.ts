@@ -77,9 +77,9 @@ export class CommonUtilService {
     return arr;
   }
 
-  public static adjustDevProdEnv(){
+  public static adjustDevProdEnv():string{
     this.masterConfig.connection.serviceRequestHost = "http://"+this.masterConfig.connection.locationHost;
-    console.log(this.masterConfig.connection);
+    return this.masterConfig.connection.serviceRequestHost;
   }
 
   public static masterConfig:any =  {

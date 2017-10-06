@@ -16,24 +16,18 @@
   </form>
 </div>
 
-<div class="container-fluid" *ngIf="signedIn">
+<div class="app-container" *ngIf="signedIn">
 <div class="pic-resource-panel WText">
   <header>
-      <div class="row">          <h3 class="brand-header" style="padding:0.65rem 0.55rem;">Resource Allotment <small>{{localImagePool.length}}</small></h3>
-          
-      </div>
-       
-      
-    </header>
+      <div class="row"><h3 class="brand-header" style="padding:0.65rem 0.55rem;">Resource Allotment <small>{{localImagePool.length}}</small></h3></div>
+  </header>
     
    <div class="pic-container" >
      <div (click)="setCurrentObject(currentPic)" class="pic rounded" *ngFor="let currentPic of (getModifiedResourceList(false));">
-       <div class="bag rounded">
-          <img  src="{{currentPic.sourcePath}}" class="rounded" />
-       </div>
-     </div>
-     
+       <div class="bag rounded"><img  src="{{currentPic.sourcePath}}" class="rounded" /></div>
+     </div>          
    </div>
+
 </div>  
 <div class="console-resource-panel">
     <!-- -->  
@@ -52,7 +46,7 @@
       <div class="preview-image-container ">
         <div class="pic" *ngFor="let selectPic of (getModifiedResourceList(true))" >
             <div class="bag round">
-              <img class="img-fluid rounded"  src="{{selectPic.sourcePath}}"/>
+              <img (click)="openImagePopup(selectPic)" class="img-fluid rounded"  src="{{selectPic.sourcePath}}"/>
             </div>
             <span class="cross" (click)="resetCurrentObject(selectPic)">˟</span>
         </div>
@@ -68,3 +62,5 @@
     <!-- -->   
 </div>
 </div>
+
+<app-resource-zoom [popupImageObject]="popupImageObject" *ngIf="popupOpen"></app-resource-zoom>

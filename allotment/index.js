@@ -29,12 +29,13 @@ var listPopulate = function(callback,foldarName){
         data.forEach(function(p){
             var resultantPath = folderPath+"/"+p;
             var dir = fs.lstatSync(resultantPath).isDirectory();
-            if(dir){
+            
                resultArray.push({
                    uri:resultantPath,
-                   name:p
+                   name:p,
+                   directory:dir
                });
-            }
+            
             
         })
         resolve(resultArray);
@@ -47,6 +48,13 @@ var listPopulate = function(callback,foldarName){
     })
     
 };
+
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 app.get('/service/basic-list/source',function(req,res){
   var resultArray = [];
@@ -67,11 +75,7 @@ app.get('/test-connection',function(req,res){
     });
 })
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+
 
 destFolders.forEach(function(p){
     folderReadRouting(p);

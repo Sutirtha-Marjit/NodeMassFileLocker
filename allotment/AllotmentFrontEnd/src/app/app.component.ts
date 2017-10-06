@@ -11,16 +11,20 @@ import {CommonUtilService} from './services/common-util.service';
 })
 export class AppComponent implements OnInit{
   title = 'app';
+  sourceImageRoot = '';
+  popupOpen:boolean = false;
+  popupImageObject:ResourceObject = null;
   CurrentSelectedObjects:Array<ResourceObject>=[];
   signedIn:boolean = true;
   localImagePool:Array<ResourceObject> = [];
   givenContainers:any = {outbox:[],model:[]};
   mockInitialData = [];
   
+  
 
   constructor(private http:HttpClient){
     if( "dev" === CommonUtilService.getEnvironment() ){
-      CommonUtilService.adjustDevProdEnv();
+      this.sourceImageRoot = CommonUtilService.adjustDevProdEnv();     
     }  
     
   }
@@ -28,16 +32,18 @@ export class AppComponent implements OnInit{
   initAction(){
     
     CommonUtilService.getResourceList(this.http,(jsonData)=>{
+      
       var outputARray=[];
       jsonData.forEach((p,n)=>{
         p.uri = p.uri.replace('./','/');
+        p.uri = this.sourceImageRoot+p.uri;
         var ro = {uniq_id:n, width:0, height:0, loaded:false, sourcePath:p.uri, targetPath:"", opted:false} 
         outputARray.push(ro);        
       })
       
       this.localImagePool = outputARray;
 
-    },function(error){
+    },(error)=>{
 
     });
     
@@ -57,11 +63,17 @@ export class AppComponent implements OnInit{
     
   }
 
+  openImagePopup(pic:ResourceObject){
+    this.popupOpen = true;
+    this.popupImageObject = pic;
+  }
+
   ngOnInit(){
     if(CommonUtilService.masterConfig.mockDataRequired){
       this.mockInitialData = MockDataProviderService.getMockData();
       this.localImagePool = this.mockInitialData;
     }        
+    
     this.initAction();
   }
 

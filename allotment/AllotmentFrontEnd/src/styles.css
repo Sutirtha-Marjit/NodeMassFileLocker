@@ -17,7 +17,8 @@ html,body{
     height:100%;
 }
 *[class *="-resource-panel"]{
-    float:left;
+    /*float:left;*/
+    display:inline-block;
 }
 
 .brand-header{
@@ -33,7 +34,7 @@ html,body{
 .pic-resource-panel{
     background:#666;
     min-height:100%;
-    width:30%;
+    width:29.6%;
 }
 
 .console-resource-panel{
