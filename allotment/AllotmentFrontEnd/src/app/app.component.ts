@@ -1,5 +1,6 @@
 import { OnInit, Component } from '@angular/core';
 import {ResourceObject} from './shared/datatypes';
+import {HttpClient} from '@angular/common/http';
 import {MockDataProviderService} from './services/mock-data-provider.service';
 import {CommonUtilService} from './services/common-util.service';
 
@@ -15,7 +16,11 @@ export class AppComponent implements OnInit{
   localImagePool:Array<ResourceObject> = [];
   mockInitialData = [];
 
-  constructor(){
+  constructor(private http:HttpClient){
+    if( "dev" === CommonUtilService.getEnvironment() ){
+      CommonUtilService.adjustDevProdEnv();
+    }  
+    
     this.mockInitialData = MockDataProviderService.getMockData();
     
   }

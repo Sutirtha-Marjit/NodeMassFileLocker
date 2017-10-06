@@ -8,6 +8,7 @@
 # dependencies
 /node_modules
 
+
 # IDEs and editors
 /.idea
 .project
@@ -36,6 +37,8 @@ testem.log
 # e2e
 /e2e/*.js
 /e2e/*.map
+
+/dist
 
 # System Files
 .DS_Store

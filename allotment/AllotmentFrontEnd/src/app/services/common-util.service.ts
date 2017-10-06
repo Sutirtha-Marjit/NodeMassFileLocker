@@ -1,13 +1,25 @@
 import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 import {ResourceObject,ResourceContainer} from '../shared/datatypes';
 
 
 @Injectable()
 export class CommonUtilService {
 
+  
+
   constructor() { 
 
   }
+
+  public static getEnvironment():string{
+    var env = "dev";
+    if(window.location.host === this.masterConfig.connection.locationHost){
+      env = "prod";  
+    }
+    return env;
+  }
+
 
   public static resetAllResources(rootData:Array<ResourceObject>){
     
@@ -47,5 +59,17 @@ export class CommonUtilService {
 
     return arr;
   }
+
+  public static adjustDevProdEnv(){
+    this.masterConfig.connection.serviceRequestHost = "http://"+this.masterConfig.connection.locationHost;
+    console.log(this.masterConfig.connection);
+  }
+
+  public static masterConfig:any =  {
+    connection:{
+      locationHost:"localhost:3000",
+      serviceRequestHost:""
+    }
+  };
 
 }
