@@ -28,12 +28,14 @@ var listPopulate = function(callback,foldarName){
         var data = fs.readdirSync(folderPath);
         data.forEach(function(p){
             var resultantPath = folderPath+"/"+p;
-            var dir = fs.lstatSync(resultantPath).isDirectory();
-            
+            var dir = fs.lstatSync(resultantPath).isDirectory();            
+            var subFolderData = fs.readdirSync(resultantPath);
+
                resultArray.push({
                    uri:resultantPath,
                    name:p,
-                   directory:dir
+                   directory:dir,
+                   subfolderData:subFolderData
                });
             
             

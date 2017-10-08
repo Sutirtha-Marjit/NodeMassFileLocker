@@ -20,19 +20,30 @@
         </div>
       </div>  
       <hr/>
-      
-      <form name="auto-complete-search">
+     <div *ngIf="lastActiveContainer!==null" class="alert alert-warning" role="alert">
+      <span>Chosen target :<strong> {{lastActiveContainer.name}}</strong>
+      <strong *ngIf="this.lastActiveSubfolderName">{{" / "+this.lastActiveSubfolderName}}</strong>
+     </span> &nbsp;&nbsp; <a (click)="resetActiveContaine()" href="#">Cancel</a>
+     </div>
+
+      <form *ngIf="lastActiveContainer==null" name="auto-complete-search">
         <div class="form-group">
           <input id="autoCompleteText" name="autoCompleteText" [(ngModel)]="autoCompleteText" type="search" class="form-control" placeholder="Folder name">
         </div>
       </form>    
-      <!-- List -->
-      <ul class="list-group app-list">
-        <li *ngFor="let listitem of (getAutoCompleteList())" class="list-group-item {{getActiveClass(listitem)}}" (click)="setActiveContainer(listitem)">
-          <span class="folder-name">{{listitem.name}}</span> 
-          <span class="badge badge-secondary">30 files</span></li>
-      </ul>
-      <!-- List -->
+      <!-- AUTO COMPLETE LIST :START-->
+      <div *ngIf="lastActiveContainer==null">
+        <div *ngFor="let listitem of (getAutoCompleteList())">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a class="btn btn-dark btn-sm" href="#" (click)="setActiveContainer(listitem,null)">{{listitem.name}}</a></li>            
+          </ol>
+          <ol *ngFor="let subItem of listitem.childrenDetails" class="breadcrumb">
+            <li class="breadcrumb-item"><a>{{listitem.name}}</a></li>
+            <li class="breadcrumb-item"><a class="btn btn-dark btn-sm"  href="#" (click)="setActiveContainer(listitem,subItem)">{{subItem}}</a></li>
+          </ol> 
+        </div>  
+      </div>
+      <!-- AUTO COMPLETE LIST :END-->
 <hr/>
       <div class="btn-group WText">
         <a href="#" class="btn btn-success ">Done</a>

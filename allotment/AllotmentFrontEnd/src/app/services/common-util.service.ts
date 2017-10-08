@@ -15,7 +15,7 @@ export class CommonUtilService {
     http.get(requestPath).subscribe(function(jsonData){
         var resultArray:Array<ResourceContainer> = [];
         for(var el in jsonData){
-          resultArray.push({name:jsonData[el].name,children:0,path:jsonData[el].uri,opted:false});
+          resultArray.push({name:jsonData[el].name,children:jsonData[el].subfolderData.length,path:jsonData[el].uri,opted:false,childrenDetails:jsonData[el].subfolderData});
           
         }
         success(resultArray);        
@@ -68,8 +68,15 @@ export class CommonUtilService {
     }else{
       list.forEach((p)=>{
       listName =  p.name.toLowerCase();
+      
       if(listName.indexOf(matchString)!==-1){
         arr.push(p);
+      }else{
+        p.childrenDetails.forEach((subEl)=>{
+          if(subEl.indexOf(matchString)!==-1){
+            arr.push(p);
+          }
+        })
       }
     })
     }

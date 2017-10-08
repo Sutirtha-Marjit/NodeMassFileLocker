@@ -17,6 +17,7 @@ export class AllotmentConsoleComponent implements OnInit {
   public autoCompleteText:string = "";
   public lastActiveContainer:ResourceContainer = null;
   public listOfContainers:Array<ResourceContainer>=[];
+  public lastActiveSubfolderName = null;
   
   constructor() { 
     
@@ -31,8 +32,14 @@ export class AllotmentConsoleComponent implements OnInit {
     return folder.opted ? "active" : "";
   }
 
-  setActiveContainer(folder:ResourceContainer){
+  resetActiveContaine(){
+    this.lastActiveSubfolderName = null;
+    this.lastActiveContainer=null;
+  }
+
+  setActiveContainer(folder:ResourceContainer,subfolderName:any){
      var selectAction = true;
+     this.lastActiveSubfolderName = null;
 
      if(this.lastActiveContainer!==null){
        if(this.lastActiveContainer.name === folder.name){
@@ -48,7 +55,9 @@ export class AllotmentConsoleComponent implements OnInit {
     }
         
     this.lastActiveContainer = folder;
+    this.lastActiveSubfolderName = subfolderName;
     this.lastActiveContainer.opted = true;
+
      }
     
   }

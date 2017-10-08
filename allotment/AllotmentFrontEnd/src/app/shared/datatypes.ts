@@ -2,7 +2,8 @@ export interface ResourceContainer{
     name:string,
     path:string,
     children:number,
-    opted:boolean 
+    opted:boolean,
+    childrenDetails:any 
 }
 
 export interface ResourceObject{
