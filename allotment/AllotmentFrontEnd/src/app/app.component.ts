@@ -35,9 +35,10 @@ export class AppComponent implements OnInit{
       
       var outputARray=[];
       jsonData.forEach((p,n)=>{
+        var orig = ''+p.uri;
         p.uri = p.uri.replace('./','/');
         p.uri = this.sourceImageRoot+p.uri;
-        var ro = {uniq_id:n, width:0, height:0, loaded:false, sourcePath:p.uri, targetPath:"", opted:false} 
+        var ro = {uniq_id:n, width:0, originSourcePath:orig, height:0, loaded:false, sourcePath:p.uri, targetPath:"", opted:false} 
         outputARray.push(ro);        
       })
       

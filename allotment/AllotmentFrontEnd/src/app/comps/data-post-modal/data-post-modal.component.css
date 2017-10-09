@@ -1,0 +1,103 @@
+.post-preload-wrap{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background:rgba(0,0,0,0.8);
+    top:0px;
+    left:0px;
+}
+
+.post-preload-content{
+    width:60%;
+    margin: 15% auto;
+    position: relative;
+    color:white;
+    
+}
+
+.post-preload-content h3,.post-preload-content small{
+    text-align: center;
+}
+
+
+.common-preloader{
+  display: block;
+  width:120px;
+  height:20px;
+  margin:0 auto;
+}
+
+.common-preloader .circle-conatiner{
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+  animation-name:common-preloader-animation;
+  animation-duration: 2s; 
+  animation-delay: 1s;
+  animation-iteration-count:infinite;
+  -webkit-animation-name:example;
+  -webkit-animation-duration: 2s; 
+  -webkit-animation-delay: 0s;
+  -webkit-animation-iteration-count:infinite;
+}
+
+.common-preloader .circle-conatiner.n2{
+  animation-delay: .5s;
+  -webkit-animation-delay: .5s;
+}
+
+.common-preloader .circle-conatiner.n3{
+  animation-delay: 1s;
+  -webkit-animation-delay: 1s;
+}
+
+.common-preloader .circle-conatiner.n4{
+  animation-delay: 1.5s;
+  -webkit-animation-delay: 1.5s;
+}
+
+.common-preloader .circle-conatiner svg{
+  width:22px;
+  height:22px;
+}
+
+.common-preloader .circle-conatiner svg circle{
+  fill:rgba(255,255,255,0.9);
+  stroke:rgba(0,0,0,0);
+  stroke-width:2px; 
+  cx:11;
+  cy:11;
+  r:10;
+}
+
+
+.count-down-preloader{
+  width:80px;
+  padding: 10px;
+  border-radius:10px;
+  background: rgba(0,0,0,0.5); 
+  margin: 5px auto;
+}
+
+.count-down-preloader span{
+display: block;
+}
+
+.count-down-preloader span.digit{
+ color:white;
+ font-size:20px; 
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes example {
+    0% {transform:translateY(0px) scale(1);}
+    50% {transform:translateY(30px) scale(0.9);}
+    100% {transform:translateY(0px) scale(1);}
+}
+
+/* Standard syntax */
+@keyframes example {
+    0% {transform:translateY(0px) scale(1);}
+    50% {transform:translateY(30px) scale(0.9);}
+    100% {transform:translateY(0px) scale(1);}
+}

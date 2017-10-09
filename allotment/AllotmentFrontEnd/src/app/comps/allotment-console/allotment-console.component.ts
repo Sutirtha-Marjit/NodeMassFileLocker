@@ -1,8 +1,9 @@
-import { Component, OnInit , Input} from '@angular/core';
+import { Component, OnInit , Input, Output, EventEmitter} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 import {FormControl,NgForm} from '@angular/forms';
 import {CommonUtilService} from '../../services/common-util.service';
 
-import {ResourceContainer} from '../../shared/datatypes';
+import {ResourceContainer,ResourcePostObject, ResourceObject} from '../../shared/datatypes';
 
 
 @Component({
@@ -13,23 +14,41 @@ import {ResourceContainer} from '../../shared/datatypes';
 export class AllotmentConsoleComponent implements OnInit {
   
   @Input() allContainers:any;
+  @Input() toPostResourceList:Array<ResourceObject>;
+  @Output() finalPostStarted:EventEmitter<ResourcePostObject> = new EventEmitter();
+  @Output() finalPostDone:EventEmitter<any> = new EventEmitter();
+
   public category = "outbox";
   public autoCompleteText:string = "";
   public lastActiveContainer:ResourceContainer = null;
   public listOfContainers:Array<ResourceContainer>=[];
   public lastActiveSubfolderName = null;
   
-  constructor() { 
+  constructor(private http:HttpClient) { 
     
   }
 
   ngOnInit() {
-    console.log('AllotmentConsoleComponent:');
-    console.log(this.allContainers);
+    
   }
 
   getActiveClass(folder:ResourceContainer):string{
     return folder.opted ? "active" : "";
+  }
+
+  finalPost(){
+   var crPostObject:ResourcePostObject,
+   arr=[],
+   path = this.lastActiveSubfolderName ? this.lastActiveContainer.path +"/"+ this.lastActiveSubfolderName : this.lastActiveContainer.path;
+   
+   this.toPostResourceList.forEach((p)=>{
+     arr.push(p.originSourcePath);
+   });   
+   crPostObject = {target: path, resourcePathList:arr }
+      
+   this.finalPostStarted.emit(crPostObject);
+   console.log(crPostObject);
+   
   }
 
   resetActiveContaine(){
@@ -57,6 +76,9 @@ export class AllotmentConsoleComponent implements OnInit {
     this.lastActiveContainer = folder;
     this.lastActiveSubfolderName = subfolderName;
     this.lastActiveContainer.opted = true;
+
+    console.log('///////////////////////');
+    console.log(this.lastActiveContainer);
 
      }
     

@@ -1,4 +1,5 @@
-<div class="col form-panel" >
+<div class="col form-panel"  >
+      <div *ngIf="lastActiveContainer===null">
       <h4>Allotment options</h4>
       <hr/>
       <div class="row">
@@ -20,10 +21,12 @@
         </div>
       </div>  
       <hr/>
+    </div>
      <div *ngIf="lastActiveContainer!==null" class="alert alert-warning" role="alert">
       <span>Chosen target :<strong> {{lastActiveContainer.name}}</strong>
-      <strong *ngIf="this.lastActiveSubfolderName">{{" / "+this.lastActiveSubfolderName}}</strong>
-     </span> &nbsp;&nbsp; <a (click)="resetActiveContaine()" href="#">Cancel</a>
+      <strong *ngIf="this.lastActiveSubfolderName">{{" / "+this.lastActiveSubfolderName}}</strong></span>
+      <p>So your selected resources will move to the chosen category. To change the decision you can 
+      <a (click)="resetActiveContaine()" href="#">Cancel</a> the selection</p>
      </div>
 
       <form *ngIf="lastActiveContainer==null" name="auto-complete-search">
@@ -45,8 +48,8 @@
       </div>
       <!-- AUTO COMPLETE LIST :END-->
 <hr/>
-      <div class="btn-group WText">
-        <a href="#" class="btn btn-success ">Done</a>
+      <div class="btn-group WText" *ngIf="lastActiveContainer!==null">
+        <a (click)="finalPost()" href="#" class="btn btn-success ">Done</a>
         
       </div>
     </div>

@@ -3,10 +3,13 @@ const express = require("express");
 const app = express();
 const fs = require('fs');
 const destFolders = ["model","outbox"];
+const MasterCopy = require("./mastercopy");
 const folderConfig = {
     destRoot:'./operations/dest/',
     sourceRoot:'./operations/source/'
 };
+
+
 
 var folderReadRouting = function(routeFolderName){
     console.log('folderReadRouting>'+routeFolderName);
@@ -27,11 +30,12 @@ var listPopulate = function(callback,foldarName){
         var folderPath = folderConfig.destRoot+foldarName;
         var data = fs.readdirSync(folderPath);
         data.forEach(function(p){
-            var resultantPath = folderPath+"/"+p;
+            var subFolderData=[],resultantPath = folderPath+"/"+p;
             var dir = fs.lstatSync(resultantPath).isDirectory();            
-            var subFolderData = fs.readdirSync(resultantPath);
-
-               resultArray.push({
+            if(dir){
+                subFolderData = fs.readdirSync(resultantPath);
+            }
+              resultArray.push({
                    uri:resultantPath,
                    name:p,
                    directory:dir,
@@ -56,6 +60,15 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
+});
+
+app.post('/service/jobs/mastercopy',function(req,res){
+
+    var givenData = {"target":"./operations/dest/outbox/analytics","resourcePathList":["./operations/source/1212132.jpg","./operations/source/1212wq212wqw2.jpg","./operations/source/2133124sasda.jpg"]}; 
+    MasterCopy(fs,givenData.target,givenData.resourcePathList,function(data){
+        res.json(data);
+    });
+
 });
 
 app.get('/service/basic-list/source',function(req,res){

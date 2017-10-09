@@ -11,8 +11,18 @@ export interface ResourceObject{
     width:number,
     height:number,
     sourcePath:string,
+    originSourcePath:string,
     targetPath:string,
     loaded:boolean,
     opted:boolean    
 }
 
+export interface ResourcePostObject{
+    target:string,
+    resourcePathList:Array<string>
+}
+
+export interface RequestStatusObject{
+    heading:string,
+    subheading:string
+}

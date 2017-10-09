@@ -10,6 +10,8 @@ export class CommonUtilService {
 
   }
 
+  
+
   public static getCategoryList(http:HttpClient,categoryName:string,success:Function,error:Function){
     var requestPath = this.masterConfig.connection.serviceRequestHost+'/service/basic-list/'+categoryName;
     http.get(requestPath).subscribe(function(jsonData){

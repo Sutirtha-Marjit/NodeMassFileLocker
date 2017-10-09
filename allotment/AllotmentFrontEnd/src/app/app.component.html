@@ -49,13 +49,13 @@
             <div class="bag round">
               <img (click)="openImagePopup(selectPic)" class="img-fluid rounded"  src="{{selectPic.sourcePath}}"/>
             </div>
-            <span class="cross" (click)="resetCurrentObject(selectPic)">˟</span>
+            <span class="cross" (click)="resetCurrentObject(selectPic)">&#x2DF;</span>
         </div>
         
       </div>      
     </div>
 
-    <app-allotment-console [allContainers]="givenContainers" class="col" ></app-allotment-console>
+    <app-allotment-console   [toPostResourceList]="getModifiedResourceList(true)" [allContainers]="givenContainers" class="col" *ngIf="(getModifiedResourceList(true)).length>0" ></app-allotment-console>
 
     <div class="w-100"></div>    
   </div>
@@ -65,3 +65,4 @@
 </div>
 
 <app-resource-zoom (click)="closeImagePopup()" [popupImageObject]="popupImageObject" *ngIf="popupOpen"></app-resource-zoom>
+<app-data-post-modal style="display:none;" [status]="'Requesting to move...'"></app-data-post-modal>
