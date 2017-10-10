@@ -16,7 +16,7 @@
   </form>
 </div>
 
-<div class="app-container popupOpen-{{popupOpen}}" *ngIf="signedIn">
+<div class="app-container dataPostModalOpen-{{dataPostModalOpen}} popupOpen-{{popupOpen}}" *ngIf="signedIn">
 <div class="pic-resource-panel WText">
   <div class="scrollable">
   <header>
@@ -55,7 +55,7 @@
       </div>      
     </div>
 
-    <app-allotment-console   [toPostResourceList]="getModifiedResourceList(true)" [allContainers]="givenContainers" class="col" *ngIf="(getModifiedResourceList(true)).length>0" ></app-allotment-console>
+    <app-allotment-console (finalPostDone)="onCopyOperationComplete($event)" (finalPostStarted)="openDataPostModal($event)"  [toPostResourceList]="getModifiedResourceList(true)" [allContainers]="givenContainers" class="col" *ngIf="(getModifiedResourceList(true)).length>0" ></app-allotment-console>
 
     <div class="w-100"></div>    
   </div>
@@ -65,4 +65,4 @@
 </div>
 
 <app-resource-zoom (click)="closeImagePopup()" [popupImageObject]="popupImageObject" *ngIf="popupOpen"></app-resource-zoom>
-<app-data-post-modal style="display:none;" [status]="'Requesting to move...'"></app-data-post-modal>
+<app-data-post-modal *ngIf="dataPostModalOpen" (onReInitApp)="initAction()" [statusObject]="crDataPostStatusObject"></app-data-post-modal>

@@ -96,6 +96,9 @@ export class CommonUtilService {
     connection:{
       locationHost:"localhost:3000",
       serviceRequestHost:""
+    },
+    serviceURI:{
+      toCopy:'/service/jobs/mastercopy'
     }
   };
 

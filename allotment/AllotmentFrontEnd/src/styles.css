@@ -38,8 +38,8 @@ html,body{
     height:100%;
 }
 
-.popupOpen-true{
-    -webkit-filter: blur(2px);
+.popupOpen-true,dataPostModalOpen-true{
+    -webkit-filter: blur(20px);
 }
 
 .pic-resource-panel{

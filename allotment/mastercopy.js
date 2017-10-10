@@ -109,6 +109,14 @@ function MasterCopy(fs,target,listOfFiles,callBack){
                 })
             }else{
                 copyLog('Copy operation completed at '+new Date());
+                listOfFiles.forEach(function(toDelFName){
+                    
+                    fs.unlink(toDelFName, function (err) {
+                    if (err) throw err;
+                    console.log('successfully deleted '+toDelFName);
+                    });
+                    
+                })
                 callBack(StatusObject);
             }
             

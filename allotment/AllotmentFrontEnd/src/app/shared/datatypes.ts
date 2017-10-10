@@ -24,5 +24,6 @@ export interface ResourcePostObject{
 
 export interface RequestStatusObject{
     heading:string,
-    subheading:string
+    subheading:string,
+    type:string
 }

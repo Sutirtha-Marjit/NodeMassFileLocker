@@ -1,4 +1,5 @@
-import { Component, OnInit ,Input} from '@angular/core';
+import { Component, OnInit ,Input,Output,EventEmitter} from '@angular/core';
+import {ResourceContainer,ResourcePostObject, ResourceObject, RequestStatusObject} from '../../shared/datatypes';
 
 @Component({
   selector: 'app-data-post-modal',
@@ -7,12 +8,19 @@ import { Component, OnInit ,Input} from '@angular/core';
 })
 export class DataPostModalComponent implements OnInit {
 
-  @Input() status:string;
+  @Input() statusObject:RequestStatusObject;
+  @Output() onReInitApp:EventEmitter<string> = new EventEmitter();
+  
   constructor() { 
 
   }
 
   ngOnInit() {
+    
+  }
+
+  reInitApp(){
+    this.onReInitApp.emit('init again');
   }
 
 }

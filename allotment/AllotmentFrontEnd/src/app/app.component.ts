@@ -1,5 +1,5 @@
 import { OnInit, Component, Input } from '@angular/core';
-import {ResourceObject} from './shared/datatypes';
+import {ResourceObject,ResourcePostObject, RequestStatusObject} from './shared/datatypes';
 import {HttpClient} from '@angular/common/http';
 import {MockDataProviderService} from './services/mock-data-provider.service';
 import {CommonUtilService} from './services/common-util.service';
@@ -13,7 +13,10 @@ export class AppComponent implements OnInit{
   title = 'app';
   sourceImageRoot = '';
   popupOpen:boolean = false;
+  dataPostModalOpen = false;
+  crDataPostObject:ResourcePostObject = null;
   popupImageObject:ResourceObject = null;
+  crDataPostStatusObject:RequestStatusObject = {heading:"",subheading:"",type:''};
   CurrentSelectedObjects:Array<ResourceObject>=[];
   signedIn:boolean = true;
   localImagePool:Array<ResourceObject> = [];
@@ -30,6 +33,12 @@ export class AppComponent implements OnInit{
   }
 
   initAction(){
+    
+    this.popupOpen = false;
+    this.dataPostModalOpen = false;
+    this.crDataPostObject = null;
+    this.popupImageObject = null;
+    this.crDataPostStatusObject = {heading:"",subheading:"",type:''};  
     
     CommonUtilService.getResourceList(this.http,(jsonData)=>{
       
@@ -62,6 +71,24 @@ export class AppComponent implements OnInit{
 
     });
     
+  }
+
+  onCopyOperationComplete(obj:RequestStatusObject){
+    this.crDataPostStatusObject = obj;
+  }
+
+  openDataPostModal(eventObject:ResourcePostObject){
+    this.crDataPostStatusObject = {
+      heading:eventObject.resourcePathList.length+" Resources are ready to be copied",
+      subheading:"Please wait while files are processing",
+      type:''
+    };
+    this.dataPostModalOpen = true;
+    this.crDataPostObject = eventObject;
+  }
+
+  closeDataPostModal(){
+    this.dataPostModalOpen = false;
   }
 
   openImagePopup(pic:ResourceObject){

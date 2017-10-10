@@ -1,8 +1,9 @@
 <div class="post-preload-wrap">
   <div class="post-preload-content">
-    <h3>{{status}}</h3>
-    <p style="text-align:center;"><small>10  resources in operation</small></p>
-    <div class="common-preloader">
+    <h3>{{statusObject.heading}}</h3>
+    <p style="text-align:center;">{{statusObject.subheading}}</p>
+    
+    <div class="common-preloader" *ngIf="statusObject.type!=='completed'">
       <div class="circle-conatiner n1">
           <svg><circle /></svg>    
       </div>
@@ -16,5 +17,10 @@
           <svg><circle /></svg>    
       </div>
     </div>
+
+    <div *ngIf="statusObject.type==='completed'" style="text-align:center;">
+        <button (click)="reInitApp()" class="btn btn-sm btn-success">Ok! got it. Go for other resources</button>
+    </div>        
+
   </div>
 </div>
