@@ -1,0 +1,35 @@
+<div class="create-container-wrap">
+  <!-- AUTO COMPLETE LIST :START-->
+      <div class="container">
+      <br/>  
+      <h3>Create new </h3>   
+      <div class="btn-group">
+        <a href="#" class="btn btn-success btn-sm {{activeState.outbox}}" (click)="setSelectedContainer('outbox')">Outbox</a>
+        <a href="#" class="btn btn-success btn-sm {{activeState.model}}" (click)="setSelectedContainer('model')">Model</a>
+        
+      </div>
+      <span> &nbsp; Chosen conatiner is {{selectedContainer}}. You can <a href="#" (click)="close()">cancel</a> the operation.</span>
+      </div>
+      <br/>
+      <div class="container" *ngIf="selectedContainer!==null">
+        <div *ngFor="let listitem of (getAutoCompleteList())">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a class="btn btn-info btn-sm" href="#">{{listitem.name}}</a>              
+            </li>
+            
+            <li class="breadcrumb-item">
+              <input  style="width:200px;" type="text"/>
+            </li>
+            <li class="breadcrumb-item">
+              <a class="btn btn-success btn-sm" href="#">+</a>
+            </li>
+          </ol>
+          <ol *ngFor="let subItem of listitem.childrenDetails" class="breadcrumb">
+            <li class="breadcrumb-item"><a>{{listitem.name}}</a></li>
+            <li class="breadcrumb-item">{{subItem}}</li>
+          </ol> 
+        </div>  
+      </div>
+      <!-- AUTO COMPLETE LIST :END-->
+</div>

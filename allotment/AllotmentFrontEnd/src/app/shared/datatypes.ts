@@ -6,6 +6,11 @@ export interface ResourceContainer{
     childrenDetails:any 
 }
 
+export interface AuthenticatedUserProfile{
+    userName:string,
+    password:string
+}
+
 export interface ResourceObject{
     uniq_id:number,
     width:number,

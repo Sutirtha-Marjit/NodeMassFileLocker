@@ -1,5 +1,5 @@
 import { OnInit, Component, Input } from '@angular/core';
-import {ResourceObject,ResourcePostObject, RequestStatusObject} from './shared/datatypes';
+import {ResourceObject,ResourcePostObject, RequestStatusObject, AuthenticatedUserProfile} from './shared/datatypes';
 import {HttpClient} from '@angular/common/http';
 import {MockDataProviderService} from './services/mock-data-provider.service';
 import {CommonUtilService} from './services/common-util.service';
@@ -14,11 +14,12 @@ export class AppComponent implements OnInit{
   sourceImageRoot = '';
   popupOpen:boolean = false;
   dataPostModalOpen = false;
+  createResourceContainerPopupOpen:boolean = false;
   crDataPostObject:ResourcePostObject = null;
   popupImageObject:ResourceObject = null;
   crDataPostStatusObject:RequestStatusObject = {heading:"",subheading:"",type:''};
   CurrentSelectedObjects:Array<ResourceObject>=[];
-  signedIn:boolean = true;
+  signedIn:boolean = false;
   localImagePool:Array<ResourceObject> = [];
   givenContainers:any = {outbox:[],model:[]};
   mockInitialData = [];
@@ -73,6 +74,12 @@ export class AppComponent implements OnInit{
     
   }
 
+  onResourceImageLoad($im:number){
+    
+    var picTag:Element = document.querySelectorAll('.image-pool .resource-box-image').item($im);
+    picTag.classList.add('image-loaded');
+  }
+
   onCopyOperationComplete(obj:RequestStatusObject){
     this.crDataPostStatusObject = obj;
   }
@@ -99,6 +106,14 @@ export class AppComponent implements OnInit{
   closeImagePopup(){
     this.popupOpen = false;
     this.popupImageObject = null;
+  }
+
+  openCreateFolderPopup(){
+    this.createResourceContainerPopupOpen = true;
+  }
+
+  closeCreateFolderPopup(){
+    this.createResourceContainerPopupOpen = false;
   }
 
   ngOnInit(){
@@ -132,9 +147,13 @@ export class AppComponent implements OnInit{
     obj.opted = false;    
   }
   
-  public loginStatus(e:Event){
-    e.preventDefault();
-    alert('ok');
+  public loginStatusChange(profile:AuthenticatedUserProfile){
+    this.signedIn = true;
+  }
+
+  public logout(){
+    CommonUtilService.removeUserFromLocalStorage();
+    this.signedIn = false;
   }
 
 

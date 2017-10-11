@@ -18,6 +18,7 @@ export class AllotmentConsoleComponent implements OnInit {
   @Input() toPostResourceList:Array<ResourceObject>;
   @Output() finalPostStarted:EventEmitter<ResourcePostObject> = new EventEmitter();
   @Output() finalPostDone:EventEmitter<RequestStatusObject> = new EventEmitter();
+  @Output() onCreateNewContainerRequest:EventEmitter<string> = new EventEmitter();
 
   public category = "outbox";
   public autoCompleteText:string = "";
@@ -35,6 +36,10 @@ export class AllotmentConsoleComponent implements OnInit {
 
   getActiveClass(folder:ResourceContainer):string{
     return folder.opted ? "active" : "";
+  }
+
+  openCreateFolderPopup(){
+    this.onCreateNewContainerRequest.emit('open');
   }
 
   private getFinalRPO():ResourcePostObject{

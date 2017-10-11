@@ -10,6 +10,25 @@ export class CommonUtilService {
 
   }
 
+  public static getUserFromLocalStorage():boolean{
+    var raAuth = window.localStorage.getItem('resource-allotment-auth');
+    if(raAuth==='1'){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  public static setUserFromLocalStorage(){
+    window.localStorage.setItem('resource-allotment-auth','1');
+    
+  }
+
+  public static removeUserFromLocalStorage(){
+    window.localStorage.removeItem('resource-allotment-auth');
+    
+  }
+
   
 
   public static getCategoryList(http:HttpClient,categoryName:string,success:Function,error:Function){

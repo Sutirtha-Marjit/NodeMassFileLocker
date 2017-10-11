@@ -1,6 +1,7 @@
 <div class="col form-panel"  >
       <div *ngIf="lastActiveContainer===null">
       <h4>Allotment options</h4>
+      <p>Please <a class="" (click)="openCreateFolderPopup()" href="#">create new resource</a> containers if needed </p>
       <hr/>
       <div class="row">
         <div class="col">
@@ -52,4 +53,5 @@
         <a (click)="finalPost()" href="#" class="btn btn-success ">Done</a>
         
       </div>
+      
     </div>
