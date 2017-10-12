@@ -3,7 +3,8 @@ export interface ResourceContainer{
     path:string,
     children:number,
     opted:boolean,
-    childrenDetails:any 
+    childrenDetails:any,
+    isDir:boolean 
 }
 
 export interface AuthenticatedUserProfile{
@@ -19,12 +20,15 @@ export interface ResourceObject{
     originSourcePath:string,
     targetPath:string,
     loaded:boolean,
-    opted:boolean    
+    opted:boolean,
+    isDir:boolean,
+    name:string    
 }
 
 export interface ResourcePostObject{
     target:string,
-    resourcePathList:Array<string>
+    resourcePathList:Array<string>,
+    
 }
 
 export interface RequestStatusObject{

@@ -9,8 +9,16 @@
   </header>
     
    <div class="pic-container image-pool" >
-     <div (click)="setCurrentObject(currentPic)" class="pic rounded" *ngFor="let currentPic of (getModifiedResourceList(false)); let $index = index;">
-       <div class="bag rounded"><img  (load)="onResourceImageLoad($index)"  src="{{currentPic.sourcePath}}" class="rounded resource-box-image" /></div>
+     <div (click)="setCurrentObject(currentPic,currentPic.isDir)" class="pic rounded" *ngFor="let currentPic of (getModifiedResourceList(false)); let $index = index;">
+       <div class="bag rounded">
+          <img *ngIf="!currentPic.isDir"  (load)="onResourceImageLoad($index)"  src="{{currentPic.sourcePath}}" class="rounded resource-box-image" />
+          <div *ngIf="currentPic.isDir">
+          <span class="icon-span-folder">
+            <span>{{currentPic.name}}</span>
+          </span>
+          
+          </div>
+      </div>
      </div>          
    </div>
    </div>  

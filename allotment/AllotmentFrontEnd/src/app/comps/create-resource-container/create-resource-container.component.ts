@@ -13,6 +13,8 @@ export class CreateResourceContainerComponent implements OnInit {
   
   @Output() onCloseWindow:EventEmitter<string> = new EventEmitter();
   selectedContainer = 'model';
+  public fn="";
+  public newFolderName = {};
   private completeFolderList = {
     outbox:[],
     model:[]
@@ -22,6 +24,10 @@ export class CreateResourceContainerComponent implements OnInit {
 
   constructor(private http:HttpClient) {
 
+   }
+
+   requestToCreateNewContainer(){
+     
    }
 
    close(){
@@ -39,12 +45,25 @@ export class CreateResourceContainerComponent implements OnInit {
      }
    }
 
+   getDuplicateSubfolderClass(listItem:ResourceContainer):string{
+     
+     if(this.newFolderName[listItem.name]){
+       var av = listItem.childrenDetails.indexOf(this.newFolderName[listItem.name].trim());
+       if(av!==-1){
+         return "duplicate";
+       }
+     }
+     return '';
+   }
+
    getAutoCompleteList(){
+     //console.log(this.completeFolderList[this.selectedContainer]);
      return this.completeFolderList[this.selectedContainer];
    }
 
-  ngOnInit() {
-    CommonUtilService.getCategoryList(this.http,'model',(resultArray:Array<ResourceContainer>)=>{
+   
+   private initAction(){
+     CommonUtilService.getCategoryList(this.http,'model',(resultArray:Array<ResourceContainer>)=>{
       this.completeFolderList.model = resultArray;
     },(error)=>{
 
@@ -56,6 +75,10 @@ export class CreateResourceContainerComponent implements OnInit {
 
     });
 
+   }
+
+  ngOnInit() {
+    this.initAction();
   }
 
 }

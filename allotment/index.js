@@ -70,6 +70,10 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.post('/service/jobs/createnewfolder',requestJsonParser,function(req,res){
+
+});
+
 app.post('/service/jobs/mastercopy',requestJsonParser,function(req,res){
     var givenData=[];
     if(req.body){
@@ -87,9 +91,12 @@ app.get('/service/basic-list/source',function(req,res){
   var resultArray = [];
   var data = fs.readdirSync(folderConfig.sourceRoot);
   data.forEach(function(p){
+      var isDir = fs.lstatSync(folderConfig.sourceRoot+'/'+p).isDirectory();
+      
       resultArray.push({
           uri:folderConfig.sourceRoot+p,
-          name:p
+          name:p,
+          isDir:isDir
       })
   });
   res.json(resultArray);

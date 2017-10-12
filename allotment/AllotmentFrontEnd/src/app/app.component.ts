@@ -48,7 +48,7 @@ export class AppComponent implements OnInit{
         var orig = ''+p.uri;
         p.uri = p.uri.replace('./','/');
         p.uri = this.sourceImageRoot+p.uri;
-        var ro = {uniq_id:n, width:0, originSourcePath:orig, height:0, loaded:false, sourcePath:p.uri, targetPath:"", opted:false} 
+        var ro = {uniq_id:n, width:0, originSourcePath:orig, height:0, loaded:false, name:p.name, sourcePath:p.uri, targetPath:"", opted:false,isDir:p.isDir} 
         outputARray.push(ro);        
       })
       
@@ -139,8 +139,11 @@ export class AppComponent implements OnInit{
     CommonUtilService.resetAllResources(this.localImagePool);
   }
 
-  public setCurrentObject(obj:ResourceObject){
-    obj.opted = true;    
+  public setCurrentObject(obj:ResourceObject,isDir:boolean){
+    if(!isDir){
+      obj.opted = true;
+    }
+        
   }
 
   public resetCurrentObject(obj:ResourceObject){

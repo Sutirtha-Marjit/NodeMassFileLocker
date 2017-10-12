@@ -38,7 +38,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-signin (onSigninSuccessful)=\"loginStatusChange($event)\"  *ngIf=\"!signedIn\">\n</app-signin>\n<div class=\"app-container dataPostModalOpen-{{dataPostModalOpen}} popupOpen-{{popupOpen}}\" *ngIf=\"signedIn\">\n<div class=\"pic-resource-panel WText\">\n  <div class=\"scrollable\">\n  <header>\n      <div class=\"row\"><h3 class=\"brand-header\" style=\"padding:0.65rem 0.55rem; width:100%; text-align:center;\">Resource Allotment</h3></div>\n      <div><small><span>{{getModifiedResourceList(false).length}} Resources left to select</span> </small> &nbsp;&nbsp;&nbsp; <a (click)=\"logout()\" class=\"btn btn-sm btn-dark\" href=\"#\">Logout</a></div>\n  </header>\n    \n   <div class=\"pic-container image-pool\" >\n     <div (click)=\"setCurrentObject(currentPic)\" class=\"pic rounded\" *ngFor=\"let currentPic of (getModifiedResourceList(false)); let $index = index;\">\n       <div class=\"bag rounded\"><img  (load)=\"onResourceImageLoad($index)\"  src=\"{{currentPic.sourcePath}}\" class=\"rounded resource-box-image\" /></div>\n     </div>          \n   </div>\n   </div>  \n</div>  \n<div class=\"console-resource-panel\">\n    <!-- -->  \n    <div class=\"container\"> \n  <div class=\"row\">\n    \n    <div class=\"col\">\n      <div class=\"selection-panel-header\">\n      <h3>Your selected resources</h3>\n      <h6 >\n        <span >Only <span>{{(getModifiedResourceList(true)).length}}</span> resources selected out of {{localImagePool.length}}</span>\n        <a *ngIf=\"(getModifiedResourceList(true)).length\" href=\"#\" (click)=\"resetCurrentSelectedObject()\">Empty List</a>\n      </h6>\n      </div>\n      \n      <div class=\"preview-image-container \">\n        <div class=\"pic\" *ngFor=\"let selectPic of (getModifiedResourceList(true))\" >\n            <div class=\"bag round\">\n              <img (click)=\"openImagePopup(selectPic)\" class=\"img-fluid rounded\"  src=\"{{selectPic.sourcePath}}\"/>\n            </div>\n            <span class=\"cross\" (click)=\"resetCurrentObject(selectPic)\">&#x2DF;</span>\n        </div>\n        \n      </div>      \n    </div>\n\n    <app-allotment-console (finalPostDone)=\"onCopyOperationComplete($event)\" (finalPostStarted)=\"openDataPostModal($event)\" (onCreateNewContainerRequest)=\"openCreateFolderPopup()\"  [toPostResourceList]=\"getModifiedResourceList(true)\" [allContainers]=\"givenContainers\" class=\"col\" *ngIf=\"(getModifiedResourceList(true)).length>0\" ></app-allotment-console>\n\n    <div class=\"w-100\"></div>    \n  </div>\n</div>\n    <!-- -->   \n</div>\n</div>\n<app-create-resource-container (onCloseWindow)=\"closeCreateFolderPopup()\" *ngIf=\"createResourceContainerPopupOpen\"></app-create-resource-container>\n<app-resource-zoom (click)=\"closeImagePopup()\" [popupImageObject]=\"popupImageObject\" *ngIf=\"popupOpen\"></app-resource-zoom>\n<app-data-post-modal *ngIf=\"dataPostModalOpen\" (onReInitApp)=\"initAction()\" [statusObject]=\"crDataPostStatusObject\"></app-data-post-modal>"
+module.exports = "<app-signin (onSigninSuccessful)=\"loginStatusChange($event)\"  *ngIf=\"!signedIn\">\n</app-signin>\n<div class=\"app-container dataPostModalOpen-{{dataPostModalOpen}} popupOpen-{{popupOpen}}\" *ngIf=\"signedIn\">\n<div class=\"pic-resource-panel WText\">\n  <div class=\"scrollable\">\n  <header>\n      <div class=\"row\"><h3 class=\"brand-header\" style=\"padding:0.65rem 0.55rem; width:100%; text-align:center;\">Resource Allotment</h3></div>\n      <div><small><span>{{getModifiedResourceList(false).length}} Resources left to select</span> </small> &nbsp;&nbsp;&nbsp; <a (click)=\"logout()\" class=\"btn btn-sm btn-dark\" href=\"#\">Logout</a></div>\n  </header>\n    \n   <div class=\"pic-container image-pool\" >\n     <div (click)=\"setCurrentObject(currentPic,currentPic.isDir)\" class=\"pic rounded\" *ngFor=\"let currentPic of (getModifiedResourceList(false)); let $index = index;\">\n       <div class=\"bag rounded\">\n          <img *ngIf=\"!currentPic.isDir\"  (load)=\"onResourceImageLoad($index)\"  src=\"{{currentPic.sourcePath}}\" class=\"rounded resource-box-image\" />\n          <div *ngIf=\"currentPic.isDir\">\n          <span class=\"icon-span-folder\">\n            <span>{{currentPic.name}}</span>\n          </span>\n          \n          </div>\n      </div>\n     </div>          \n   </div>\n   </div>  \n</div>  \n<div class=\"console-resource-panel\">\n    <!-- -->  \n    <div class=\"container\"> \n  <div class=\"row\">\n    \n    <div class=\"col\">\n      <div class=\"selection-panel-header\">\n      <h3>Your selected resources</h3>\n      <h6 >\n        <span >Only <span>{{(getModifiedResourceList(true)).length}}</span> resources selected out of {{localImagePool.length}}</span>\n        <a *ngIf=\"(getModifiedResourceList(true)).length\" href=\"#\" (click)=\"resetCurrentSelectedObject()\">Empty List</a>\n      </h6>\n      </div>\n      \n      <div class=\"preview-image-container \">\n        <div class=\"pic\" *ngFor=\"let selectPic of (getModifiedResourceList(true))\" >\n            <div class=\"bag round\">\n              <img (click)=\"openImagePopup(selectPic)\" class=\"img-fluid rounded\"  src=\"{{selectPic.sourcePath}}\"/>\n            </div>\n            <span class=\"cross\" (click)=\"resetCurrentObject(selectPic)\">&#x2DF;</span>\n        </div>\n        \n      </div>      \n    </div>\n\n    <app-allotment-console (finalPostDone)=\"onCopyOperationComplete($event)\" (finalPostStarted)=\"openDataPostModal($event)\" (onCreateNewContainerRequest)=\"openCreateFolderPopup()\"  [toPostResourceList]=\"getModifiedResourceList(true)\" [allContainers]=\"givenContainers\" class=\"col\" *ngIf=\"(getModifiedResourceList(true)).length>0\" ></app-allotment-console>\n\n    <div class=\"w-100\"></div>    \n  </div>\n</div>\n    <!-- -->   \n</div>\n</div>\n<app-create-resource-container (onCloseWindow)=\"closeCreateFolderPopup()\" *ngIf=\"createResourceContainerPopupOpen\"></app-create-resource-container>\n<app-resource-zoom (click)=\"closeImagePopup()\" [popupImageObject]=\"popupImageObject\" *ngIf=\"popupOpen\"></app-resource-zoom>\n<app-data-post-modal *ngIf=\"dataPostModalOpen\" (onReInitApp)=\"initAction()\" [statusObject]=\"crDataPostStatusObject\"></app-data-post-modal>"
 
 /***/ }),
 
@@ -97,7 +97,7 @@ var AppComponent = (function () {
                 var orig = '' + p.uri;
                 p.uri = p.uri.replace('./', '/');
                 p.uri = _this.sourceImageRoot + p.uri;
-                var ro = { uniq_id: n, width: 0, originSourcePath: orig, height: 0, loaded: false, sourcePath: p.uri, targetPath: "", opted: false };
+                var ro = { uniq_id: n, width: 0, originSourcePath: orig, height: 0, loaded: false, name: p.name, sourcePath: p.uri, targetPath: "", opted: false, isDir: p.isDir };
                 outputARray.push(ro);
             });
             _this.localImagePool = outputARray;
@@ -163,8 +163,10 @@ var AppComponent = (function () {
     AppComponent.prototype.resetCurrentSelectedObject = function () {
         __WEBPACK_IMPORTED_MODULE_3__services_common_util_service__["a" /* CommonUtilService */].resetAllResources(this.localImagePool);
     };
-    AppComponent.prototype.setCurrentObject = function (obj) {
-        obj.opted = true;
+    AppComponent.prototype.setCurrentObject = function (obj, isDir) {
+        if (!isDir) {
+            obj.opted = true;
+        }
     };
     AppComponent.prototype.resetCurrentObject = function (obj) {
         obj.opted = false;
@@ -422,7 +424,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".create-container-wrap{\r\n    position:fixed;\r\n    top:0px;\r\n    left:0px;\r\n    width:100%;\r\n    height: 100%;\r\n    overflow-y: scroll;\r\n    /*background:rgba(0,0,0,0.9);*/\r\n    background:rgba(255,255,255,0.98);\r\n}\r\n\r\n.breadcrumb-item-wide{\r\n    width: 100%;\r\n    display: block;\r\n}\r\n\r\n", ""]);
+exports.push([module.i, ".create-container-wrap{\r\n    position:fixed;\r\n    top:0px;\r\n    left:0px;\r\n    width:100%;\r\n    height: 100%;\r\n    overflow-y: scroll;\r\n    /*background:rgba(0,0,0,0.9);*/\r\n    background:rgba(255,255,255,0.98);\r\n}\r\n\r\n.breadcrumb-item-wide{\r\n    width: 100%;\r\n    display: block;\r\n}\r\n\r\n.breadcrumb-item input{\r\n    font-size:14px;\r\n    border-radius:8px;\r\n    border:1px solid #888;\r\n    padding: 4px;\r\n}\r\n\r\nol.breadcrumb.duplicate input{\r\nbackground: linear-gradient(to bottom, #ff3019 0%,#cf0404 100%);\r\ncolor:white;\r\nfont-weight:bold;\r\nborder:1px solid #ff3019;\r\n}", ""]);
 
 // exports
 
@@ -435,7 +437,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/comps/create-resource-container/create-resource-container.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"create-container-wrap\">\n  <!-- AUTO COMPLETE LIST :START-->\n      <div class=\"container\">\n      <br/>  \n      <h3>Create new </h3>   \n      <div class=\"btn-group\">\n        <a href=\"#\" class=\"btn btn-success btn-sm {{activeState.outbox}}\" (click)=\"setSelectedContainer('outbox')\">Outbox</a>\n        <a href=\"#\" class=\"btn btn-success btn-sm {{activeState.model}}\" (click)=\"setSelectedContainer('model')\">Model</a>\n        \n      </div>\n      <span> &nbsp; Chosen conatiner is {{selectedContainer}}. You can <a href=\"#\" (click)=\"close()\">cancel</a> the operation.</span>\n      </div>\n      <br/>\n      <div class=\"container\" *ngIf=\"selectedContainer!==null\">\n        <div *ngFor=\"let listitem of (getAutoCompleteList())\">\n          <ol class=\"breadcrumb\">\n            <li class=\"breadcrumb-item\">\n              <a class=\"btn btn-info btn-sm\" href=\"#\">{{listitem.name}}</a>              \n            </li>\n            \n            <li class=\"breadcrumb-item\">\n              <input  style=\"width:200px;\" type=\"text\"/>\n            </li>\n            <li class=\"breadcrumb-item\">\n              <a class=\"btn btn-success btn-sm\" href=\"#\">+</a>\n            </li>\n          </ol>\n          <ol *ngFor=\"let subItem of listitem.childrenDetails\" class=\"breadcrumb\">\n            <li class=\"breadcrumb-item\"><a>{{listitem.name}}</a></li>\n            <li class=\"breadcrumb-item\">{{subItem}}</li>\n          </ol> \n        </div>  \n      </div>\n      <!-- AUTO COMPLETE LIST :END-->\n</div>"
+module.exports = "<div class=\"create-container-wrap\">\n  <!-- AUTO COMPLETE LIST :START-->\n      <div class=\"container\">\n      <br/>  \n      <h3>Create new </h3>   \n      <div class=\"btn-group\">\n        <a href=\"#\" class=\"btn btn-success btn-sm {{activeState.outbox}}\" (click)=\"setSelectedContainer('outbox')\">Outbox</a>\n        <a href=\"#\" class=\"btn btn-success btn-sm {{activeState.model}}\" (click)=\"setSelectedContainer('model')\">Model</a>\n        \n      </div>\n      <span> &nbsp; Chosen conatiner is {{selectedContainer}}. You can <a href=\"#\" (click)=\"close()\">cancel</a> the operation.</span>\n      </div>\n      <br/>\n      <div class=\"container\" *ngIf=\"selectedContainer!==null\">\n        <div *ngFor=\"let listitem of (getAutoCompleteList()); let i = index;\">\n          <ol class=\"breadcrumb main-breadcrumb {{getDuplicateSubfolderClass(listitem)}}\" *ngIf=\"listitem.isDir\" >\n            <li class=\"breadcrumb-item\">\n              <a class=\"btn btn-info btn-sm\" href=\"#\">{{listitem.name}}</a>              \n            </li>\n            \n            <li class=\"breadcrumb-item\">\n              <input [(ngModel)]=\"newFolderName[listitem.name]\" id=\"folder-name-{{listitem.name}}\" name=\"folder-name-{{listitem.name}}\"  style=\"width:200px;\" type=\"text\"/>\n            </li>\n            <li class=\"breadcrumb-item\">\n              <a (click)=\"requestToCreateNewContainer()\" class=\"btn btn-success btn-sm\" href=\"#\">+</a>\n            </li>\n          </ol>\n          <ol *ngFor=\"let subItem of listitem.childrenDetails\" class=\"breadcrumb\">\n            <li class=\"breadcrumb-item\"><a>{{listitem.name}}</a></li>\n            <li class=\"breadcrumb-item\">{{subItem}}</li>\n          </ol> \n        </div>  \n      </div>\n      <!-- AUTO COMPLETE LIST :END-->\n</div>"
 
 /***/ }),
 
@@ -464,12 +466,16 @@ var CreateResourceContainerComponent = (function () {
         this.http = http;
         this.onCloseWindow = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* EventEmitter */]();
         this.selectedContainer = 'model';
+        this.fn = "";
+        this.newFolderName = {};
         this.completeFolderList = {
             outbox: [],
             model: []
         };
         this.activeState = { outbox: '', model: 'active' };
     }
+    CreateResourceContainerComponent.prototype.requestToCreateNewContainer = function () {
+    };
     CreateResourceContainerComponent.prototype.close = function () {
         this.onCloseWindow.emit('close');
     };
@@ -484,10 +490,20 @@ var CreateResourceContainerComponent = (function () {
             this.activeState.model = 'active';
         }
     };
+    CreateResourceContainerComponent.prototype.getDuplicateSubfolderClass = function (listItem) {
+        if (this.newFolderName[listItem.name]) {
+            var av = listItem.childrenDetails.indexOf(this.newFolderName[listItem.name].trim());
+            if (av !== -1) {
+                return "duplicate";
+            }
+        }
+        return '';
+    };
     CreateResourceContainerComponent.prototype.getAutoCompleteList = function () {
+        //console.log(this.completeFolderList[this.selectedContainer]);
         return this.completeFolderList[this.selectedContainer];
     };
-    CreateResourceContainerComponent.prototype.ngOnInit = function () {
+    CreateResourceContainerComponent.prototype.initAction = function () {
         var _this = this;
         __WEBPACK_IMPORTED_MODULE_2__services_common_util_service__["a" /* CommonUtilService */].getCategoryList(this.http, 'model', function (resultArray) {
             _this.completeFolderList.model = resultArray;
@@ -497,6 +513,9 @@ var CreateResourceContainerComponent = (function () {
             _this.completeFolderList.outbox = resultArray;
         }, function (error) {
         });
+    };
+    CreateResourceContainerComponent.prototype.ngOnInit = function () {
+        this.initAction();
     };
     return CreateResourceContainerComponent;
 }());
@@ -798,7 +817,7 @@ var CommonUtilService = (function () {
         http.get(requestPath).subscribe(function (jsonData) {
             var resultArray = [];
             for (var el in jsonData) {
-                resultArray.push({ name: jsonData[el].name, children: jsonData[el].subfolderData.length, path: jsonData[el].uri, opted: false, childrenDetails: jsonData[el].subfolderData });
+                resultArray.push({ name: jsonData[el].name, children: jsonData[el].subfolderData.length, path: jsonData[el].uri, opted: false, childrenDetails: jsonData[el].subfolderData, isDir: jsonData[el].directory });
             }
             success(resultArray);
         });
@@ -899,21 +918,21 @@ var MockDataProviderService = (function () {
     }
     MockDataProviderService.getMockData = function () {
         var mockData = [
-            { originSourcePath: "", uniq_id: 0, width: 0, height: 0, loaded: false, sourcePath: "https://cdn.thinglink.me/api/image/724116666635517952/1240/10/scaletowidth", targetPath: "", opted: false },
-            { originSourcePath: "", uniq_id: 1, width: 0, height: 0, loaded: false, sourcePath: "http://bit.ly/2a2BKbI", targetPath: "", opted: false },
-            { originSourcePath: "", uniq_id: 2, width: 0, height: 0, loaded: false, sourcePath: "http://bit.ly/2wuDrII", targetPath: "", opted: false },
-            { originSourcePath: "", uniq_id: 3, width: 0, height: 0, loaded: false, sourcePath: "http://bit.ly/2xYEAvO", targetPath: "", opted: false },
-            { originSourcePath: "", uniq_id: 4, width: 0, height: 0, loaded: false, sourcePath: "http://bit.ly/2xP4en6", targetPath: "", opted: false },
-            { originSourcePath: "", uniq_id: 5, width: 0, height: 0, loaded: false, sourcePath: "http://bit.ly/2xZyUBX", targetPath: "", opted: false },
-            { originSourcePath: "", uniq_id: 6, width: 0, height: 0, loaded: false, sourcePath: "http://bit.ly/2xOezzC", targetPath: "", opted: false },
-            { originSourcePath: "", uniq_id: 7, width: 0, height: 0, loaded: false, sourcePath: "http://bit.ly/2wuDCUo", targetPath: "", opted: false },
-            { originSourcePath: "", uniq_id: 8, width: 0, height: 0, loaded: false, sourcePath: "http://bit.ly/2xQEKDn", targetPath: "", opted: false },
-            { originSourcePath: "", uniq_id: 9, width: 0, height: 0, loaded: false, sourcePath: "http://bit.ly/2g7uIX0", targetPath: "", opted: false },
-            { originSourcePath: "", uniq_id: 10, width: 0, height: 0, loaded: false, sourcePath: "http://bit.ly/2hHLTSz", targetPath: "", opted: false },
-            { originSourcePath: "", uniq_id: 11, width: 0, height: 0, loaded: false, sourcePath: "http://images.indianexpress.com/2016/08/rrain-759.jpg", targetPath: "", opted: false },
-            { originSourcePath: "", uniq_id: 12, width: 0, height: 0, loaded: false, sourcePath: "http://bit.ly/2xPbCiq", targetPath: "", opted: false },
-            { originSourcePath: "", uniq_id: 13, width: 0, height: 0, loaded: false, sourcePath: "http://bit.ly/2xdmqqW", targetPath: "", opted: false },
-            { originSourcePath: "", uniq_id: 14, width: 0, height: 0, loaded: false, sourcePath: "http://bit.ly/2fI6cej", targetPath: "", opted: false }
+            { isDir: false, name: '', originSourcePath: "", uniq_id: 0, width: 0, height: 0, loaded: false, sourcePath: "https://cdn.thinglink.me/api/image/724116666635517952/1240/10/scaletowidth", targetPath: "", opted: false },
+            { isDir: false, name: '', originSourcePath: "", uniq_id: 1, width: 0, height: 0, loaded: false, sourcePath: "http://bit.ly/2a2BKbI", targetPath: "", opted: false },
+            { isDir: false, name: '', originSourcePath: "", uniq_id: 2, width: 0, height: 0, loaded: false, sourcePath: "http://bit.ly/2wuDrII", targetPath: "", opted: false },
+            { isDir: false, name: '', originSourcePath: "", uniq_id: 3, width: 0, height: 0, loaded: false, sourcePath: "http://bit.ly/2xYEAvO", targetPath: "", opted: false },
+            { isDir: false, name: '', originSourcePath: "", uniq_id: 4, width: 0, height: 0, loaded: false, sourcePath: "http://bit.ly/2xP4en6", targetPath: "", opted: false },
+            { isDir: false, name: '', originSourcePath: "", uniq_id: 5, width: 0, height: 0, loaded: false, sourcePath: "http://bit.ly/2xZyUBX", targetPath: "", opted: false },
+            { isDir: false, name: '', originSourcePath: "", uniq_id: 6, width: 0, height: 0, loaded: false, sourcePath: "http://bit.ly/2xOezzC", targetPath: "", opted: false },
+            { isDir: false, name: '', originSourcePath: "", uniq_id: 7, width: 0, height: 0, loaded: false, sourcePath: "http://bit.ly/2wuDCUo", targetPath: "", opted: false },
+            { isDir: false, name: '', originSourcePath: "", uniq_id: 8, width: 0, height: 0, loaded: false, sourcePath: "http://bit.ly/2xQEKDn", targetPath: "", opted: false },
+            { isDir: false, name: '', originSourcePath: "", uniq_id: 9, width: 0, height: 0, loaded: false, sourcePath: "http://bit.ly/2g7uIX0", targetPath: "", opted: false },
+            { isDir: false, name: '', originSourcePath: "", uniq_id: 10, width: 0, height: 0, loaded: false, sourcePath: "http://bit.ly/2hHLTSz", targetPath: "", opted: false },
+            { isDir: false, name: '', originSourcePath: "", uniq_id: 11, width: 0, height: 0, loaded: false, sourcePath: "http://images.indianexpress.com/2016/08/rrain-759.jpg", targetPath: "", opted: false },
+            { isDir: false, name: '', originSourcePath: "", uniq_id: 12, width: 0, height: 0, loaded: false, sourcePath: "http://bit.ly/2xPbCiq", targetPath: "", opted: false },
+            { isDir: false, name: '', originSourcePath: "", uniq_id: 13, width: 0, height: 0, loaded: false, sourcePath: "http://bit.ly/2xdmqqW", targetPath: "", opted: false },
+            { isDir: false, name: '', originSourcePath: "", uniq_id: 14, width: 0, height: 0, loaded: false, sourcePath: "http://bit.ly/2fI6cej", targetPath: "", opted: false }
         ];
         return mockData;
     };

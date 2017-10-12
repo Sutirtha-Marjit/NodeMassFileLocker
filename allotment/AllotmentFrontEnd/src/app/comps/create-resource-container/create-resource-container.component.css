@@ -14,3 +14,16 @@
     display: block;
 }
 
+.breadcrumb-item input{
+    font-size:14px;
+    border-radius:8px;
+    border:1px solid #888;
+    padding: 4px;
+}
+
+ol.breadcrumb.duplicate input{
+background: linear-gradient(to bottom, #ff3019 0%,#cf0404 100%);
+color:white;
+font-weight:bold;
+border:1px solid #ff3019;
+}
