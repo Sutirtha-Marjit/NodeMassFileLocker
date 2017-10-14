@@ -71,6 +71,16 @@ app.use(function(req, res, next) {
 });
 
 app.post('/service/jobs/createnewfolder',requestJsonParser,function(req,res){
+    console.log('Requested for new folder creation...')
+    var givenData;
+    if(req.body){
+        givenData = req.body;
+        for(var el in givenData){
+            fs.closeSync(fs.openSync(folderConfig.destRoot+givenData[el]+"/abc.txt", 'w'));
+             
+        }
+    }
+    res.json({});
 
 });
 

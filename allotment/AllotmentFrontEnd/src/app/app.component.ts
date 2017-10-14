@@ -30,7 +30,8 @@ export class AppComponent implements OnInit{
     if( "dev" === CommonUtilService.getEnvironment() ){
       this.sourceImageRoot = CommonUtilService.adjustDevProdEnv();     
     }  
-    
+   
+
   }
 
   initAction(){
@@ -59,14 +60,14 @@ export class AppComponent implements OnInit{
     });
     
     CommonUtilService.getCategoryList(this.http,'outbox',(jsonData)=>{
-    console.log(jsonData);
+    
     this.givenContainers.outbox = jsonData;
     },()=>{
       
     });
 
     CommonUtilService.getCategoryList(this.http,'model',(jsonData)=>{
-    console.log(jsonData);
+    
     this.givenContainers.model = jsonData;
     },()=>{
 

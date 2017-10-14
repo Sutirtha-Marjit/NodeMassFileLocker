@@ -38,7 +38,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-signin (onSigninSuccessful)=\"loginStatusChange($event)\"  *ngIf=\"!signedIn\">\n</app-signin>\n<div class=\"app-container dataPostModalOpen-{{dataPostModalOpen}} popupOpen-{{popupOpen}}\" *ngIf=\"signedIn\">\n<div class=\"pic-resource-panel WText\">\n  <div class=\"scrollable\">\n  <header>\n      <div class=\"row\"><h3 class=\"brand-header\" style=\"padding:0.65rem 0.55rem; width:100%; text-align:center;\">Resource Allotment</h3></div>\n      <div><small><span>{{getModifiedResourceList(false).length}} Resources left to select</span> </small> &nbsp;&nbsp;&nbsp; <a (click)=\"logout()\" class=\"btn btn-sm btn-dark\" href=\"#\">Logout</a></div>\n  </header>\n    \n   <div class=\"pic-container image-pool\" >\n     <div (click)=\"setCurrentObject(currentPic,currentPic.isDir)\" class=\"pic rounded\" *ngFor=\"let currentPic of (getModifiedResourceList(false)); let $index = index;\">\n       <div class=\"bag rounded\">\n          <img *ngIf=\"!currentPic.isDir\"  (load)=\"onResourceImageLoad($index)\"  src=\"{{currentPic.sourcePath}}\" class=\"rounded resource-box-image\" />\n          <div *ngIf=\"currentPic.isDir\">\n          <span class=\"icon-span-folder\">\n            <span>{{currentPic.name}}</span>\n          </span>\n          \n          </div>\n      </div>\n     </div>          \n   </div>\n   </div>  \n</div>  \n<div class=\"console-resource-panel\">\n    <!-- -->  \n    <div class=\"container\"> \n  <div class=\"row\">\n    \n    <div class=\"col\">\n      <div class=\"selection-panel-header\">\n      <h3>Your selected resources</h3>\n      <h6 >\n        <span >Only <span>{{(getModifiedResourceList(true)).length}}</span> resources selected out of {{localImagePool.length}}</span>\n        <a *ngIf=\"(getModifiedResourceList(true)).length\" href=\"#\" (click)=\"resetCurrentSelectedObject()\">Empty List</a>\n      </h6>\n      </div>\n      \n      <div class=\"preview-image-container \">\n        <div class=\"pic\" *ngFor=\"let selectPic of (getModifiedResourceList(true))\" >\n            <div class=\"bag round\">\n              <img (click)=\"openImagePopup(selectPic)\" class=\"img-fluid rounded\"  src=\"{{selectPic.sourcePath}}\"/>\n            </div>\n            <span class=\"cross\" (click)=\"resetCurrentObject(selectPic)\">&#x2DF;</span>\n        </div>\n        \n      </div>      \n    </div>\n\n    <app-allotment-console (finalPostDone)=\"onCopyOperationComplete($event)\" (finalPostStarted)=\"openDataPostModal($event)\" (onCreateNewContainerRequest)=\"openCreateFolderPopup()\"  [toPostResourceList]=\"getModifiedResourceList(true)\" [allContainers]=\"givenContainers\" class=\"col\" *ngIf=\"(getModifiedResourceList(true)).length>0\" ></app-allotment-console>\n\n    <div class=\"w-100\"></div>    \n  </div>\n</div>\n    <!-- -->   \n</div>\n</div>\n<app-create-resource-container (onCloseWindow)=\"closeCreateFolderPopup()\" *ngIf=\"createResourceContainerPopupOpen\"></app-create-resource-container>\n<app-resource-zoom (click)=\"closeImagePopup()\" [popupImageObject]=\"popupImageObject\" *ngIf=\"popupOpen\"></app-resource-zoom>\n<app-data-post-modal *ngIf=\"dataPostModalOpen\" (onReInitApp)=\"initAction()\" [statusObject]=\"crDataPostStatusObject\"></app-data-post-modal>"
+module.exports = "<app-signin (onSigninSuccessful)=\"loginStatusChange($event)\"  *ngIf=\"!signedIn\">\r\n</app-signin>\r\n<div class=\"app-container dataPostModalOpen-{{dataPostModalOpen}} popupOpen-{{popupOpen}}\" *ngIf=\"signedIn\">\r\n<div class=\"pic-resource-panel WText\">\r\n  <div class=\"scrollable\">\r\n  <header>\r\n      <div class=\"row\"><h3 class=\"brand-header\" style=\"padding:0.65rem 0.55rem; width:100%; text-align:center;\">Resource Allotment</h3></div>\r\n      <div><small><span>{{getModifiedResourceList(false).length}} Resources left to select</span> </small> &nbsp;&nbsp;&nbsp; <a (click)=\"logout()\" class=\"btn btn-sm btn-dark\" href=\"#\">Logout</a></div>\r\n  </header>\r\n    \r\n   <div class=\"pic-container image-pool\" >\r\n     <div (click)=\"setCurrentObject(currentPic,currentPic.isDir)\" class=\"pic rounded\" *ngFor=\"let currentPic of (getModifiedResourceList(false)); let $index = index;\">\r\n       <div class=\"bag rounded\">\r\n          <img *ngIf=\"!currentPic.isDir\"  (load)=\"onResourceImageLoad($index)\"  src=\"{{currentPic.sourcePath}}\" class=\"rounded resource-box-image\" />\r\n          <div *ngIf=\"currentPic.isDir\">\r\n          <span class=\"icon-span-folder\">\r\n            <span>{{currentPic.name}}</span>\r\n          </span>\r\n          \r\n          </div>\r\n      </div>\r\n     </div>          \r\n   </div>\r\n   </div>  \r\n</div>  \r\n<div class=\"console-resource-panel\">\r\n    <!-- -->  \r\n    <div class=\"container\"> \r\n  <div class=\"row\">\r\n    \r\n    <div class=\"col\">\r\n      <div class=\"selection-panel-header\">\r\n      <h3>Your selected resources</h3>\r\n      <h6 >\r\n        <span >Only <span>{{(getModifiedResourceList(true)).length}}</span> resources selected out of {{localImagePool.length}}</span>\r\n        <a *ngIf=\"(getModifiedResourceList(true)).length\" href=\"#\" (click)=\"resetCurrentSelectedObject()\">Empty List</a>\r\n      </h6>\r\n      </div>\r\n      \r\n      <div class=\"preview-image-container \">\r\n        <div class=\"pic\" *ngFor=\"let selectPic of (getModifiedResourceList(true))\" >\r\n            <div class=\"bag round\">\r\n              <img (click)=\"openImagePopup(selectPic)\" class=\"img-fluid rounded\"  src=\"{{selectPic.sourcePath}}\"/>\r\n            </div>\r\n            <span class=\"cross\" (click)=\"resetCurrentObject(selectPic)\">&#x2DF;</span>\r\n        </div>\r\n        \r\n      </div>      \r\n    </div>\r\n\r\n    <app-allotment-console (finalPostDone)=\"onCopyOperationComplete($event)\" (finalPostStarted)=\"openDataPostModal($event)\" (onCreateNewContainerRequest)=\"openCreateFolderPopup()\"  [toPostResourceList]=\"getModifiedResourceList(true)\" [allContainers]=\"givenContainers\" class=\"col\" *ngIf=\"(getModifiedResourceList(true)).length>0\" ></app-allotment-console>\r\n\r\n    <div class=\"w-100\"></div>    \r\n  </div>\r\n</div>\r\n    <!-- -->   \r\n</div>\r\n</div>\r\n<app-create-resource-container (onCloseWindow)=\"closeCreateFolderPopup()\" *ngIf=\"createResourceContainerPopupOpen\"></app-create-resource-container>\r\n<app-resource-zoom (click)=\"closeImagePopup()\" [popupImageObject]=\"popupImageObject\" *ngIf=\"popupOpen\"></app-resource-zoom>\r\n<app-data-post-modal *ngIf=\"dataPostModalOpen\" (onReInitApp)=\"initAction()\" [statusObject]=\"crDataPostStatusObject\"></app-data-post-modal>"
 
 /***/ }),
 
@@ -104,12 +104,10 @@ var AppComponent = (function () {
         }, function (error) {
         });
         __WEBPACK_IMPORTED_MODULE_3__services_common_util_service__["a" /* CommonUtilService */].getCategoryList(this.http, 'outbox', function (jsonData) {
-            console.log(jsonData);
             _this.givenContainers.outbox = jsonData;
         }, function () {
         });
         __WEBPACK_IMPORTED_MODULE_3__services_common_util_service__["a" /* CommonUtilService */].getCategoryList(this.http, 'model', function (jsonData) {
-            console.log(jsonData);
             _this.givenContainers.model = jsonData;
         }, function () {
         });
@@ -262,7 +260,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".list-sub-item a{\n    margin-right:5px;\n    margin-top:40px;\n}", ""]);
+exports.push([module.i, ".list-sub-item a{\r\n    margin-right:5px;\r\n    margin-top:40px;\r\n}", ""]);
 
 // exports
 
@@ -275,7 +273,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/comps/allotment-console/allotment-console.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col form-panel\"  >\n      <div *ngIf=\"lastActiveContainer===null\">\n      <h4>Allotment options</h4>\n      <p>Please <a class=\"\" (click)=\"openCreateFolderPopup()\" href=\"#\">create new resource</a> containers if needed </p>\n      <hr/>\n      <div class=\"row\">\n        <div class=\"col\">\n            <div class=\"form-check\">\n              <label class=\"form-check-label\">\n                <input [(ngModel)]=\"category\" class=\"form-check-input\" type=\"radio\" name=\"categoryType\" id=\"categoryType1\" value=\"outbox\" checked>\n                OutBox\n              </label>\n            </div>\n        </div>\n        <div class=\"col\">\n            <div class=\"form-check\">\n              <label class=\"form-check-label\">\n                <input [(ngModel)]=\"category\" class=\"form-check-input\" type=\"radio\" name=\"categoryType\" id=\"categoryType2\" value=\"model\" checked>\n                Model\n              </label>\n            </div>\n        </div>\n      </div>  \n      <hr/>\n    </div>\n     <div *ngIf=\"lastActiveContainer!==null\" class=\"alert alert-warning\" role=\"alert\">\n      <span>Chosen target :<strong> {{lastActiveContainer.name}}</strong>\n      <strong *ngIf=\"this.lastActiveSubfolderName\">{{\" / \"+this.lastActiveSubfolderName}}</strong></span>\n      <p>So your selected resources will move to the chosen category. To change the decision you can \n      <a (click)=\"resetActiveContaine()\" href=\"#\">Cancel</a> the selection</p>\n     </div>\n\n      <form *ngIf=\"lastActiveContainer==null\" name=\"auto-complete-search\">\n        <div class=\"form-group\">\n          <input id=\"autoCompleteText\" name=\"autoCompleteText\" [(ngModel)]=\"autoCompleteText\" type=\"search\" class=\"form-control\" placeholder=\"Folder name\">\n        </div>\n      </form>    \n      <!-- AUTO COMPLETE LIST :START-->\n      <div *ngIf=\"lastActiveContainer==null\">\n        <div *ngFor=\"let listitem of (getAutoCompleteList())\">\n          <ol class=\"breadcrumb\">\n            <li class=\"breadcrumb-item\"><a class=\"btn btn-dark btn-sm\" href=\"#\" (click)=\"setActiveContainer(listitem,null)\">{{listitem.name}}</a></li>            \n          </ol>\n          <ol *ngFor=\"let subItem of listitem.childrenDetails\" class=\"breadcrumb\">\n            <li class=\"breadcrumb-item\"><a>{{listitem.name}}</a></li>\n            <li class=\"breadcrumb-item\"><a class=\"btn btn-dark btn-sm\"  href=\"#\" (click)=\"setActiveContainer(listitem,subItem)\">{{subItem}}</a></li>\n          </ol> \n        </div>  \n      </div>\n      <!-- AUTO COMPLETE LIST :END-->\n<hr/>\n      <div class=\"btn-group WText\" *ngIf=\"lastActiveContainer!==null\">\n        <a (click)=\"finalPost()\" href=\"#\" class=\"btn btn-success \">Done</a>\n        \n      </div>\n      \n    </div>"
+module.exports = "<div class=\"col form-panel\"  >\r\n      <div *ngIf=\"lastActiveContainer===null\">\r\n      <h4>Allotment options</h4>\r\n      <p>Please <a class=\"\" (click)=\"openCreateFolderPopup()\" href=\"#\">create new resource</a> containers if needed </p>\r\n      <hr/>\r\n      <div class=\"row\">\r\n        <div class=\"col\">\r\n            <div class=\"form-check\">\r\n              <label class=\"form-check-label\">\r\n                <input [(ngModel)]=\"category\" class=\"form-check-input\" type=\"radio\" name=\"categoryType\" id=\"categoryType1\" value=\"outbox\" checked>\r\n                OutBox\r\n              </label>\r\n            </div>\r\n        </div>\r\n        <div class=\"col\">\r\n            <div class=\"form-check\">\r\n              <label class=\"form-check-label\">\r\n                <input [(ngModel)]=\"category\" class=\"form-check-input\" type=\"radio\" name=\"categoryType\" id=\"categoryType2\" value=\"model\" checked>\r\n                Model\r\n              </label>\r\n            </div>\r\n        </div>\r\n      </div>  \r\n      <hr/>\r\n    </div>\r\n     <div *ngIf=\"lastActiveContainer!==null\" class=\"alert alert-warning\" role=\"alert\">\r\n      <span>Chosen target :<strong> {{lastActiveContainer.name}}</strong>\r\n      <strong *ngIf=\"this.lastActiveSubfolderName\">{{\" / \"+this.lastActiveSubfolderName}}</strong></span>\r\n      <p>So your selected resources will move to the chosen category. To change the decision you can \r\n      <a (click)=\"resetActiveContaine()\" href=\"#\">Cancel</a> the selection</p>\r\n     </div>\r\n\r\n      <form *ngIf=\"lastActiveContainer==null\" name=\"auto-complete-search\">\r\n        <div class=\"form-group\">\r\n          <input id=\"autoCompleteText\" name=\"autoCompleteText\" [(ngModel)]=\"autoCompleteText\" type=\"search\" class=\"form-control\" placeholder=\"Folder name\">\r\n        </div>\r\n      </form>    \r\n      <!-- AUTO COMPLETE LIST :START-->\r\n      <div *ngIf=\"lastActiveContainer==null\">\r\n        <div *ngFor=\"let listitem of (getAutoCompleteList())\">\r\n          <ol class=\"breadcrumb\">\r\n            <li class=\"breadcrumb-item\"><a class=\"btn btn-dark btn-sm\" href=\"#\" (click)=\"setActiveContainer(listitem,null)\">{{listitem.name}}</a></li>            \r\n          </ol>\r\n          <ol *ngFor=\"let subItem of listitem.childrenDetails\" class=\"breadcrumb\">\r\n            <li class=\"breadcrumb-item\"><a>{{listitem.name}}</a></li>\r\n            <li class=\"breadcrumb-item\"><a class=\"btn btn-dark btn-sm\"  href=\"#\" (click)=\"setActiveContainer(listitem,subItem)\">{{subItem}}</a></li>\r\n          </ol> \r\n        </div>  \r\n      </div>\r\n      <!-- AUTO COMPLETE LIST :END-->\r\n<hr/>\r\n      <div class=\"btn-group WText\" *ngIf=\"lastActiveContainer!==null\">\r\n        <a (click)=\"finalPost()\" href=\"#\" class=\"btn btn-success \">Done</a>\r\n        \r\n      </div>\r\n      \r\n    </div>"
 
 /***/ }),
 
@@ -336,7 +334,6 @@ var AllotmentConsoleComponent = (function () {
         postObservableObj = this.http.post(requestPath, crPostObject);
         postObservableObj.subscribe(function (jsonResponseData) {
             var stHeading = ":) Done!", stDesc = "Copying of " + jsonResponseData.copyComplete + " files successfully done!";
-            console.log(jsonResponseData);
             if (jsonResponseData.masterErrorObject.targetFolderStatus) {
                 stHeading = "Target folder is not available";
             }
@@ -350,7 +347,6 @@ var AllotmentConsoleComponent = (function () {
         }, function (error) {
             _this.finalPostDone.emit({ heading: "Problem in connection", subheading: "Please check connection", type: 'completed' });
         });
-        console.log('post fired');
     };
     AllotmentConsoleComponent.prototype.resetActiveContaine = function () {
         this.lastActiveSubfolderName = null;
@@ -373,8 +369,6 @@ var AllotmentConsoleComponent = (function () {
             this.lastActiveContainer = folder;
             this.lastActiveSubfolderName = subfolderName;
             this.lastActiveContainer.opted = true;
-            //console.log('///////////////////////');
-            //console.log(this.lastActiveContainer);
         }
     };
     AllotmentConsoleComponent.prototype.getAutoCompleteList = function () {
@@ -437,7 +431,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/comps/create-resource-container/create-resource-container.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"create-container-wrap\">\n  <!-- AUTO COMPLETE LIST :START-->\n      <div class=\"container\">\n      <br/>  \n      <h3>Create new </h3>   \n      <div class=\"btn-group\">\n        <a href=\"#\" class=\"btn btn-success btn-sm {{activeState.outbox}}\" (click)=\"setSelectedContainer('outbox')\">Outbox</a>\n        <a href=\"#\" class=\"btn btn-success btn-sm {{activeState.model}}\" (click)=\"setSelectedContainer('model')\">Model</a>\n        \n      </div>\n      <span> &nbsp; Chosen conatiner is {{selectedContainer}}. You can <a href=\"#\" (click)=\"close()\">cancel</a> the operation.</span>\n      </div>\n      <br/>\n      <div class=\"container\" *ngIf=\"selectedContainer!==null\">\n        <div *ngFor=\"let listitem of (getAutoCompleteList()); let i = index;\">\n          <ol class=\"breadcrumb main-breadcrumb {{getDuplicateSubfolderClass(listitem)}}\" *ngIf=\"listitem.isDir\" >\n            <li class=\"breadcrumb-item\">\n              <a class=\"btn btn-info btn-sm\" href=\"#\">{{listitem.name}}</a>              \n            </li>\n            \n            <li class=\"breadcrumb-item\">\n              <input [(ngModel)]=\"newFolderName[listitem.name]\" id=\"folder-name-{{listitem.name}}\" name=\"folder-name-{{listitem.name}}\"  style=\"width:200px;\" type=\"text\"/>\n            </li>\n            <li class=\"breadcrumb-item\">\n              <a (click)=\"requestToCreateNewContainer()\" class=\"btn btn-success btn-sm\" href=\"#\">+</a>\n            </li>\n          </ol>\n          <ol *ngFor=\"let subItem of listitem.childrenDetails\" class=\"breadcrumb\">\n            <li class=\"breadcrumb-item\"><a>{{listitem.name}}</a></li>\n            <li class=\"breadcrumb-item\">{{subItem}}</li>\n          </ol> \n        </div>  \n      </div>\n      <!-- AUTO COMPLETE LIST :END-->\n</div>"
+module.exports = "<div class=\"create-container-wrap\">\r\n  <!-- AUTO COMPLETE LIST :START-->\r\n      <div class=\"container\">\r\n      <br/>  \r\n      <h3>Create new </h3>   \r\n      <div class=\"btn-group\">\r\n        <a href=\"#\" class=\"btn btn-success btn-sm {{activeState.outbox}}\" (click)=\"setSelectedContainer('outbox')\">Outbox</a>\r\n        <a href=\"#\" class=\"btn btn-success btn-sm {{activeState.model}}\" (click)=\"setSelectedContainer('model')\">Model</a>\r\n        \r\n      </div>\r\n      <span> &nbsp; Chosen conatiner is {{selectedContainer}}. You can <a href=\"#\" (click)=\"close()\">cancel</a> the operation.</span>\r\n      </div>\r\n      <br/>\r\n      <div class=\"container\" *ngIf=\"selectedContainer!==null\">\r\n        <div *ngFor=\"let listitem of (getAutoCompleteList()); let i = index;\">\r\n          <ol class=\"breadcrumb main-breadcrumb {{getDuplicateSubfolderClass(listitem)}}\" *ngIf=\"listitem.isDir\" >\r\n            <li class=\"breadcrumb-item\">\r\n              <a class=\"btn btn-info btn-sm\" href=\"#\">{{listitem.name}}</a>              \r\n            </li>\r\n            \r\n            <li class=\"breadcrumb-item\">\r\n              <input [(ngModel)]=\"newFolderName[listitem.name]\" id=\"folder-name-{{listitem.name}}\" name=\"folder-name-{{listitem.name}}\"  style=\"width:200px;\" type=\"text\"/>\r\n            </li>\r\n            <li *ngIf=\"folderAddButtonShow(listitem.name)\" class=\"breadcrumb-item\">\r\n              <a (click)=\"requestToCreateNewContainer()\" class=\"btn btn-success btn-sm\" href=\"#\">+</a>\r\n            </li>\r\n          </ol>\r\n          <ol *ngFor=\"let subItem of listitem.childrenDetails\" class=\"breadcrumb\">\r\n            <li class=\"breadcrumb-item\"><a>{{listitem.name}}</a></li>\r\n            <li class=\"breadcrumb-item\">{{subItem}}</li>\r\n          </ol> \r\n        </div>  \r\n      </div>\r\n      <!-- AUTO COMPLETE LIST :END-->\r\n</div>"
 
 /***/ }),
 
@@ -474,7 +468,34 @@ var CreateResourceContainerComponent = (function () {
         };
         this.activeState = { outbox: '', model: 'active' };
     }
+    CreateResourceContainerComponent.prototype.getNonEmptyNameObject = function () {
+        var v, obj = {};
+        for (var crEL in this.newFolderName) {
+            v = this.newFolderName[crEL].trim();
+            if (v.length > 0) {
+                obj[crEL] = v;
+            }
+        }
+        return obj;
+    };
+    CreateResourceContainerComponent.prototype.folderAddButtonShow = function (listitemName) {
+        var r = (this.getNonEmptyNameObject())[listitemName] ? true : false;
+        return r;
+    };
     CreateResourceContainerComponent.prototype.requestToCreateNewContainer = function () {
+        var crEL, toPostData = {}, requestPath = __WEBPACK_IMPORTED_MODULE_2__services_common_util_service__["a" /* CommonUtilService */].masterConfig.connection.serviceRequestHost + '/' + 'service/jobs/createnewfolder';
+        toPostData = this.getNonEmptyNameObject();
+        for (crEL in toPostData) {
+            toPostData[crEL] = this.selectedContainer + '/' + crEL + '/' + toPostData[crEL];
+        }
+        if (Object.keys(toPostData).length > 0) {
+            this.folderCreationObservable = this.http.post(requestPath, toPostData);
+            this.folderCreationObservable.subscribe(function (jsonData) {
+                console.log('got JSON');
+            }, function (errorObj) {
+                console.log('error');
+            });
+        }
     };
     CreateResourceContainerComponent.prototype.close = function () {
         this.onCloseWindow.emit('close');
@@ -558,7 +579,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/comps/data-post-modal/data-post-modal.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"post-preload-wrap\">\n  <div class=\"post-preload-content\">\n    <h3>{{statusObject.heading}}</h3>\n    <p style=\"text-align:center;\">{{statusObject.subheading}}</p>\n    \n    <div class=\"common-preloader\" *ngIf=\"statusObject.type!=='completed'\">\n      <div class=\"circle-conatiner n1\">\n          <svg><circle /></svg>    \n      </div>\n      <div class=\"circle-conatiner n2\">\n          <svg><circle /></svg>    \n      </div>\n      <div class=\"circle-conatiner n3\">\n          <svg><circle /></svg>    \n      </div>\n      <div class=\"circle-conatiner n4\">\n          <svg><circle /></svg>    \n      </div>\n    </div>\n\n    <div *ngIf=\"statusObject.type==='completed'\" style=\"text-align:center;\">\n        <button (click)=\"reInitApp()\" class=\"btn btn-sm btn-success\">Ok! got it. Go for other resources</button>\n    </div>        \n\n  </div>\n</div>\n"
+module.exports = "<div class=\"post-preload-wrap\">\r\n  <div class=\"post-preload-content\">\r\n    <h3>{{statusObject.heading}}</h3>\r\n    <p style=\"text-align:center;\">{{statusObject.subheading}}</p>\r\n    \r\n    <div class=\"common-preloader\" *ngIf=\"statusObject.type!=='completed'\">\r\n      <div class=\"circle-conatiner n1\">\r\n          <svg><circle /></svg>    \r\n      </div>\r\n      <div class=\"circle-conatiner n2\">\r\n          <svg><circle /></svg>    \r\n      </div>\r\n      <div class=\"circle-conatiner n3\">\r\n          <svg><circle /></svg>    \r\n      </div>\r\n      <div class=\"circle-conatiner n4\">\r\n          <svg><circle /></svg>    \r\n      </div>\r\n    </div>\r\n\r\n    <div *ngIf=\"statusObject.type==='completed'\" style=\"text-align:center;\">\r\n        <button (click)=\"reInitApp()\" class=\"btn btn-sm btn-success\">Ok! got it. Go for other resources</button>\r\n    </div>        \r\n\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -622,7 +643,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".zoom-wrap{\n    position:fixed;\n    top:0px;\n    left:0px;\n    width:100%;\n    height: 100%;\n    background: rgba(0,0,0,0.8);\n    z-index:90; \n}\n\n.zoom-image-container{\n    padding:5.67rem;\n    width: 100%;\n    height: 100%; \n    text-align: center;\n}\n\n.zoom-image-container img{\n     width: auto;\n     height: 100%;\n}", ""]);
+exports.push([module.i, ".zoom-wrap{\r\n    position:fixed;\r\n    top:0px;\r\n    left:0px;\r\n    width:100%;\r\n    height: 100%;\r\n    background: rgba(0,0,0,0.8);\r\n    z-index:90; \r\n}\r\n\r\n.zoom-image-container{\r\n    padding:5.67rem;\r\n    width: 100%;\r\n    height: 100%; \r\n    text-align: center;\r\n}\r\n\r\n.zoom-image-container img{\r\n     width: auto;\r\n     height: 100%;\r\n}", ""]);
 
 // exports
 
@@ -635,7 +656,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/comps/resource-zoom/resource-zoom.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"zoom-wrap\" *ngIf=\"popupImageObject!==null\">\n  <div class=\"zoom-image-container\">\n    <img class=\"round\" src=\"{{popupImageObject.sourcePath}}\"/>\n  </div>\n</div>"
+module.exports = "\r\n<div class=\"zoom-wrap\" *ngIf=\"popupImageObject!==null\">\r\n  <div class=\"zoom-image-container\">\r\n    <img class=\"round\" src=\"{{popupImageObject.sourcePath}}\"/>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -704,7 +725,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/comps/signin/signin.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"signin-wrapper-bg\">\n<div class=\"bg-image-container\"></div>  \n<div class=\"container\">\n  <h1 class=\"brand-header\">Resource Allotment</h1>\n  <h4>Signin Please</h4>\n  <div class=\"signin-form-wrapper\">\n  <form>\n    <div class=\"form-group\">\n      <label for=\"exampleInputEmail1\">Email address</label>\n      <input [(ngModel)]=\"crProfile.userName\" type=\"email\" class=\"form-control\" id=\"userName\" name=\"username\" aria-describedby=\"emailHelp\" placeholder=\"username\">      \n    </div>\n    <div class=\"form-group\">\n      <label for=\"exampleInputPassword1\">Password</label>\n      <input [(ngModel)]=\"crProfile.password\" type=\"password\" class=\"form-control\" name=\"password\" id=\"exampleInputPassword1\" placeholder=\"Password\">\n    </div>\n   \n    <input (click)=\"loginStatus()\" type=\"button\" class=\"btn btn-light\" value=\"Signin\"/>\n  </form>\n  \n</div>\n</div>\n</div>"
+module.exports = "\r\n<div class=\"signin-wrapper-bg\">\r\n<div class=\"bg-image-container\"></div>  \r\n<div class=\"container\">\r\n  <h1 class=\"brand-header\">Resource Allotment</h1>\r\n  <h4>Signin Please</h4>\r\n  <div class=\"signin-form-wrapper\">\r\n  <form>\r\n    <div class=\"form-group\">\r\n      <label for=\"exampleInputEmail1\">Email address</label>\r\n      <input [(ngModel)]=\"crProfile.userName\" type=\"email\" class=\"form-control\" id=\"userName\" name=\"username\" aria-describedby=\"emailHelp\" placeholder=\"username\">      \r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label for=\"exampleInputPassword1\">Password</label>\r\n      <input [(ngModel)]=\"crProfile.password\" type=\"password\" class=\"form-control\" name=\"password\" id=\"exampleInputPassword1\" placeholder=\"Password\">\r\n    </div>\r\n   \r\n    <input (click)=\"loginStatus()\" type=\"button\" class=\"btn btn-light\" value=\"Signin\"/>\r\n  </form>\r\n  \r\n</div>\r\n</div>\r\n</div>"
 
 /***/ }),
 
@@ -796,6 +817,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var CommonUtilService = (function () {
     function CommonUtilService() {
+        console.log;
     }
     CommonUtilService.getUserFromLocalStorage = function () {
         var raAuth = window.localStorage.getItem('resource-allotment-auth');

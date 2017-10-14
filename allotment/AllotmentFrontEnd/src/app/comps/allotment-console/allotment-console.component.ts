@@ -67,7 +67,7 @@ export class AllotmentConsoleComponent implements OnInit {
                                 
                                 var stHeading=":) Done!",
                                 stDesc="Copying of "+jsonResponseData.copyComplete+" files successfully done!";
-                                console.log(jsonResponseData);
+                                
                                 if(jsonResponseData.masterErrorObject.targetFolderStatus){
                                   stHeading="Target folder is not available";
                                 }
@@ -83,7 +83,7 @@ export class AllotmentConsoleComponent implements OnInit {
                                 this.finalPostDone.emit({heading:"Problem in connection",subheading:"Please check connection",type:'completed'});
                               },
                               ) 
-      console.log('post fired');
+      
   }
 
   resetActiveContaine(){
@@ -112,8 +112,6 @@ export class AllotmentConsoleComponent implements OnInit {
     this.lastActiveSubfolderName = subfolderName;
     this.lastActiveContainer.opted = true;
 
-    //console.log('///////////////////////');
-    //console.log(this.lastActiveContainer);
 
      }
     

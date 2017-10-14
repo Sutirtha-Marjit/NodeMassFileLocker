@@ -21,7 +21,7 @@
             <li class="breadcrumb-item">
               <input [(ngModel)]="newFolderName[listitem.name]" id="folder-name-{{listitem.name}}" name="folder-name-{{listitem.name}}"  style="width:200px;" type="text"/>
             </li>
-            <li class="breadcrumb-item">
+            <li *ngIf="folderAddButtonShow(listitem.name)" class="breadcrumb-item">
               <a (click)="requestToCreateNewContainer()" class="btn btn-success btn-sm" href="#">+</a>
             </li>
           </ol>

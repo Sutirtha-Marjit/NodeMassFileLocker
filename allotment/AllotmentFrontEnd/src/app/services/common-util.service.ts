@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ResourceObject,ResourceContainer} from '../shared/datatypes';
+import * as Lodash from 'lodash';
 
 
 @Injectable()
 export class CommonUtilService {
 
   constructor() { 
-
+    console.log
   }
 
   public static getUserFromLocalStorage():boolean{
@@ -32,6 +33,7 @@ export class CommonUtilService {
   
 
   public static getCategoryList(http:HttpClient,categoryName:string,success:Function,error:Function){
+    
     var requestPath = this.masterConfig.connection.serviceRequestHost+'/service/basic-list/'+categoryName;
     http.get(requestPath).subscribe(function(jsonData){
         var resultArray:Array<ResourceContainer> = [];
