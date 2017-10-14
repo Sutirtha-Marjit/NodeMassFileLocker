@@ -34,6 +34,22 @@ export class AppComponent implements OnInit{
 
   }
 
+  updateCategories(){
+     CommonUtilService.getCategoryList(this.http,'outbox',(jsonData)=>{
+    
+    this.givenContainers.outbox = jsonData;
+    },()=>{
+      
+    });
+
+    CommonUtilService.getCategoryList(this.http,'model',(jsonData)=>{
+    
+    this.givenContainers.model = jsonData;
+    },()=>{
+
+    });
+  }
+
   initAction(){
     
     this.popupOpen = false;
@@ -59,19 +75,7 @@ export class AppComponent implements OnInit{
 
     });
     
-    CommonUtilService.getCategoryList(this.http,'outbox',(jsonData)=>{
-    
-    this.givenContainers.outbox = jsonData;
-    },()=>{
-      
-    });
-
-    CommonUtilService.getCategoryList(this.http,'model',(jsonData)=>{
-    
-    this.givenContainers.model = jsonData;
-    },()=>{
-
-    });
+   this.updateCategories();
     
   }
 
@@ -115,6 +119,7 @@ export class AppComponent implements OnInit{
 
   closeCreateFolderPopup(){
     this.createResourceContainerPopupOpen = false;
+    this.updateCategories();
   }
 
   ngOnInit(){

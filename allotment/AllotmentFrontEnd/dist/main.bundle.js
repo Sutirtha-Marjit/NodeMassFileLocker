@@ -38,7 +38,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-signin (onSigninSuccessful)=\"loginStatusChange($event)\"  *ngIf=\"!signedIn\">\r\n</app-signin>\r\n<div class=\"app-container dataPostModalOpen-{{dataPostModalOpen}} popupOpen-{{popupOpen}}\" *ngIf=\"signedIn\">\r\n<div class=\"pic-resource-panel WText\">\r\n  <div class=\"scrollable\">\r\n  <header>\r\n      <div class=\"row\"><h3 class=\"brand-header\" style=\"padding:0.65rem 0.55rem; width:100%; text-align:center;\">Resource Allotment</h3></div>\r\n      <div><small><span>{{getModifiedResourceList(false).length}} Resources left to select</span> </small> &nbsp;&nbsp;&nbsp; <a (click)=\"logout()\" class=\"btn btn-sm btn-dark\" href=\"#\">Logout</a></div>\r\n  </header>\r\n    \r\n   <div class=\"pic-container image-pool\" >\r\n     <div (click)=\"setCurrentObject(currentPic,currentPic.isDir)\" class=\"pic rounded\" *ngFor=\"let currentPic of (getModifiedResourceList(false)); let $index = index;\">\r\n       <div class=\"bag rounded\">\r\n          <img *ngIf=\"!currentPic.isDir\"  (load)=\"onResourceImageLoad($index)\"  src=\"{{currentPic.sourcePath}}\" class=\"rounded resource-box-image\" />\r\n          <div *ngIf=\"currentPic.isDir\">\r\n          <span class=\"icon-span-folder\">\r\n            <span>{{currentPic.name}}</span>\r\n          </span>\r\n          \r\n          </div>\r\n      </div>\r\n     </div>          \r\n   </div>\r\n   </div>  \r\n</div>  \r\n<div class=\"console-resource-panel\">\r\n    <!-- -->  \r\n    <div class=\"container\"> \r\n  <div class=\"row\">\r\n    \r\n    <div class=\"col\">\r\n      <div class=\"selection-panel-header\">\r\n      <h3>Your selected resources</h3>\r\n      <h6 >\r\n        <span >Only <span>{{(getModifiedResourceList(true)).length}}</span> resources selected out of {{localImagePool.length}}</span>\r\n        <a *ngIf=\"(getModifiedResourceList(true)).length\" href=\"#\" (click)=\"resetCurrentSelectedObject()\">Empty List</a>\r\n      </h6>\r\n      </div>\r\n      \r\n      <div class=\"preview-image-container \">\r\n        <div class=\"pic\" *ngFor=\"let selectPic of (getModifiedResourceList(true))\" >\r\n            <div class=\"bag round\">\r\n              <img (click)=\"openImagePopup(selectPic)\" class=\"img-fluid rounded\"  src=\"{{selectPic.sourcePath}}\"/>\r\n            </div>\r\n            <span class=\"cross\" (click)=\"resetCurrentObject(selectPic)\">&#x2DF;</span>\r\n        </div>\r\n        \r\n      </div>      \r\n    </div>\r\n\r\n    <app-allotment-console (finalPostDone)=\"onCopyOperationComplete($event)\" (finalPostStarted)=\"openDataPostModal($event)\" (onCreateNewContainerRequest)=\"openCreateFolderPopup()\"  [toPostResourceList]=\"getModifiedResourceList(true)\" [allContainers]=\"givenContainers\" class=\"col\" *ngIf=\"(getModifiedResourceList(true)).length>0\" ></app-allotment-console>\r\n\r\n    <div class=\"w-100\"></div>    \r\n  </div>\r\n</div>\r\n    <!-- -->   \r\n</div>\r\n</div>\r\n<app-create-resource-container (onCloseWindow)=\"closeCreateFolderPopup()\" *ngIf=\"createResourceContainerPopupOpen\"></app-create-resource-container>\r\n<app-resource-zoom (click)=\"closeImagePopup()\" [popupImageObject]=\"popupImageObject\" *ngIf=\"popupOpen\"></app-resource-zoom>\r\n<app-data-post-modal *ngIf=\"dataPostModalOpen\" (onReInitApp)=\"initAction()\" [statusObject]=\"crDataPostStatusObject\"></app-data-post-modal>"
+module.exports = "<app-signin (onSigninSuccessful)=\"loginStatusChange($event)\"  *ngIf=\"!signedIn\">\r\n</app-signin>\r\n<div class=\"app-container dataPostModalOpen-{{dataPostModalOpen}} popupOpen-{{popupOpen}}\" *ngIf=\"signedIn\">\r\n<div class=\"pic-resource-panel WText\">\r\n  <div class=\"scrollable\">\r\n  <header>\r\n      <div class=\"row\"><h3 class=\"brand-header\" style=\"padding:0.65rem 0.55rem; width:100%; text-align:center;\">Resource Allotment</h3></div>\r\n      <div><small><span>{{getModifiedResourceList(false).length}} Resources left to select</span> </small> &nbsp;&nbsp;&nbsp; <a (click)=\"logout()\" class=\"btn btn-sm btn-dark\" href=\"#\">Logout</a></div>\r\n  </header>\r\n    \r\n   <div class=\"pic-container image-pool\" >\r\n     <div (click)=\"setCurrentObject(currentPic,currentPic.isDir)\" class=\"pic rounded\" *ngFor=\"let currentPic of (getModifiedResourceList(false)); let $index = index;\">\r\n       <div class=\"bag rounded\">\r\n          <img *ngIf=\"!currentPic.isDir\"  (load)=\"onResourceImageLoad($index)\"  src=\"{{currentPic.sourcePath}}\" class=\"rounded resource-box-image\" />\r\n          <div *ngIf=\"currentPic.isDir\">\r\n          <span class=\"icon-span-folder\">\r\n            <span>{{currentPic.name}}</span>\r\n          </span>\r\n          \r\n          </div>\r\n      </div>\r\n     </div>          \r\n   </div>\r\n   </div>  \r\n</div>  \r\n<div class=\"console-resource-panel\">\r\n    <!-- -->  \r\n    <div class=\"container\"> \r\n  <div class=\"row\">\r\n    \r\n    <div class=\"col\">\r\n      <div class=\"selection-panel-header\">\r\n      <h3>Your selected resources</h3>\r\n      <h6 >\r\n        <span >Only <span>{{(getModifiedResourceList(true)).length}}</span> resources selected out of {{localImagePool.length}}</span>\r\n        <a *ngIf=\"(getModifiedResourceList(true)).length\" href=\"#\" (click)=\"resetCurrentSelectedObject()\">Empty List</a>\r\n      </h6>\r\n      </div>\r\n      \r\n      <div class=\"preview-image-container \">\r\n        <div class=\"pic\" *ngFor=\"let selectPic of (getModifiedResourceList(true))\" >\r\n            <div class=\"bag round\">\r\n              <img (click)=\"openImagePopup(selectPic)\" class=\"img-fluid rounded\"  src=\"{{selectPic.sourcePath}}\"/>\r\n            </div>\r\n            <span class=\"cross\" (click)=\"resetCurrentObject(selectPic)\">&#x2DF;</span>\r\n        </div>\r\n        \r\n      </div>      \r\n    </div>\r\n\r\n    <app-allotment-console (finalPostDone)=\"onCopyOperationComplete($event)\" (finalPostStarted)=\"openDataPostModal($event)\" (onCreateNewContainerRequest)=\"openCreateFolderPopup()\"  [toPostResourceList]=\"getModifiedResourceList(true)\" [allContainers]=\"givenContainers\" class=\"col\" \r\n    *ngIf=\"(getModifiedResourceList(true)).length>0 && !createResourceContainerPopupOpen\" ></app-allotment-console>\r\n\r\n    <div class=\"w-100\"></div>    \r\n  </div>\r\n</div>\r\n    <!-- -->   \r\n</div>\r\n</div>\r\n<app-create-resource-container (onCloseWindow)=\"closeCreateFolderPopup()\" *ngIf=\"createResourceContainerPopupOpen\"></app-create-resource-container>\r\n<app-resource-zoom (click)=\"closeImagePopup()\" [popupImageObject]=\"popupImageObject\" *ngIf=\"popupOpen\"></app-resource-zoom>\r\n<app-data-post-modal *ngIf=\"dataPostModalOpen\" (onReInitApp)=\"initAction()\" [statusObject]=\"crDataPostStatusObject\"></app-data-post-modal>"
 
 /***/ }),
 
@@ -84,6 +84,17 @@ var AppComponent = (function () {
             this.sourceImageRoot = __WEBPACK_IMPORTED_MODULE_3__services_common_util_service__["a" /* CommonUtilService */].adjustDevProdEnv();
         }
     }
+    AppComponent.prototype.updateCategories = function () {
+        var _this = this;
+        __WEBPACK_IMPORTED_MODULE_3__services_common_util_service__["a" /* CommonUtilService */].getCategoryList(this.http, 'outbox', function (jsonData) {
+            _this.givenContainers.outbox = jsonData;
+        }, function () {
+        });
+        __WEBPACK_IMPORTED_MODULE_3__services_common_util_service__["a" /* CommonUtilService */].getCategoryList(this.http, 'model', function (jsonData) {
+            _this.givenContainers.model = jsonData;
+        }, function () {
+        });
+    };
     AppComponent.prototype.initAction = function () {
         var _this = this;
         this.popupOpen = false;
@@ -103,14 +114,7 @@ var AppComponent = (function () {
             _this.localImagePool = outputARray;
         }, function (error) {
         });
-        __WEBPACK_IMPORTED_MODULE_3__services_common_util_service__["a" /* CommonUtilService */].getCategoryList(this.http, 'outbox', function (jsonData) {
-            _this.givenContainers.outbox = jsonData;
-        }, function () {
-        });
-        __WEBPACK_IMPORTED_MODULE_3__services_common_util_service__["a" /* CommonUtilService */].getCategoryList(this.http, 'model', function (jsonData) {
-            _this.givenContainers.model = jsonData;
-        }, function () {
-        });
+        this.updateCategories();
     };
     AppComponent.prototype.onResourceImageLoad = function ($im) {
         var picTag = document.querySelectorAll('.image-pool .resource-box-image').item($im);
@@ -144,6 +148,7 @@ var AppComponent = (function () {
     };
     AppComponent.prototype.closeCreateFolderPopup = function () {
         this.createResourceContainerPopupOpen = false;
+        this.updateCategories();
     };
     AppComponent.prototype.ngOnInit = function () {
         if (__WEBPACK_IMPORTED_MODULE_3__services_common_util_service__["a" /* CommonUtilService */].masterConfig.mockDataRequired) {
@@ -483,6 +488,7 @@ var CreateResourceContainerComponent = (function () {
         return r;
     };
     CreateResourceContainerComponent.prototype.requestToCreateNewContainer = function () {
+        var _this = this;
         var crEL, toPostData = {}, requestPath = __WEBPACK_IMPORTED_MODULE_2__services_common_util_service__["a" /* CommonUtilService */].masterConfig.connection.serviceRequestHost + '/' + 'service/jobs/createnewfolder';
         toPostData = this.getNonEmptyNameObject();
         for (crEL in toPostData) {
@@ -491,9 +497,9 @@ var CreateResourceContainerComponent = (function () {
         if (Object.keys(toPostData).length > 0) {
             this.folderCreationObservable = this.http.post(requestPath, toPostData);
             this.folderCreationObservable.subscribe(function (jsonData) {
-                console.log('got JSON');
+                _this.initAction();
             }, function (errorObj) {
-                console.log('error');
+                alert('some problem happend');
             });
         }
     };
@@ -526,6 +532,7 @@ var CreateResourceContainerComponent = (function () {
     };
     CreateResourceContainerComponent.prototype.initAction = function () {
         var _this = this;
+        this.newFolderName = {};
         __WEBPACK_IMPORTED_MODULE_2__services_common_util_service__["a" /* CommonUtilService */].getCategoryList(this.http, 'model', function (resultArray) {
             _this.completeFolderList.model = resultArray;
         }, function (error) {

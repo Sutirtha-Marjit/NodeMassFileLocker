@@ -72,15 +72,19 @@ app.use(function(req, res, next) {
 
 app.post('/service/jobs/createnewfolder',requestJsonParser,function(req,res){
     console.log('Requested for new folder creation...')
-    var givenData;
+    var folderCreated=0, foldarPath,givenData;
     if(req.body){
         givenData = req.body;
         for(var el in givenData){
-            fs.closeSync(fs.openSync(folderConfig.destRoot+givenData[el]+"/abc.txt", 'w'));
+            foldarPath = folderConfig.destRoot+givenData[el];
+            if (!fs.existsSync(foldarPath)){
+                fs.mkdirSync(foldarPath);
+                folderCreated++;
+            }
              
         }
     }
-    res.json({});
+    res.json({status:{folderCreated:folderCreated}});
 
 });
 

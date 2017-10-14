@@ -56,10 +56,10 @@ export class CreateResourceContainerComponent implements OnInit {
      if(Object.keys(toPostData).length>0){
         this.folderCreationObservable = this.http.post(requestPath,toPostData);
         this.folderCreationObservable.subscribe((jsonData)=>{
-       console.log('got JSON');
+          this.initAction();
         },
         (errorObj)=>{
-          console.log('error');
+          alert('some problem happend');
         }
         );
      }
@@ -99,6 +99,7 @@ export class CreateResourceContainerComponent implements OnInit {
 
    
    private initAction(){
+     this.newFolderName={};
      CommonUtilService.getCategoryList(this.http,'model',(resultArray:Array<ResourceContainer>)=>{
       this.completeFolderList.model = resultArray;
     },(error)=>{

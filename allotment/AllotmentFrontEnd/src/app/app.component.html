@@ -48,7 +48,8 @@
       </div>      
     </div>
 
-    <app-allotment-console (finalPostDone)="onCopyOperationComplete($event)" (finalPostStarted)="openDataPostModal($event)" (onCreateNewContainerRequest)="openCreateFolderPopup()"  [toPostResourceList]="getModifiedResourceList(true)" [allContainers]="givenContainers" class="col" *ngIf="(getModifiedResourceList(true)).length>0" ></app-allotment-console>
+    <app-allotment-console (finalPostDone)="onCopyOperationComplete($event)" (finalPostStarted)="openDataPostModal($event)" (onCreateNewContainerRequest)="openCreateFolderPopup()"  [toPostResourceList]="getModifiedResourceList(true)" [allContainers]="givenContainers" class="col" 
+    *ngIf="(getModifiedResourceList(true)).length>0 && !createResourceContainerPopupOpen" ></app-allotment-console>
 
     <div class="w-100"></div>    
   </div>
