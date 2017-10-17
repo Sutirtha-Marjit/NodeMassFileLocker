@@ -38,7 +38,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-signin (onSigninSuccessful)=\"loginStatusChange($event)\"  *ngIf=\"!signedIn\">\r\n</app-signin>\r\n<div class=\"app-container dataPostModalOpen-{{dataPostModalOpen}} popupOpen-{{popupOpen}}\" *ngIf=\"signedIn\">\r\n<div class=\"pic-resource-panel WText\">\r\n  <div class=\"scrollable\">\r\n  <header>\r\n      <div class=\"row\"><h3 class=\"brand-header\" style=\"padding:0.65rem 0.55rem; width:100%; text-align:center;\">Resource Allotment</h3></div>\r\n      <div><small><span>{{getModifiedResourceList(false).length}} Resources left to select</span> </small> &nbsp;&nbsp;&nbsp; <a (click)=\"logout()\" class=\"btn btn-sm btn-dark\" href=\"#\">Logout</a></div>\r\n  </header>\r\n    \r\n   <div class=\"pic-container image-pool\" >\r\n     <div (click)=\"setCurrentObject(currentPic,currentPic.isDir)\" class=\"pic rounded\" *ngFor=\"let currentPic of (getModifiedResourceList(false)); let $index = index;\">\r\n       <div class=\"bag rounded\">\r\n          <img *ngIf=\"!currentPic.isDir\"  (load)=\"onResourceImageLoad($index)\"  src=\"{{currentPic.sourcePath}}\" class=\"rounded resource-box-image\" />\r\n          <div *ngIf=\"currentPic.isDir\">\r\n          <span class=\"icon-span-folder\">\r\n            <span>{{currentPic.name}}</span>\r\n          </span>\r\n          \r\n          </div>\r\n      </div>\r\n     </div>          \r\n   </div>\r\n   </div>  \r\n</div>  \r\n<div class=\"console-resource-panel\">\r\n    <!-- -->  \r\n    <div class=\"container\"> \r\n  <div class=\"row\">\r\n    \r\n    <div class=\"col\">\r\n      <div class=\"selection-panel-header\">\r\n      <h3>Your selected resources</h3>\r\n      <h6 >\r\n        <span >Only <span>{{(getModifiedResourceList(true)).length}}</span> resources selected out of {{localImagePool.length}}</span>\r\n        <a *ngIf=\"(getModifiedResourceList(true)).length\" href=\"#\" (click)=\"resetCurrentSelectedObject()\">Empty List</a>\r\n      </h6>\r\n      </div>\r\n      \r\n      <div class=\"preview-image-container \">\r\n        <div class=\"pic\" *ngFor=\"let selectPic of (getModifiedResourceList(true))\" >\r\n            <div class=\"bag round\">\r\n              <img (click)=\"openImagePopup(selectPic)\" class=\"img-fluid rounded\"  src=\"{{selectPic.sourcePath}}\"/>\r\n            </div>\r\n            <span class=\"cross\" (click)=\"resetCurrentObject(selectPic)\">&#x2DF;</span>\r\n        </div>\r\n        \r\n      </div>      \r\n    </div>\r\n\r\n    <app-allotment-console (finalPostDone)=\"onCopyOperationComplete($event)\" (finalPostStarted)=\"openDataPostModal($event)\" (onCreateNewContainerRequest)=\"openCreateFolderPopup()\"  [toPostResourceList]=\"getModifiedResourceList(true)\" [allContainers]=\"givenContainers\" class=\"col\" \r\n    *ngIf=\"(getModifiedResourceList(true)).length>0 && !createResourceContainerPopupOpen\" ></app-allotment-console>\r\n\r\n    <div class=\"w-100\"></div>    \r\n  </div>\r\n</div>\r\n    <!-- -->   \r\n</div>\r\n</div>\r\n<app-create-resource-container (onCloseWindow)=\"closeCreateFolderPopup()\" *ngIf=\"createResourceContainerPopupOpen\"></app-create-resource-container>\r\n<app-resource-zoom (click)=\"closeImagePopup()\" [popupImageObject]=\"popupImageObject\" *ngIf=\"popupOpen\"></app-resource-zoom>\r\n<app-data-post-modal *ngIf=\"dataPostModalOpen\" (onReInitApp)=\"initAction()\" [statusObject]=\"crDataPostStatusObject\"></app-data-post-modal>"
+module.exports = "<app-signin (onSigninSuccessful)=\"loginStatusChange($event)\"  *ngIf=\"!signedIn\">\r\n</app-signin>\r\n<div class=\"app-container dataPostModalOpen-{{dataPostModalOpen}} popupOpen-{{popupOpen}}\" *ngIf=\"signedIn\">\r\n<div class=\"pic-resource-panel WText\">\r\n  <div class=\"scrollable\">\r\n  <header>\r\n      <div class=\"row\"><h3 class=\"brand-header\" style=\"padding:0.65rem 0.55rem; width:100%; text-align:center;\">Resource Allotment</h3></div>\r\n      <div>\r\n        <div><small><span>{{getModifiedResourceList(false).length}} Resources left to select</span> </small></div> \r\n        <div class=\"btn-group\"><a (click)=\"openBrowseDestContainer()\" href=\"#\" class=\"btn btn-sm btn-info\">Explore dest</a><a (click)=\"logout()\" class=\"btn btn-sm btn-dark\" href=\"#\">Logout</a></div>\r\n      </div>\r\n  </header>\r\n    \r\n   <div class=\"pic-container image-pool\" >\r\n     <div (click)=\"setCurrentObject(currentPic,currentPic.isDir)\" class=\"pic rounded\" *ngFor=\"let currentPic of (getModifiedResourceList(false)); let $index = index;\">\r\n       <div class=\"bag rounded\">\r\n          <img *ngIf=\"!currentPic.isDir\"  (load)=\"onResourceImageLoad($index)\"  src=\"{{currentPic.sourcePath}}\" class=\"rounded resource-box-image\" />\r\n          <div *ngIf=\"currentPic.isDir\">\r\n          <span class=\"icon-span-folder\">\r\n            <span>{{currentPic.name}}</span>\r\n          </span>\r\n          \r\n          </div>\r\n      </div>\r\n     </div>          \r\n   </div>\r\n   </div>  \r\n</div>  \r\n<div class=\"console-resource-panel\">\r\n    <!-- -->  \r\n    <div class=\"container\"> \r\n  <div class=\"row\">\r\n    \r\n    <div class=\"col\">\r\n      <div class=\"selection-panel-header\">\r\n      <h3>Your selected resources</h3>\r\n      <h6 >\r\n        <span >Only <span>{{(getModifiedResourceList(true)).length}}</span> resources selected out of {{localImagePool.length}}</span>\r\n        <a *ngIf=\"(getModifiedResourceList(true)).length\" href=\"#\" (click)=\"resetCurrentSelectedObject()\">Empty List</a>\r\n      </h6>\r\n      </div>\r\n      \r\n      <div class=\"preview-image-container \">\r\n        <div class=\"pic\" *ngFor=\"let selectPic of (getModifiedResourceList(true))\" >\r\n            <div class=\"bag round\">\r\n              <img (click)=\"openImagePopup(selectPic)\" class=\"img-fluid rounded\"  src=\"{{selectPic.sourcePath}}\"/>\r\n            </div>\r\n            <span class=\"cross\" (click)=\"resetCurrentObject(selectPic)\">&#x2DF;</span>\r\n        </div>\r\n        \r\n      </div>      \r\n    </div>\r\n\r\n    <app-allotment-console (finalPostDone)=\"onCopyOperationComplete($event)\" (finalPostStarted)=\"openDataPostModal($event)\" (onCreateNewContainerRequest)=\"openCreateFolderPopup()\"  [toPostResourceList]=\"getModifiedResourceList(true)\" [allContainers]=\"givenContainers\" class=\"col\" \r\n    *ngIf=\"(getModifiedResourceList(true)).length>0 && !createResourceContainerPopupOpen\" ></app-allotment-console>\r\n\r\n    <div class=\"w-100\"></div>    \r\n  </div>\r\n</div>\r\n    <!-- -->   \r\n</div>\r\n</div>\r\n<app-create-resource-container (onCloseWindow)=\"closeCreateFolderPopup()\" *ngIf=\"createResourceContainerPopupOpen\"></app-create-resource-container>\r\n<app-resource-zoom (click)=\"closeImagePopup()\" [popupImageObject]=\"popupImageObject\" *ngIf=\"popupOpen\"></app-resource-zoom>\r\n<app-data-post-modal *ngIf=\"dataPostModalOpen\" (onReInitApp)=\"initAction()\" [statusObject]=\"crDataPostStatusObject\"></app-data-post-modal>\r\n<app-explore-dest *ngIf=\"browseDestPopupOpen\" [givenContainers]=\"givenContainers\"></app-explore-dest>"
 
 /***/ }),
 
@@ -72,6 +72,7 @@ var AppComponent = (function () {
         this.popupOpen = false;
         this.dataPostModalOpen = false;
         this.createResourceContainerPopupOpen = false;
+        this.browseDestPopupOpen = false;
         this.crDataPostObject = null;
         this.popupImageObject = null;
         this.crDataPostStatusObject = { heading: "", subheading: "", type: '' };
@@ -134,6 +135,12 @@ var AppComponent = (function () {
     };
     AppComponent.prototype.closeDataPostModal = function () {
         this.dataPostModalOpen = false;
+    };
+    AppComponent.prototype.openBrowseDestContainer = function () {
+        this.browseDestPopupOpen = true;
+    };
+    AppComponent.prototype.closeBrowseDestContainer = function () {
+        this.browseDestPopupOpen = false;
     };
     AppComponent.prototype.openImagePopup = function (pic) {
         this.popupOpen = true;
@@ -212,12 +219,14 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__comps_data_post_modal_data_post_modal_component__ = __webpack_require__("../../../../../src/app/comps/data-post-modal/data-post-modal.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__comps_signin_signin_component__ = __webpack_require__("../../../../../src/app/comps/signin/signin.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__comps_create_resource_container_create_resource_container_component__ = __webpack_require__("../../../../../src/app/comps/create-resource-container/create-resource-container.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__comps_explore_dest_explore_dest_component__ = __webpack_require__("../../../../../src/app/comps/explore-dest/explore-dest.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -241,7 +250,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_6__comps_resource_zoom_resource_zoom_component__["a" /* ResourceZoomComponent */],
             __WEBPACK_IMPORTED_MODULE_7__comps_data_post_modal_data_post_modal_component__["a" /* DataPostModalComponent */],
             __WEBPACK_IMPORTED_MODULE_8__comps_signin_signin_component__["a" /* SigninComponent */],
-            __WEBPACK_IMPORTED_MODULE_9__comps_create_resource_container_create_resource_container_component__["a" /* CreateResourceContainerComponent */]
+            __WEBPACK_IMPORTED_MODULE_9__comps_create_resource_container_create_resource_container_component__["a" /* CreateResourceContainerComponent */],
+            __WEBPACK_IMPORTED_MODULE_10__comps_explore_dest_explore_dest_component__["a" /* ExploreDestComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -650,6 +660,76 @@ var _a, _b;
 
 /***/ }),
 
+/***/ "../../../../../src/app/comps/explore-dest/explore-dest.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".dest-contain-wrap{\r\n    position: fixed;\r\n    top:0px;\r\n    left: 0px;\r\n    background: #ccc;\r\n    width: 100%;\r\n    height: 100%;\r\n    padding:0.673rem;\r\n    overflow-y: scroll;\r\n    overflow-x: hidden;\r\n    /*display: none;*/\r\n}", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/comps/explore-dest/explore-dest.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"dest-contain-wrap\">\n  \n  <div class=\"container-fluid\">\n    <div>\n    <h2>Browse</h2>\n    <hr/>\n  </div>\n    <div class=\"row\">\n      <div class=\"col\" *ngFor=\"let rootContainer of CommonUtilService.toRepeatable(givenContainers);\">\n        <h3>{{rootContainer.key}}</h3>\n        <div *ngFor=\"let listitem of rootContainer.val; let i = index;\">\n      <ol  class=\"breadcrumb\">\n        <li class=\"breadcrumb-item\">\n          <a href=\"#\" class=\"btn btn-sm btn-dark\">{{listitem.name}}</a>\n        </li>        \n      </ol>\n      <ol class=\"breadcrumb\" *ngFor=\"let sublistItem of listitem.childrenDetails\">\n        <li class=\"breadcrumb-item\">\n          <a>{{listitem.name}}</a>\n        </li>\n        <li class=\"breadcrumb-item\">\n          <a href=\"#\" class=\"btn btn-sm btn-dark\">{{sublistItem}}</a>\n        </li>        \n      </ol>\n      </div>\n      </div> \n   \n    </div>\n  </div>\n \n</div>  \n\n<!-- \n\n    <div class=\"col\">\n      \n    </div>\n\n-->\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/comps/explore-dest/explore-dest.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ExploreDestComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_common_util_service__ = __webpack_require__("../../../../../src/app/services/common-util.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var ExploreDestComponent = (function () {
+    function ExploreDestComponent() {
+        this.CommonUtilService = __WEBPACK_IMPORTED_MODULE_1__services_common_util_service__["a" /* CommonUtilService */];
+    }
+    ExploreDestComponent.prototype.ngOnInit = function () {
+        console.log('ExploreDestComponent');
+        console.log(this.givenContainers);
+    };
+    return ExploreDestComponent;
+}());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
+    __metadata("design:type", Object)
+], ExploreDestComponent.prototype, "givenContainers", void 0);
+ExploreDestComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        selector: 'app-explore-dest',
+        template: __webpack_require__("../../../../../src/app/comps/explore-dest/explore-dest.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/comps/explore-dest/explore-dest.component.css")]
+    }),
+    __metadata("design:paramtypes", [])
+], ExploreDestComponent);
+
+//# sourceMappingURL=explore-dest.component.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/comps/resource-zoom/resource-zoom.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -842,6 +922,16 @@ var CommonUtilService = (function () {
         else {
             return false;
         }
+    };
+    CommonUtilService.toRepeatable = function (obj) {
+        var arr = [];
+        for (var el in obj) {
+            arr.push({
+                key: el,
+                val: obj[el]
+            });
+        }
+        return arr;
     };
     CommonUtilService.setUserFromLocalStorage = function () {
         window.localStorage.setItem('resource-allotment-auth', '1');

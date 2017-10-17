@@ -5,7 +5,10 @@
   <div class="scrollable">
   <header>
       <div class="row"><h3 class="brand-header" style="padding:0.65rem 0.55rem; width:100%; text-align:center;">Resource Allotment</h3></div>
-      <div><small><span>{{getModifiedResourceList(false).length}} Resources left to select</span> </small> &nbsp;&nbsp;&nbsp; <a (click)="logout()" class="btn btn-sm btn-dark" href="#">Logout</a></div>
+      <div>
+        <div><small><span>{{getModifiedResourceList(false).length}} Resources left to select</span> </small></div> 
+        <div class="btn-group"><a (click)="openBrowseDestContainer()" href="#" class="btn btn-sm btn-info">Explore dest</a><a (click)="logout()" class="btn btn-sm btn-dark" href="#">Logout</a></div>
+      </div>
   </header>
     
    <div class="pic-container image-pool" >
@@ -60,3 +63,4 @@
 <app-create-resource-container (onCloseWindow)="closeCreateFolderPopup()" *ngIf="createResourceContainerPopupOpen"></app-create-resource-container>
 <app-resource-zoom (click)="closeImagePopup()" [popupImageObject]="popupImageObject" *ngIf="popupOpen"></app-resource-zoom>
 <app-data-post-modal *ngIf="dataPostModalOpen" (onReInitApp)="initAction()" [statusObject]="crDataPostStatusObject"></app-data-post-modal>
+<app-explore-dest *ngIf="browseDestPopupOpen" [givenContainers]="givenContainers"></app-explore-dest>

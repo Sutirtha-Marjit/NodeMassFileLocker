@@ -15,6 +15,7 @@ export class AppComponent implements OnInit{
   popupOpen:boolean = false;
   dataPostModalOpen = false;
   createResourceContainerPopupOpen:boolean = false;
+  browseDestPopupOpen:boolean = false;
   crDataPostObject:ResourcePostObject = null;
   popupImageObject:ResourceObject = null;
   crDataPostStatusObject:RequestStatusObject = {heading:"",subheading:"",type:''};
@@ -101,6 +102,14 @@ export class AppComponent implements OnInit{
 
   closeDataPostModal(){
     this.dataPostModalOpen = false;
+  }
+
+  openBrowseDestContainer(){
+    this.browseDestPopupOpen = true;
+  }
+
+  closeBrowseDestContainer(){
+    this.browseDestPopupOpen = false;
   }
 
   openImagePopup(pic:ResourceObject){

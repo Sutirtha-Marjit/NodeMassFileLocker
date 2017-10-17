@@ -20,6 +20,17 @@ export class CommonUtilService {
     }
   }
 
+  public static toRepeatable(obj:any):Array<{key:string,val:any}>{
+    var arr:Array<{key:string,val:any}>=[];
+    for(var el in obj){
+      arr.push({
+        key:el,
+        val:obj[el]
+      });
+    }
+    return arr;
+  }
+
   public static setUserFromLocalStorage(){
     window.localStorage.setItem('resource-allotment-auth','1');
     
