@@ -17,6 +17,7 @@ export class CreateResourceContainerComponent implements OnInit {
   public fn="";
   private folderCreationObservable:Observable<any>;
   public newFolderName = {};
+  public rootLevelFolderName = "";
   private completeFolderList = {
     outbox:[],
     model:[]
@@ -49,20 +50,31 @@ export class CreateResourceContainerComponent implements OnInit {
 
    requestToCreateNewContainer(){
      var crEL,toPostData={},requestPath = CommonUtilService.masterConfig.connection.serviceRequestHost+'/'+'service/jobs/createnewfolder';
-     toPostData = this.getNonEmptyNameObject();
-     for(crEL in toPostData){      
-         toPostData[crEL] = this.selectedContainer+'/'+crEL+'/'+toPostData[crEL];       
-     }
+
+     if(arguments.length>0){
+
+       toPostData['rootLevelFolderName'] = this.selectedContainer+'/'+this.rootLevelFolderName;
+       console.log(toPostData);
+
+     }else{
+
+      toPostData = this.getNonEmptyNameObject();
+      for(crEL in toPostData){      
+          toPostData[crEL] = this.selectedContainer+'/'+crEL+'/'+toPostData[crEL];       
+      }
+      
+     }    
+
      if(Object.keys(toPostData).length>0){
-        this.folderCreationObservable = this.http.post(requestPath,toPostData);
-        this.folderCreationObservable.subscribe((jsonData)=>{
-          this.initAction();
-        },
-        (errorObj)=>{
-          alert('some problem happend');
-        }
-        );
-     }
+          this.folderCreationObservable = this.http.post(requestPath,toPostData);
+          this.folderCreationObservable.subscribe((jsonData)=>{
+            this.initAction();
+          },
+          (errorObj)=>{
+            alert('some problem happend');
+          }
+          );
+      }
      
    }
 
@@ -100,6 +112,7 @@ export class CreateResourceContainerComponent implements OnInit {
    
    private initAction(){
      this.newFolderName={};
+     this.rootLevelFolderName='';
      CommonUtilService.getCategoryList(this.http,'model',(resultArray:Array<ResourceContainer>)=>{
       this.completeFolderList.model = resultArray;
     },(error)=>{

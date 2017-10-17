@@ -9,6 +9,16 @@
         
       </div>
       <span> &nbsp; Chosen conatiner is {{selectedContainer}}. You can <a href="#" (click)="close()">cancel</a> the operation.</span>
+      <br/><br/>
+      <div>
+       <form class="form-inline">
+          <div class="form-group mx-sm-3">
+            <input [(ngModel)]="rootLevelFolderName" type="text" class="form-control form-control-sm" name="root-level-folder-name" id="root-level-folder-name" placeholder="Root level folder">
+          </div>
+          <button *ngIf="(rootLevelFolderName.trim()).length!==0" (click)="requestToCreateNewContainer(true)" class="btn btn-success btn-sm">Create</button>
+        </form> 
+      </div>
+
       </div>
       <br/>
       <div class="container" *ngIf="selectedContainer!==null">

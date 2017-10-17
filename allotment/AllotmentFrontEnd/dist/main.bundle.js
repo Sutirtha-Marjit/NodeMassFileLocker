@@ -436,7 +436,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/comps/create-resource-container/create-resource-container.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"create-container-wrap\">\r\n  <!-- AUTO COMPLETE LIST :START-->\r\n      <div class=\"container\">\r\n      <br/>  \r\n      <h3>Create new </h3>   \r\n      <div class=\"btn-group\">\r\n        <a href=\"#\" class=\"btn btn-success btn-sm {{activeState.outbox}}\" (click)=\"setSelectedContainer('outbox')\">Outbox</a>\r\n        <a href=\"#\" class=\"btn btn-success btn-sm {{activeState.model}}\" (click)=\"setSelectedContainer('model')\">Model</a>\r\n        \r\n      </div>\r\n      <span> &nbsp; Chosen conatiner is {{selectedContainer}}. You can <a href=\"#\" (click)=\"close()\">cancel</a> the operation.</span>\r\n      </div>\r\n      <br/>\r\n      <div class=\"container\" *ngIf=\"selectedContainer!==null\">\r\n        <div *ngFor=\"let listitem of (getAutoCompleteList()); let i = index;\">\r\n          <ol class=\"breadcrumb main-breadcrumb {{getDuplicateSubfolderClass(listitem)}}\" *ngIf=\"listitem.isDir\" >\r\n            <li class=\"breadcrumb-item\">\r\n              <a class=\"btn btn-info btn-sm\" href=\"#\">{{listitem.name}}</a>              \r\n            </li>\r\n            \r\n            <li class=\"breadcrumb-item\">\r\n              <input [(ngModel)]=\"newFolderName[listitem.name]\" id=\"folder-name-{{listitem.name}}\" name=\"folder-name-{{listitem.name}}\"  style=\"width:200px;\" type=\"text\"/>\r\n            </li>\r\n            <li *ngIf=\"folderAddButtonShow(listitem.name)\" class=\"breadcrumb-item\">\r\n              <a (click)=\"requestToCreateNewContainer()\" class=\"btn btn-success btn-sm\" href=\"#\">+</a>\r\n            </li>\r\n          </ol>\r\n          <ol *ngFor=\"let subItem of listitem.childrenDetails\" class=\"breadcrumb\">\r\n            <li class=\"breadcrumb-item\"><a>{{listitem.name}}</a></li>\r\n            <li class=\"breadcrumb-item\">{{subItem}}</li>\r\n          </ol> \r\n        </div>  \r\n      </div>\r\n      <!-- AUTO COMPLETE LIST :END-->\r\n</div>"
+module.exports = "<div class=\"create-container-wrap\">\r\n  <!-- AUTO COMPLETE LIST :START-->\r\n      <div class=\"container\">\r\n      <br/>  \r\n      <h3>Create new </h3>   \r\n      <div class=\"btn-group\">\r\n        <a href=\"#\" class=\"btn btn-success btn-sm {{activeState.outbox}}\" (click)=\"setSelectedContainer('outbox')\">Outbox</a>\r\n        <a href=\"#\" class=\"btn btn-success btn-sm {{activeState.model}}\" (click)=\"setSelectedContainer('model')\">Model</a>\r\n        \r\n      </div>\r\n      <span> &nbsp; Chosen conatiner is {{selectedContainer}}. You can <a href=\"#\" (click)=\"close()\">cancel</a> the operation.</span>\r\n      <br/><br/>\r\n      <div>\r\n       <form class=\"form-inline\">\r\n          <div class=\"form-group mx-sm-3\">\r\n            <input [(ngModel)]=\"rootLevelFolderName\" type=\"text\" class=\"form-control form-control-sm\" name=\"root-level-folder-name\" id=\"root-level-folder-name\" placeholder=\"Root level folder\">\r\n          </div>\r\n          <button *ngIf=\"(rootLevelFolderName.trim()).length!==0\" (click)=\"requestToCreateNewContainer(true)\" class=\"btn btn-success btn-sm\">Create</button>\r\n        </form> \r\n      </div>\r\n\r\n      </div>\r\n      <br/>\r\n      <div class=\"container\" *ngIf=\"selectedContainer!==null\">\r\n        <div *ngFor=\"let listitem of (getAutoCompleteList()); let i = index;\">\r\n          <ol class=\"breadcrumb main-breadcrumb {{getDuplicateSubfolderClass(listitem)}}\" *ngIf=\"listitem.isDir\" >\r\n            <li class=\"breadcrumb-item\">\r\n              <a class=\"btn btn-info btn-sm\" href=\"#\">{{listitem.name}}</a>              \r\n            </li>\r\n            \r\n            <li class=\"breadcrumb-item\">\r\n              <input [(ngModel)]=\"newFolderName[listitem.name]\" id=\"folder-name-{{listitem.name}}\" name=\"folder-name-{{listitem.name}}\"  style=\"width:200px;\" type=\"text\"/>\r\n            </li>\r\n            <li *ngIf=\"folderAddButtonShow(listitem.name)\" class=\"breadcrumb-item\">\r\n              <a (click)=\"requestToCreateNewContainer()\" class=\"btn btn-success btn-sm\" href=\"#\">+</a>\r\n            </li>\r\n          </ol>\r\n          <ol *ngFor=\"let subItem of listitem.childrenDetails\" class=\"breadcrumb\">\r\n            <li class=\"breadcrumb-item\"><a>{{listitem.name}}</a></li>\r\n            <li class=\"breadcrumb-item\">{{subItem}}</li>\r\n          </ol> \r\n        </div>  \r\n      </div>\r\n      <!-- AUTO COMPLETE LIST :END-->\r\n</div>"
 
 /***/ }),
 
@@ -467,6 +467,7 @@ var CreateResourceContainerComponent = (function () {
         this.selectedContainer = 'model';
         this.fn = "";
         this.newFolderName = {};
+        this.rootLevelFolderName = "";
         this.completeFolderList = {
             outbox: [],
             model: []
@@ -490,9 +491,15 @@ var CreateResourceContainerComponent = (function () {
     CreateResourceContainerComponent.prototype.requestToCreateNewContainer = function () {
         var _this = this;
         var crEL, toPostData = {}, requestPath = __WEBPACK_IMPORTED_MODULE_2__services_common_util_service__["a" /* CommonUtilService */].masterConfig.connection.serviceRequestHost + '/' + 'service/jobs/createnewfolder';
-        toPostData = this.getNonEmptyNameObject();
-        for (crEL in toPostData) {
-            toPostData[crEL] = this.selectedContainer + '/' + crEL + '/' + toPostData[crEL];
+        if (arguments.length > 0) {
+            toPostData['rootLevelFolderName'] = this.selectedContainer + '/' + this.rootLevelFolderName;
+            console.log(toPostData);
+        }
+        else {
+            toPostData = this.getNonEmptyNameObject();
+            for (crEL in toPostData) {
+                toPostData[crEL] = this.selectedContainer + '/' + crEL + '/' + toPostData[crEL];
+            }
         }
         if (Object.keys(toPostData).length > 0) {
             this.folderCreationObservable = this.http.post(requestPath, toPostData);
@@ -533,6 +540,7 @@ var CreateResourceContainerComponent = (function () {
     CreateResourceContainerComponent.prototype.initAction = function () {
         var _this = this;
         this.newFolderName = {};
+        this.rootLevelFolderName = '';
         __WEBPACK_IMPORTED_MODULE_2__services_common_util_service__["a" /* CommonUtilService */].getCategoryList(this.http, 'model', function (resultArray) {
             _this.completeFolderList.model = resultArray;
         }, function (error) {
