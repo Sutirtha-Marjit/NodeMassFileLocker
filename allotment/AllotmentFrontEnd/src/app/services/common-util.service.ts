@@ -56,6 +56,10 @@ export class CommonUtilService {
       })
   }
 
+  public static getSpecificResourceList(http:HttpClient,dataToPost:any,success:Function,error:Function){
+        
+  }
+
   public static getResourceList(http:HttpClient,success:Function,error:Function){
       var requestPath = this.masterConfig.connection.serviceRequestHost+'/service/basic-list/source';
       http.get(requestPath).subscribe(function(jsonData){

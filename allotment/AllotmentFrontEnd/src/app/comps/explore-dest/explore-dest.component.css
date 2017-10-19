@@ -2,11 +2,28 @@
     position: fixed;
     top:0px;
     left: 0px;
-    background: #ccc;
+    background-color: #ccc;
+    
+    background-blend-mode:luminosity;
+    background-size: auto 100%; 
     width: 100%;
     height: 100%;
     padding:0.673rem;
     overflow-y: scroll;
     overflow-x: hidden;
     /*display: none;*/
+}
+
+.folder-name{
+    transform: translateY(-3px);
+}
+
+.col-row .col-pic{
+margin: 0px;
+padding: 0px;
+}
+
+.col-row .col-pic img{
+    width:100%;
+    height: auto;
 }

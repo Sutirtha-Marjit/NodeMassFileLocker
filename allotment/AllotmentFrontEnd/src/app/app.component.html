@@ -63,4 +63,4 @@
 <app-create-resource-container (onCloseWindow)="closeCreateFolderPopup()" *ngIf="createResourceContainerPopupOpen"></app-create-resource-container>
 <app-resource-zoom (click)="closeImagePopup()" [popupImageObject]="popupImageObject" *ngIf="popupOpen"></app-resource-zoom>
 <app-data-post-modal *ngIf="dataPostModalOpen" (onReInitApp)="initAction()" [statusObject]="crDataPostStatusObject"></app-data-post-modal>
-<app-explore-dest *ngIf="browseDestPopupOpen" [givenContainers]="givenContainers"></app-explore-dest>
+<app-explore-dest (onCloseRequest)="closeBrowseDestContainer()" *ngIf="browseDestPopupOpen" [givenContainers]="givenContainers"></app-explore-dest>

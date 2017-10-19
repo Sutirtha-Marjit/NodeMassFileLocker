@@ -101,6 +101,10 @@ app.post('/service/jobs/mastercopy',requestJsonParser,function(req,res){
 
 });
 
+app.post('/service/jobs/analyzeanyfolder',requestJsonParser,function(req,res){
+    res.json(req.body);
+});
+
 app.get('/service/basic-list/source',function(req,res){
   var resultArray = [];
   var data = fs.readdirSync(folderConfig.sourceRoot);
@@ -116,13 +120,6 @@ app.get('/service/basic-list/source',function(req,res){
   res.json(resultArray);
 });
 
-app.get('/test-connection',function(req,res){
-    res.json({
-        test:'success',
-        date:(new Date())
-    });
-})
-
 
 
 destFolders.forEach(function(p){
@@ -136,6 +133,8 @@ destFolders.forEach(function(p){
 
 app.use(express.static('./AllotmentFrontEnd/dist'));
 app.use('/operations/source/',express.static('./operations/source'));
+app.use('/operations/dest/',express.static('./operations/dest'));
+
 
 app.listen(port,function(){
    console.log('Application running on '+port);

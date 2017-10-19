@@ -3,15 +3,26 @@
   <div class="container-fluid">
     <div>
     <h2>Browse</h2>
+    <h6>
+    <a *ngIf="browsePath.length!==0"  (click)="resetBrowawePath()" class="btn btn-sm btn-success" href="#">Clean & Browse Again</a>
+    <a *ngIf="browsePath.length!==0">&nbsp;<span>{{browsePath}}</span></a>
+    </h6>
     <hr/>
   </div>
-    <div class="row">
+    <div class="row col-row" *ngIf="browsePath.length!==0">
+    <div class="col col-pic">A</div>  
+    <div class="col col-pic">B</div>
+    <div class="col col-pic">C</div>
+    <div class="col col-pic">D</div>
+    </div>  
+
+    <div class="row" *ngIf="browsePath.length===0">
       <div class="col" *ngFor="let rootContainer of CommonUtilService.toRepeatable(givenContainers);">
         <h3>{{rootContainer.key}}</h3>
         <div *ngFor="let listitem of rootContainer.val; let i = index;">
       <ol  class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="#" class="btn btn-sm btn-dark">{{listitem.name}}</a>
+          <a (click)="setBrowsePath(rootContainer.key+'/'+listitem.name)" href="#" class="btn btn-sm btn-dark"><span class="folder-icon-small"></span><span class="folder-name">{{listitem.name}}</span></a>
         </li>        
       </ol>
       <ol class="breadcrumb" *ngFor="let sublistItem of listitem.childrenDetails">
@@ -19,7 +30,7 @@
           <a>{{listitem.name}}</a>
         </li>
         <li class="breadcrumb-item">
-          <a href="#" class="btn btn-sm btn-dark">{{sublistItem}}</a>
+          <a href="#" (click)="setBrowsePath(rootContainer.key+'/'+listitem.name+'/'+sublistItem)" class="btn btn-sm btn-dark">{{sublistItem}}</a>
         </li>        
       </ol>
       </div>
@@ -28,6 +39,10 @@
     </div>
   </div>
  
+ <div class="cross-button" title="Close this" (click)="onClose()">
+   <div class="cross"></div>
+   <div class="cross"></div>
+ </div>
 </div>  
 
 <!-- 

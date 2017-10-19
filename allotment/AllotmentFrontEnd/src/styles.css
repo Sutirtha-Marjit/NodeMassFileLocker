@@ -31,6 +31,15 @@ html,body{
     margin: 0 auto;
 }
 
+.folder-icon-small{
+    display: inline-block;
+    width:30px;
+    height:24px;
+    background:url('./assets/normal_folder.png') no-repeat;
+    background-size: 100% auto;
+    margin: 0px 10px 0px 0px;
+}
+
 .icon-span-folder>span{
     display: block;
     width:100%;
@@ -149,6 +158,35 @@ html,body{
 .pic .bag img{
     width:100%;
     transition: all 1.5s ease-in-out;
+}
+
+.cross-button{
+    position:absolute;
+    width:40px;
+    height:40px;
+    top:10px;
+    right:10px;
+    background:black;
+    border-radius:1000px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.cross-button:hover{
+    background:#888;
+    transform: rotateZ(180deg); 
+}
+
+.cross-button .cross{
+  border-radius:100px;
+  height:6px;
+  width:30px;   
+  background: white; 
+  transform: translateY(17px) translateX(5px) rotateZ(45deg);
+}
+
+.cross-button .cross:nth-child(even){
+    transform: translateY(11px) translateX(6px) rotateZ(-45deg);
 }
 
 .app-list.list-group .list-group-item{
