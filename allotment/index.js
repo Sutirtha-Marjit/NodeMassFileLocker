@@ -5,6 +5,7 @@ const app = express();
 const fs = require('fs');
 const destFolders = ["model","outbox"];
 const MasterCopy = require("./mastercopy");
+const MasterAnalyze = require("./masteranalyze");
 const requestJsonParser = bodyparser.json();
 const folderConfig = {
     destRoot:'./operations/dest/',
@@ -102,7 +103,13 @@ app.post('/service/jobs/mastercopy',requestJsonParser,function(req,res){
 });
 
 app.post('/service/jobs/analyzeanyfolder',requestJsonParser,function(req,res){
-    res.json(req.body);
+    if(req.body){
+        var arr = MasterAnalyze(folderConfig.destRoot+ req.body.containerURI);
+        res.json(arr);
+    }else{
+        res.json({error:'No parameter passed'});
+    }
+    
 });
 
 app.get('/service/basic-list/source',function(req,res){

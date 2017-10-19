@@ -36,3 +36,14 @@ export interface RequestStatusObject{
     subheading:string,
     type:string
 }
+
+export interface AlbumResourceObject{
+    file:string,
+    path:string,
+    isDir:boolean
+}
+
+export interface GeneralPhotoShow{
+    COL_LENGTH:number,
+    list:Array<Array<AlbumResourceObject>>
+}

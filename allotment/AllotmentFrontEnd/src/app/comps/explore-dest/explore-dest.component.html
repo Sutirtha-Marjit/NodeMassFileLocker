@@ -10,14 +10,18 @@
     <hr/>
   </div>
     <div class="row col-row" *ngIf="browsePath.length!==0">
-    <div class="col col-pic">A</div>  
-    <div class="col col-pic">B</div>
-    <div class="col col-pic">C</div>
-    <div class="col col-pic">D</div>
+        <div class="col col-pic" *ngFor="let set of this.browsedData.list">
+          <div *ngFor="let item of set">
+            <div class="dir-element" *ngIf="item.isDir"></div> 
+            <div class="pic-element" *ngIf="!item.isDir">
+              <img alt="{{item.filename}}" src="{{item.path}}"/>              
+            </div> 
+          </div>  
+        </div>
     </div>  
 
     <div class="row" *ngIf="browsePath.length===0">
-      <div class="col" *ngFor="let rootContainer of CommonUtilService.toRepeatable(givenContainers);">
+      <div class="col" *ngFor="let rootContainer of geArrayVersionOfGivenContainers();">
         <h3>{{rootContainer.key}}</h3>
         <div *ngFor="let listitem of rootContainer.val; let i = index;">
       <ol  class="breadcrumb">

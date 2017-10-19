@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ResourceObject,ResourceContainer} from '../shared/datatypes';
+import {Observable } from 'rxjs/Observable';
 import * as Lodash from 'lodash';
 
 
@@ -57,6 +58,13 @@ export class CommonUtilService {
   }
 
   public static getSpecificResourceList(http:HttpClient,dataToPost:any,success:Function,error:Function){
+        var requestPath = this.masterConfig.connection.serviceRequestHost+'/service/jobs/analyzeanyfolder';
+        var analyzeObservable:Observable<any> = http.post(requestPath,dataToPost);
+        analyzeObservable.subscribe((jsonData)=>{
+          success(jsonData);
+        },(err)=>{
+          error(err);
+        });
         
   }
 
