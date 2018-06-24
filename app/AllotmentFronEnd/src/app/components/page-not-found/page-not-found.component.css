@@ -1,0 +1,11 @@
+.page-not-found-wrap{
+    background: #f5f5f5;
+    text-align: center;
+    margin: 30px 0px;
+    border-radius: 10px;
+}
+
+.page-not-found-wrap img{
+    text-align: center;
+
+}

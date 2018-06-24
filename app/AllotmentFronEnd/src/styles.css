@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files */
+app-root *{
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+app-root .anton{
+    font-family: 'Anton', sans-serif;
+}
+
+
+.pT20{
+    padding-top:20px; 
+}
