@@ -1,0 +1,16 @@
+.element-box{
+    float:left;
+    height:370px;
+    padding-bottom:10px; 
+}
+
+.right-console{
+    float: right;
+}
+.left-console{
+    float: left;
+}
+
+.clear{
+    clear: both;
+}

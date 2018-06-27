@@ -5,13 +5,13 @@ import {PageNotFoundComponent} from './components/page-not-found/page-not-found.
 
 const routes: Routes = [
   {path:'page404',component:PageNotFoundComponent},
-  { path: 'album/:childpath', component: AlbumFolderGridComponent },
+  {path: 'album/:childpath', component: AlbumFolderGridComponent },
   {path:'**',redirectTo:'page404'},
   
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{useHash:true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

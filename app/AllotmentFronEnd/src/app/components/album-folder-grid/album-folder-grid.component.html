@@ -1,9 +1,24 @@
-<h1 class="anton pT20">Folder name</h1>
+<h1 class="anton pT20">{{currentFolder.name}}</h1>
+<div>
+  <div class="btn-group left-console">
+      <a href="#/album/{{getFolderLink(i)}}" *ngFor="let item of currentFolder.pathArray; index as i; " class="btn btn-sm btn-light">{{item}} / </a>
+  </div>
+  <div class="btn-group right-console">
+      
+      <button class="btn btn-primary" (click)="prevPage()">previous</button>
+      <span class="btn btn-light">{{crPageCount}}</span>
+      <button class="btn btn-success" (click)="nextPage()">next</button>
+  </div>  
+  <div class="clear"></div>
+</div>
 <hr/>
-<div class="row">
-  <div class="col">col</div>
-  <div class="col">col</div>
-  <div class="w-100"></div>
-  <div class="col">col</div>
-  <div class="col">col</div>
+
+<div>
+  <div *ngFor="let albumEl of filteredData[crPageCount]" class="col-md-4 element-box">
+    <app-folder-element [albumData]="albumEl"></app-folder-element>
+  </div>
+  <div>
+    
+
+  </div>
 </div>

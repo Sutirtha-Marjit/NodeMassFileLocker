@@ -1,3 +1,16 @@
-<p>
-  folder-element works!
-</p>
+<div class="view-{{elementType}}">
+  <div class="inner-wrapper" *ngIf="this.elementType==='folder'">
+      <h5><a href="#">{{albumData.file}}</a></h5>
+      <h6>{{elementLength}} Objects</h6>
+      <div class="card-roll">
+        <div class="card" *ngFor="let im of cardRollArray">
+          <div class="inner-wrap"><img src="{{im}}"/></div>
+        </div>
+      </div>
+  </div>
+
+  <div class="inner-wrapper" *ngIf="this.elementType==='image'">
+    Image
+  </div>
+  
+</div>
