@@ -14,8 +14,9 @@ import {FolderElementComponent} from '../folder-element/folder-element.component
 export class AlbumFolderGridComponent implements OnInit {
 
   currentFolder:FolderDetails=null;
-  pageSize = 9;
-  crPageCount=6;
+  pageSize:number = 4;
+  crPageCount:number=0;
+  crChildPath="";
   mastereFilteredData=[];
   filteredData = [];
   
@@ -23,15 +24,21 @@ export class AlbumFolderGridComponent implements OnInit {
 
   }
 
-  prevPage(){
-    if(this.crPageCount>0){
-      this.crPageCount--;
-    }    
+  paginationNavigate(direction:string='next'):number{
+      let output = 0;
+      switch(direction){
+        case 'next':
+        output = this.crPageCount+1;
+        break;
+
+        case 'previous':
+        output = this.crPageCount-1;
+        break;
+      }
+      
+      return output;
   }
 
-  nextPage(){
-    this.crPageCount++;
-  }
 
   getFolderLink(i:number){
     return this.griddatamngr.getCorrectLocationFromPathArray(this.currentFolder.pathArray,i);
@@ -43,6 +50,7 @@ export class AlbumFolderGridComponent implements OnInit {
 
   furnishData(){
      this.filteredData = this.searchRequest({});
+     
      
   }
 
@@ -69,8 +77,14 @@ export class AlbumFolderGridComponent implements OnInit {
     
     this.route.params.subscribe((params)=>{
       this.filteredData = [];
-      let childpath = params['childpath'];
-        this.fetchGridData(childpath);
+      this.crChildPath = params['childpath'];
+      if(params['pagenumber']){
+        this.crPageCount = parseInt(params['pagenumber']);
+      }
+      if(params['pagesize']){
+        this.pageSize = parseInt(params['pagesize']);
+      }
+      this.fetchGridData(this.crChildPath);
         
     });
   }

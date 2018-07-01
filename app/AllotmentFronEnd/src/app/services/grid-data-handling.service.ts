@@ -79,9 +79,11 @@ export class GridDataHandlingService {
     
    // console.log(albumRequestURL);
     
-      this.http.get(albumRequestURL,{}).subscribe((data)=>{
-        
-        success(data);
+      this.http.get(albumRequestURL,{}).subscribe((receivedData:any)=>{
+        receivedData.data.resultObject.forEach((el)=>{
+         el.accessPath = this.getRealImagePath(el.path);
+        })
+        success(receivedData);
       },(error)=>{
         failure(error);
       });

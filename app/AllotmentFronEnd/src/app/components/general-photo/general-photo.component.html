@@ -1,0 +1,8 @@
+<div class="photo-wrapper">
+  <div class="preloading-wrap {{loaded}}">
+    
+  </div>
+  <div class="photo-shutter {{loaded}}">
+      <img [src]="imageSource" (load)="onLoad()" class="general-photo" #photo/>
+  </div>
+</div>

@@ -9,13 +9,15 @@ import { AppComponent } from './app.component';
 import { AlbumFolderGridComponent } from './components/album-folder-grid/album-folder-grid.component';
 import { FolderElementComponent } from './components/folder-element/folder-element.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { GeneralPhotoComponent } from './components/general-photo/general-photo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AlbumFolderGridComponent,
     FolderElementComponent,
-    PageNotFoundComponent    
+    PageNotFoundComponent,
+    GeneralPhotoComponent    
   ],
   imports: [
     BrowserModule,

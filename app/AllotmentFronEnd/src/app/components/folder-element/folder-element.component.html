@@ -1,16 +1,38 @@
-<div class="view-{{elementType}}">
-  <div class="inner-wrapper" *ngIf="this.elementType==='folder'">
-      <h5><a href="#">{{albumData.file}}</a></h5>
-      <h6>{{elementLength}} Objects</h6>
-      <div class="card-roll">
-        <div class="card" *ngFor="let im of cardRollArray">
-          <div class="inner-wrap"><img src="{{im}}"/></div>
-        </div>
-      </div>
+<div class="view-{{elementType}}" *ngIf="this.elementType==='folder'">
+  <div class="inner-wrapper">
+      <h5><a href="${{elementLink}}">{{albumData.file}}</a></h5>
+  <h6>{{elementLength}} Objects</h6>
+  <div class="card-roll">
+    <div class="card" *ngFor="let im of cardRollArray">
+      <div class="inner-wrap"><img src="{{im.accessPath}}"/></div>
+    </div>
+  </div>
+      
   </div>
 
-  <div class="inner-wrapper" *ngIf="this.elementType==='image'">
-    Image
-  </div>
-  
 </div>
+
+<div class="view-{{elementType}}" *ngIf="this.elementType==='image'">
+    
+    <app-general-photo [imageSource]="this.albumData.accessPath"></app-general-photo>
+</div>
+
+
+<ng-template #allImageAvailable>
+  <h5><a href="${{elementLink}}">{{albumData.file}}</a></h5>
+  <h6>{{elementLength}} Objects</h6>
+  <div class="card-roll">
+    <div class="card" *ngFor="let im of cardRollArray">
+      <div class="inner-wrap"><img src="{{im.accessPath}}"/></div>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #noImageAvailable>
+    
+</ng-template>
+
+<ng-template #mixImageAvailable>
+    
+</ng-template>

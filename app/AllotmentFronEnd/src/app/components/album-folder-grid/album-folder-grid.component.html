@@ -3,22 +3,33 @@
   <div class="btn-group left-console">
       <a href="#/album/{{getFolderLink(i)}}" *ngFor="let item of currentFolder.pathArray; index as i; " class="btn btn-sm btn-light">{{item}} / </a>
   </div>
-  <div class="btn-group right-console">
-      
-      <button class="btn btn-primary" (click)="prevPage()">previous</button>
-      <span class="btn btn-light">{{crPageCount}}</span>
-      <button class="btn btn-success" (click)="nextPage()">next</button>
-  </div>  
+
+  <div class="btn-group right-console">      
+    <a class="btn btn-dark" routerLink="/album/{{this.crChildPath}}/0">first</a>
+    <a *ngIf="crPageCount>0" class="btn btn-primary" routerLink="/album/{{this.crChildPath}}/{{this.paginationNavigate('previous')}}">previous</a>
+    <span class="btn btn-light">{{crPageCount+1}} / {{this.filteredData.length}}</span>
+    <a *ngIf="crPageCount<filteredData.length-1" class="btn btn-success" routerLink="/album/{{this.crChildPath}}/{{this.paginationNavigate('next')}}">next</a>
+    <a class="btn btn-dark"  routerLink="/album/{{this.crChildPath}}/{{this.filteredData.length-1}}">last</a>
+  </div>
+
   <div class="clear"></div>
 </div>
 <hr/>
 
 <div>
-  <div *ngFor="let albumEl of filteredData[crPageCount]" class="col-md-4 element-box">
-    <app-folder-element [albumData]="albumEl"></app-folder-element>
+  <div *ngFor="let albumEl of filteredData[crPageCount]" class="col-md-3   element-box">
+    <app-folder-element [albumData]="albumEl" [containerFolder]="currentFolder"></app-folder-element>
   </div>
   <div>
     
 
   </div>
 </div>
+<div class="clear"></div>
+<div class="btn-group right-console">      
+    <a class="btn btn-dark" routerLink="/album/{{this.crChildPath}}/0">first</a>
+    <a *ngIf="crPageCount>0" class="btn btn-primary" routerLink="/album/{{this.crChildPath}}/{{this.paginationNavigate('previous')}}">previous</a>
+    <span class="btn btn-light">{{crPageCount}}</span>
+    <a *ngIf="crPageCount<filteredData.length-1" class="btn btn-success" routerLink="/album/{{this.crChildPath}}/{{this.paginationNavigate('next')}}">next</a>
+    <a class="btn btn-dark"  routerLink="/album/{{this.crChildPath}}/{{this.filteredData.length-1}}">last</a>
+  </div>
