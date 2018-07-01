@@ -10,6 +10,8 @@ export class GeneralPhotoComponent implements OnInit {
 
   @Input() imageSource:string;
   @ViewChild('photo') photo:HTMLImageElement;
+  isDirectURL:boolean = false;
+  passivePath:string='';
   loaded:boolean = false;
 
   constructor(private route: ActivatedRoute) { 
@@ -21,10 +23,14 @@ export class GeneralPhotoComponent implements OnInit {
   }
 
   ngOnInit() {
+  
+  this.passivePath = btoa(this.imageSource);  
 
   this.route.params.subscribe((params)=>{
     if(params['imagesource']){
-      this.imageSource = params['imagesource'];
+      this.imageSource = params['imagesource'];      
+      this.isDirectURL = true;
+      this.imageSource = atob(this.imageSource);
     }
   })
 

@@ -9,6 +9,7 @@ const routes: Routes = [
   {path: 'album/:childpath/:pagenumber/:pagesize', component: AlbumFolderGridComponent },
   {path: 'album/:childpath/:pagenumber', component: AlbumFolderGridComponent },
   {path: 'album/:childpath', component: AlbumFolderGridComponent },
+  {path: 'photo',component:GeneralPhotoComponent},
   {path: 'photo/:imagesource',component:GeneralPhotoComponent},
   {path:'**',redirectTo:'page404'},
   

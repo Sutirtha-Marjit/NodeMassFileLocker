@@ -1,19 +1,22 @@
 <div class="view-{{elementType}}" *ngIf="this.elementType==='folder'">
   <div class="inner-wrapper">
       <h5><a href="${{elementLink}}">{{albumData.file}}</a></h5>
-  <h6>{{elementLength}} Objects</h6>
-  <div class="card-roll">
-    <div class="card" *ngFor="let im of cardRollArray">
-      <div class="inner-wrap"><img src="{{im.accessPath}}"/></div>
-    </div>
+      <h6>{{elementLength}} Objects</h6>
+      <div *ngIf="cardRollArray.length>0" class="card-roll">
+          <div class="card" *ngFor="let im of cardRollArray">
+              <div class="inner-wrap"><img src="{{im.accessPath}}"/></div>
+          </div>
+      </div>
+      <div *ngIf="cardRollArray.length===0">
+        <hr/>
+        <ol>
+          <li *ngFor="let subitem of this.subFolderList"><a>{{subitem.file}}</a></li>
+        </ol>
+      </div>      
   </div>
-      
-  </div>
-
 </div>
 
-<div class="view-{{elementType}}" *ngIf="this.elementType==='image'">
-    
+<div class="view-{{elementType}}" *ngIf="this.elementType==='image'">    
     <app-general-photo [imageSource]="this.albumData.accessPath"></app-general-photo>
 </div>
 
@@ -29,10 +32,3 @@
 </ng-template>
 
 
-<ng-template #noImageAvailable>
-    
-</ng-template>
-
-<ng-template #mixImageAvailable>
-    
-</ng-template>

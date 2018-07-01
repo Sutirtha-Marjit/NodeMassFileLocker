@@ -11,6 +11,7 @@ export class FolderElementComponent implements OnInit , OnChanges{
 
   elementType:string = '';
   elementLength=0;
+  subFolderList:Array<any>=[];
   cardRollArray:Array<any>=[];
   elementLink="";
 
@@ -31,7 +32,6 @@ export class FolderElementComponent implements OnInit , OnChanges{
       this.griddatamngr.requestServerFolder(url,(resultSet)=>{
       this.elementLength = resultSet.data.resultObject.length;
      
-      //console.log('----------------------Element:Start----------------------------');
       while(c<resultSet.data.resultObject.length && notFound){
 
         if(!resultSet.data.resultObject[c].isDir){
@@ -40,15 +40,21 @@ export class FolderElementComponent implements OnInit , OnChanges{
           this.cardRollArray.push(currentCardData);
           fCount++;
           if(fCount===2){
-            notFound = false;
-           // console.log('found 3 all images');
+            notFound = false;           
           }
         }
-
         c++;
       }
+
+      resultSet.data.resultObject.forEach((p,i)=>{
+        if(p){
+          if(p.isDir){
+            this.subFolderList.push(p);
+          }
+        }        
+      });
       
-      //console.log(this.cardRollArray);
+      console.log(this.subFolderList);
       //console.log('----------------------Element:End----------------------------');
       
 
@@ -59,7 +65,7 @@ export class FolderElementComponent implements OnInit , OnChanges{
   }
 
   ngOnChanges(){
-    console.log(this.containerFolder);
+    
     this.elementLink = '/#/album/'+this.griddatamngr.getCorrectLocationFromPathArray(this.containerFolder.pathArray,this.containerFolder.pathArray.length-1)+'$'+this.albumData.file+'/0';
   }
 

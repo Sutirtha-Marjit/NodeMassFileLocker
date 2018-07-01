@@ -1,8 +1,14 @@
-<div class="photo-wrapper">
-  <div class="preloading-wrap {{loaded}}">
+<div *ngIf="isDirectURL" class="direct-image-wrap">
     
-  </div>
+            <img [src]="imageSource" (load)="onLoad()" class="general-photo" #photo/>
+        
+</div>
+
+<a *ngIf="!isDirectURL" routerLink="/photo/{{passivePath}}">
+<div class="photo-wrapper">
+  <div class="preloading-wrap {{loaded}}"></div>
   <div class="photo-shutter {{loaded}}">
       <img [src]="imageSource" (load)="onLoad()" class="general-photo" #photo/>
   </div>
 </div>
+</a>
