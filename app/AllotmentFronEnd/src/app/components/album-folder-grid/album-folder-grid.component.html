@@ -1,4 +1,15 @@
+<div>
+<div class="left-console">
 <h1 class="anton pT20">{{currentFolder.name}}</h1>
+</div>  
+<div class="btn-group right-console"> 
+    <button *ngFor="let ch of chars" (click)="furnishData({startsWith:ch})"  class="btn btn-sm btn-dark">{{ch}}</button>
+</div>
+
+</div>
+
+<div class="clear"></div>
+
 <div>
   <div class="btn-group left-console">
       <a href="#/album/{{getFolderLink(i)}}" *ngFor="let item of currentFolder.pathArray; index as i; " class="btn btn-sm btn-light">{{item}} / </a>
@@ -11,6 +22,7 @@
     <a *ngIf="crPageCount<filteredData.length-1" class="btn btn-success" routerLink="/album/{{this.crChildPath}}/{{this.paginationNavigate('next')}}">next</a>
     <a class="btn btn-dark"  routerLink="/album/{{this.crChildPath}}/{{this.filteredData.length-1}}">last</a>
   </div>
+    
 
   <div class="clear"></div>
 </div>

@@ -14,6 +14,7 @@ export class FolderElementComponent implements OnInit , OnChanges{
   subFolderList:Array<any>=[];
   cardRollArray:Array<any>=[];
   elementLink="";
+  elementHighLightClass="";
 
   @Input() albumData:any = {}; 
   @Input() containerFolder:FolderDetails;
@@ -54,9 +55,6 @@ export class FolderElementComponent implements OnInit , OnChanges{
         }        
       });
       
-      console.log(this.subFolderList);
-      //console.log('----------------------Element:End----------------------------');
-      
 
       },(error)=>{
 
@@ -64,12 +62,24 @@ export class FolderElementComponent implements OnInit , OnChanges{
     },delay);
   }
 
+  highlight(signal:boolean){
+    if(signal){
+      this.elementHighLightClass = "highlight";
+    }else{
+      this.elementHighLightClass = "";
+    }
+      
+  }
+
   ngOnChanges(){
     
-    this.elementLink = '/#/album/'+this.griddatamngr.getCorrectLocationFromPathArray(this.containerFolder.pathArray,this.containerFolder.pathArray.length-1)+'$'+this.albumData.file+'/0';
+    this.elementLink = this.griddatamngr.getCorrectLocationFromPathArray(this.containerFolder.pathArray,this.containerFolder.pathArray.length-1)+'$'+this.albumData.file+'/0';
+    //this.elementLink = this.griddatamngr.getCorrectLocationFromPathArray(this.containerFolder.pathArray,this.containerFolder.pathArray.length-1);
+    //this.elementLink='zero';
   }
 
   ngOnInit() {
+    console.log(this.containerFolder);
     if(this.albumData.isDir){
       this.elementType = 'folder';
       this.getDetail(1);

@@ -5,3 +5,4 @@ export interface FolderDetails{
     desc?:string,
     pathArray?:Array<string>
 }
+

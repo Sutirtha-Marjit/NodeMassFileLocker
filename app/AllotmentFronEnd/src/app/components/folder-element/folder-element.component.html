@@ -1,6 +1,6 @@
-<div class="view-{{elementType}}" *ngIf="this.elementType==='folder'">
+<div class="view-{{elementType}} {{elementHighLightClass}}" *ngIf="this.elementType==='folder'">
   <div class="inner-wrapper">
-      <h5><a href="${{elementLink}}">{{albumData.file}}</a></h5>
+      <h5><a (mouseout)="highlight(false)" (mouseover)="highlight(true)" routerLink="/album/{{elementLink}}">{{albumData.file}}</a></h5>
       <h6>{{elementLength}} Objects</h6>
       <div *ngIf="cardRollArray.length>0" class="card-roll">
           <div class="card" *ngFor="let im of cardRollArray">
@@ -21,14 +21,6 @@
 </div>
 
 
-<ng-template #allImageAvailable>
-  <h5><a href="${{elementLink}}">{{albumData.file}}</a></h5>
-  <h6>{{elementLength}} Objects</h6>
-  <div class="card-roll">
-    <div class="card" *ngFor="let im of cardRollArray">
-      <div class="inner-wrap"><img src="{{im.accessPath}}"/></div>
-    </div>
-  </div>
-</ng-template>
+
 
 

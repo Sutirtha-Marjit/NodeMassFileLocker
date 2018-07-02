@@ -19,9 +19,13 @@ export class AlbumFolderGridComponent implements OnInit {
   crChildPath="";
   mastereFilteredData=[];
   filteredData = [];
+  chars:Array<string>=[];
   
   constructor(private route: ActivatedRoute,private griddatamngr:GridDataHandlingService) { 
-
+    for(let i=65;i<65+26;i++){
+      this.chars.push(String.fromCharCode(i));
+    }
+    
   }
 
   paginationNavigate(direction:string='next'):number{
@@ -48,8 +52,8 @@ export class AlbumFolderGridComponent implements OnInit {
     return this.griddatamngr.getFiltered(this.mastereFilteredData,params,this.pageSize);
   }
 
-  furnishData(){
-     this.filteredData = this.searchRequest({});
+  furnishData(reqParams:any){
+     this.filteredData = this.searchRequest(reqParams);
      
      
   }
@@ -62,7 +66,7 @@ export class AlbumFolderGridComponent implements OnInit {
       if(resultSet.meta.status){
 
         this.mastereFilteredData = resultSet.data.resultObject;
-        this.furnishData();
+        this.furnishData({});
 
       }else{
 

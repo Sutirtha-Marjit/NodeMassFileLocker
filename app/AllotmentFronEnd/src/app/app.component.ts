@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {GridDataHandlingService} from './services/grid-data-handling.service';
 
 
 
@@ -11,8 +12,12 @@ export class AppComponent {
   
   title = 'app';
   
-  constructor(){
+  constructor(private griddatamngr:GridDataHandlingService){
 
+  }
+
+  getCahce(){
+    return Object.keys(this.griddatamngr.MASTER_CACHE).length+'OKOK';
   }
 
   

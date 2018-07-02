@@ -22,11 +22,29 @@
 .view-folder .inner-wrapper h5{
     color:#2c2c2c;
     text-align: center;
+    
+}
+
+.view-folder .inner-wrapper{
+    transition: all 0.2s ease-out;
 }
 
 .view-folder .inner-wrapper h6{
     color:#c4c4c4;
     text-align: center;
+}
+
+.view-folder .inner-wrapper h6 a{
+    transition: all 1s ease-in-out;
+}
+
+.view-folder.highlight .inner-wrapper{
+    
+    background:#343434;
+}
+
+.view-folder.highlight .inner-wrapper a{
+    color:white;
 }
 
 .card-roll{

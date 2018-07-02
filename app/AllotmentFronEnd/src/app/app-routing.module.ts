@@ -8,7 +8,7 @@ const routes: Routes = [
   {path:'page404',component:PageNotFoundComponent},
   {path: 'album/:childpath/:pagenumber/:pagesize', component: AlbumFolderGridComponent },
   {path: 'album/:childpath/:pagenumber', component: AlbumFolderGridComponent },
-  {path: 'album/:childpath', component: AlbumFolderGridComponent },
+  {path: 'album/:childpath',component: AlbumFolderGridComponent},
   {path: 'photo',component:GeneralPhotoComponent},
   {path: 'photo/:imagesource',component:GeneralPhotoComponent},
   {path:'**',redirectTo:'page404'},
