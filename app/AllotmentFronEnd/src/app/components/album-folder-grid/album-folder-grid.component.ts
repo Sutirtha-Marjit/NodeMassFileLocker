@@ -53,8 +53,9 @@ export class AlbumFolderGridComponent implements OnInit {
   }
 
   furnishData(reqParams:any){
+     console.log('furnish called with',reqParams);
      this.filteredData = this.searchRequest(reqParams);
-     
+     console.log(this.filteredData);
      
   }
 

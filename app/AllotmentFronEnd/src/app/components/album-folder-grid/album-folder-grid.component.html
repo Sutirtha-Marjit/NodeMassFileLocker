@@ -1,9 +1,10 @@
 <div>
 <div class="left-console">
 <h1 class="anton pT20">{{currentFolder.name}}</h1>
-</div>  
+</div>
+<br/>  
 <div class="btn-group right-console"> 
-    <button *ngFor="let ch of chars" (click)="furnishData({startsWith:ch})"  class="btn btn-sm btn-dark">{{ch}}</button>
+    <button *ngFor="let ch of chars" (click)="furnishData({startsWith:ch})"  class="btn btn-sm btn-secondary">{{ch}}</button>
 </div>
 
 </div>
@@ -38,10 +39,24 @@
   </div>
 </div>
 <div class="clear"></div>
-<div class="btn-group right-console">      
-    <a class="btn btn-dark" routerLink="/album/{{this.crChildPath}}/0">first</a>
-    <a *ngIf="crPageCount>0" class="btn btn-primary" routerLink="/album/{{this.crChildPath}}/{{this.paginationNavigate('previous')}}">previous</a>
-    <span class="btn btn-light">{{crPageCount}}</span>
-    <a *ngIf="crPageCount<filteredData.length-1" class="btn btn-success" routerLink="/album/{{this.crChildPath}}/{{this.paginationNavigate('next')}}">next</a>
-    <a class="btn btn-dark"  routerLink="/album/{{this.crChildPath}}/{{this.filteredData.length-1}}">last</a>
+<hr/>
+<div class="contaniner-fluid">
+  <div class="row">
+     <div class="col-lg-6">
+       <form>
+         <div class="form-group">
+           
+         </div>
+       </form>
+     </div>
+     <div class="col-lg-6">
+      <div class="btn-group right-console">      
+        <a class="btn btn-dark" routerLink="/album/{{this.crChildPath}}/0">first</a>
+        <a *ngIf="crPageCount>0" class="btn btn-primary" routerLink="/album/{{this.crChildPath}}/{{this.paginationNavigate('previous')}}">previous</a>
+        <span class="btn btn-light">{{crPageCount}}</span>
+        <a *ngIf="crPageCount<filteredData.length-1" class="btn btn-success" routerLink="/album/{{this.crChildPath}}/{{this.paginationNavigate('next')}}">next</a>
+        <a class="btn btn-dark"  routerLink="/album/{{this.crChildPath}}/{{this.filteredData.length-1}}">last</a>
+      </div>
+     </div>
   </div>
+</div>

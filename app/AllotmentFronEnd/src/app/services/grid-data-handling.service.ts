@@ -73,13 +73,16 @@ export class GridDataHandlingService {
 
   getFiltered(resultSet:Array<any>,filter:any,pageSize:number){
     
-    let data = resultSet;
-    /*
-    if(Object.keys(filter).length>0){
-    data = Lodash.find(resultSet,(el)=>{
-      return (`${el.file}`.toLowerCase().indexOf(filter.startsWith)===0)
-    });
-    }*/
+    let tempData,data = resultSet;
+    if(filter.startsWith){
+      let tempData = Lodash.filter(resultSet,(crData)=>{
+        let r =  crData.file.toLowerCase().charAt(0)===filter.startsWith.toLowerCase();
+        return r;
+      });
+
+      return this.getPages(tempData,pageSize);
+    }
+    
     return this.getPages(data,pageSize);
     //return resultSet;
   }

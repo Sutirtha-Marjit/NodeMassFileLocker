@@ -47,6 +47,10 @@
     color:white;
 }
 
+.view-folder.highlight .card-roll .card:nth-child(2){
+ z-index: 500;
+}
+
 .card-roll{
     perspective: 1400px;
     width:100%;
@@ -62,6 +66,7 @@
     left:calc(50% - 37.5%);
     border:none;
     z-index: 480;
+    background:#343434;
 
 }
 
