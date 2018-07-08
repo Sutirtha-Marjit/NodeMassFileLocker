@@ -1,0 +1,9 @@
+
+<!--
+  <div class="btn-group">
+  
+</div>
+-->
+<div class="btn-group">
+    <button (click)="requestCharacterSearch(item.ch)" class="btn btn-sm btn-light" *ngFor="let item of list" title="{{item.total}} elements available">{{item.ch}}</button>
+</div>

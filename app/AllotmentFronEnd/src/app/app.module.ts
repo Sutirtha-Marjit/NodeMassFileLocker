@@ -10,6 +10,7 @@ import { AlbumFolderGridComponent } from './components/album-folder-grid/album-f
 import { FolderElementComponent } from './components/folder-element/folder-element.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { GeneralPhotoComponent } from './components/general-photo/general-photo.component';
+import { AlphabetsComponent } from './components/alphabets/alphabets.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { GeneralPhotoComponent } from './components/general-photo/general-photo.
     AlbumFolderGridComponent,
     FolderElementComponent,
     PageNotFoundComponent,
-    GeneralPhotoComponent    
+    GeneralPhotoComponent,
+    AlphabetsComponent    
   ],
   imports: [
     BrowserModule,

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {GridDataHandlingService} from '../../services/grid-data-handling.service';
 import {environment} from '../../../environments/environment';
-import {FolderDetails} from '../../interfaces/datatypes';
+import {ServerFolderObject,FolderDetails} from '../../interfaces/datatypes';
 import {FolderElementComponent} from '../folder-element/folder-element.component';
 
 
@@ -17,14 +17,11 @@ export class AlbumFolderGridComponent implements OnInit {
   pageSize:number = 4;
   crPageCount:number=0;
   crChildPath="";
-  mastereFilteredData=[];
+  mastereFilteredData:Array<ServerFolderObject>=[];
   filteredData = [];
-  chars:Array<string>=[];
+  chars:any = {};
   
   constructor(private route: ActivatedRoute,private griddatamngr:GridDataHandlingService) { 
-    for(let i=65;i<65+26;i++){
-      this.chars.push(String.fromCharCode(i));
-    }
     
   }
 
@@ -49,33 +46,47 @@ export class AlbumFolderGridComponent implements OnInit {
   }
 
   searchRequest(params:any){
+    console.log('searchRequest',params);
     return this.griddatamngr.getFiltered(this.mastereFilteredData,params,this.pageSize);
   }
 
   furnishData(reqParams:any){
-     console.log('furnish called with',reqParams);
      this.filteredData = this.searchRequest(reqParams);
-     console.log(this.filteredData);
-     
   }
 
   fetchGridData(path){
-    
+    this.chars = {};
     this.currentFolder = this.griddatamngr.getFolderObjectMinimal(path);
     
     this.griddatamngr.requestServerFolder(path,(resultSet)=>{
       if(resultSet.meta.status){
 
         this.mastereFilteredData = resultSet.data.resultObject;
+        this.mastereFilteredData.forEach((fObject:ServerFolderObject)=>{
+          let ch = fObject.file.charAt(0).toLowerCase();
+          if(!this.chars[ch]){
+            this.chars[ch]=1;
+          }else{
+            this.chars[ch]++;
+          }
+          
+        });
+        
         this.furnishData({});
 
       }else{
-
+        alert(resultSet.meta.message);
       }
       
 
-    },(err)=>{});
+    },(err)=>{
+
+    });
     
+  }
+
+  test(e){
+alert(e);
   }
 
   ngOnInit() {

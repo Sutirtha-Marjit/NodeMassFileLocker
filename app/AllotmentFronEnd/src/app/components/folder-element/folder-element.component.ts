@@ -79,7 +79,7 @@ export class FolderElementComponent implements OnInit , OnChanges{
   }
 
   ngOnInit() {
-    console.log(this.containerFolder);
+    //console.log(this.containerFolder);
     if(this.albumData.isDir){
       this.elementType = 'folder';
       this.getDetail(1);

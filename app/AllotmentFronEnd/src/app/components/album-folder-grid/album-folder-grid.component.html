@@ -3,10 +3,10 @@
 <h1 class="anton pT20">{{currentFolder.name}}</h1>
 </div>
 <br/>  
-<div class="btn-group right-console"> 
-    <button *ngFor="let ch of chars" (click)="furnishData({startsWith:ch})"  class="btn btn-sm btn-secondary">{{ch}}</button>
-</div>
 
+<div class="right-console"><app-alphabets (onAlphabetRequest)="furnishData({startsWith:$event})" [alphabetList]="chars"></app-alphabets></div>
+
+      
 </div>
 
 <div class="clear"></div>

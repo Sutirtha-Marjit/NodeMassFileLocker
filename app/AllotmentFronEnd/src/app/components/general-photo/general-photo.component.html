@@ -1,7 +1,5 @@
 <div *ngIf="isDirectURL" class="direct-image-wrap">
-    
-            <img [src]="imageSource" (load)="onLoad()" class="general-photo" #photo/>
-        
+  <img [src]="imageSource" (load)="onLoad()" class="general-photo" #photo/>        
 </div>
 
 <a *ngIf="!isDirectURL" routerLink="/photo/{{passivePath}}">
@@ -10,5 +8,9 @@
   <div class="photo-shutter {{loaded}}">
       <img [src]="imageSource" (load)="onLoad()" class="general-photo" #photo/>
   </div>
+  <div class="console-panel">
+    <button class="btn btn-sm btn-success"><small>CONFIG</small></button>
+  </div>
 </div>
 </a>
+

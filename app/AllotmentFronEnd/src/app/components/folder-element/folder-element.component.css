@@ -60,7 +60,7 @@
 
 .card-roll .card{
     width:75%;
-    height:90%;
+    height:auto;
     position: absolute;
     top:0px;
     left:calc(50% - 37.5%);
