@@ -13,11 +13,30 @@ export class CarouselComponent implements OnInit {
   foldersource:string = '';
   itemnumber:number = 0;
   carouselData:CompleteFolderResponse = null;
-  cStyle:any = {}
+  cStyle:any = {};
+  activeView='';
+  positionStatusObject:any =  {
+    index:0,
+    total:0,
+    currentFolder:''
+  };
   constructor(private route: ActivatedRoute,private router:Router,private griddatamngr:GridDataHandlingService) { 
     this.cStyle.W = '2222000%';
     this.cStyle.w = '8.8%';
     this.cStyle.t = 0;
+    this.positionStatusObject = {
+      index:0,
+      total:0,
+      currentFolder:''
+    }
+  }
+
+  toggleActiveView(){
+    if(this.activeView.length>0){
+      this.activeView = '';
+    }else{
+      this.activeView='fullview';
+    }
   }
 
   getScrollPosition(){
@@ -29,6 +48,8 @@ export class CarouselComponent implements OnInit {
   private decorateCarousel(){
     this.griddatamngr.requestServerFolder(this.foldersource,(carouselData)=>{
       this.carouselData = carouselData;
+      
+      this.positionStatusObject.total = this.carouselData.data.resultObject.length;
       this.cStyle = {
         W:`${this.carouselData.data.resultObject.length*100}%`,
         w:`${100/this.carouselData.data.resultObject.length}%`,
@@ -49,7 +70,7 @@ export class CarouselComponent implements OnInit {
     let arr = this.router.url.split('/');
     let p = (arr.splice(0,arr.length-1).join('/'))+'/'+this.itemnumber;
     this.router.navigateByUrl(p);
-    
+    this.positionStatusObject.index = (this.itemnumber+1);
 
   }
 
