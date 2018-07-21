@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AlbumFolderGridComponent } from './components/album-folder-grid/album-folder-grid.component';
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 import { GeneralPhotoComponent } from './components/general-photo/general-photo.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
 
 const routes: Routes = [
   {path:'page404',component:PageNotFoundComponent},
@@ -10,7 +11,8 @@ const routes: Routes = [
   {path: 'album/:childpath/:pagenumber', component: AlbumFolderGridComponent },
   {path: 'album/:childpath',component: AlbumFolderGridComponent},
   {path: 'photo',component:GeneralPhotoComponent},
-  {path: 'photo/:imagesource',component:GeneralPhotoComponent},
+  {path: 'photo/:foldersource',component:CarouselComponent},
+  {path: 'photo/:foldersource/:itemnumber',component:CarouselComponent},
   {path:'**',redirectTo:'page404'},
   
 ];

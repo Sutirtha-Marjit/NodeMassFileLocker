@@ -18,6 +18,8 @@ export class FolderElementComponent implements OnInit , OnChanges{
 
   @Input() albumData:any = {}; 
   @Input() containerFolder:FolderDetails;
+  @Input() serial:number = 0; 
+  serverAccessPathToCurrentFolder="";
   constructor(private griddatamngr:GridDataHandlingService) { 
 
   }
@@ -29,8 +31,8 @@ export class FolderElementComponent implements OnInit , OnChanges{
   getDetail(delay){
     setTimeout(()=>{
       let c=0,fCount=0,notFound = true;
-      let url = (`${this.albumData.path}`.replace('./operations/','')).split('/').join('$');
-      this.griddatamngr.requestServerFolder(url,(resultSet)=>{
+      this.serverAccessPathToCurrentFolder = this.griddatamngr.realPathToServerAccessPath(this.albumData.path);
+      this.griddatamngr.requestServerFolder(this.serverAccessPathToCurrentFolder,(resultSet)=>{
       this.elementLength = resultSet.data.resultObject.length;
      
       while(c<resultSet.data.resultObject.length && notFound){
@@ -83,8 +85,10 @@ export class FolderElementComponent implements OnInit , OnChanges{
     if(this.albumData.isDir){
       this.elementType = 'folder';
       this.getDetail(1);
+      
     }else{
       this.elementType = 'image';
+      this.serverAccessPathToCurrentFolder = this.griddatamngr.realPathToServerAccessPath(this.albumData.path);
     }
     
 

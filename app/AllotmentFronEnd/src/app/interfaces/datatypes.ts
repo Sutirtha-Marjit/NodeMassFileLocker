@@ -18,3 +18,10 @@ export interface ServerFolderObject{
     file:string,
     path:string
 }
+
+export interface CompleteFolderResponse{
+    meta:any,
+    data:{
+        resultObject:Array<ServerFolderObject>
+    }
+}

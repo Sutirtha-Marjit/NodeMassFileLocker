@@ -11,6 +11,7 @@ import { FolderElementComponent } from './components/folder-element/folder-eleme
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { GeneralPhotoComponent } from './components/general-photo/general-photo.component';
 import { AlphabetsComponent } from './components/alphabets/alphabets.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AlphabetsComponent } from './components/alphabets/alphabets.component';
     FolderElementComponent,
     PageNotFoundComponent,
     GeneralPhotoComponent,
-    AlphabetsComponent    
+    AlphabetsComponent,
+    CarouselComponent    
   ],
   imports: [
     BrowserModule,

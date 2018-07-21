@@ -1,0 +1,20 @@
+<div class="carousel-wrap">
+  
+  <div class="carousel-view" *ngIf="this.carouselData">
+    <div class="carousel-plate fullview" [style.width]="this.cStyle.W"  [style.transform]="this.getScrollPosition()">
+     <div class="img-container" [ngStyle]="{'width':this.cStyle.w}" *ngFor="let photo of this.carouselData.data.resultObject">
+        <img [src]="photo.accessPath"/>
+     </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+  <div class="carousel-console">
+    <a class="move-right" (click)="caroselNav(false)">left</a>
+    <a class="move-right" (click)="caroselNav(true)">right</a>
+  </div>
+</div>
+
+<!--
+
+  [ngStyle]="{'width':this.cStyle,'transform':'transplateX('+getScrollPosition()+')'}"
+-->

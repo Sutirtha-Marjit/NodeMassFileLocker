@@ -13,7 +13,7 @@
 
 <div>
   <div class="btn-group left-console">
-      <a href="#/album/{{getFolderLink(i)}}" *ngFor="let item of currentFolder.pathArray; index as i; " class="btn btn-sm btn-light">{{item}} / </a>
+      <a routerLink="/album/{{getFolderLink(i)}}" *ngFor="let item of currentFolder.pathArray; index as i; " class="btn btn-sm btn-light">{{item}} / </a>
   </div>
 
   <div class="btn-group right-console">      
@@ -30,8 +30,8 @@
 <hr/>
 
 <div>
-  <div *ngFor="let albumEl of filteredData[crPageCount]" class="col-md-3   element-box">
-    <app-folder-element [albumData]="albumEl" [containerFolder]="currentFolder"></app-folder-element>
+  <div *ngFor="let albumEl of filteredData[crPageCount]; let i=index" class="col-md-3   element-box">
+    <app-folder-element [serial]="i" [albumData]="albumEl" [containerFolder]="currentFolder"></app-folder-element>
   </div>
   <div>
     

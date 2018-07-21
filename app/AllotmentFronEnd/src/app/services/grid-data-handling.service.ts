@@ -13,7 +13,10 @@ import * as Lodash from "lodash";
 export class GridDataHandlingService {
 
   MASTER_CACHE:any={};
-  constructor(private http:HttpClient) { }
+  IMAGE_EXTENSIONS= [];
+  constructor(private http:HttpClient) {
+    this.IMAGE_EXTENSIONS = ['.jpg','.jpeg','.png','.bmp','.webm'];
+   }
 
   public getViewablePath(path){
     return path.split('$').join('/');
@@ -85,6 +88,30 @@ export class GridDataHandlingService {
     
     return this.getPages(data,pageSize);
     //return resultSet;
+  }
+
+  public realPathToServerAccessPath(realPath:string):string{
+    let url='',c=0,isImage=false;
+
+    while(c<this.IMAGE_EXTENSIONS.length && !isImage){
+      if(realPath.endsWith(this.IMAGE_EXTENSIONS[c]) || realPath.toLowerCase().endsWith(this.IMAGE_EXTENSIONS[c])){
+        isImage = true;
+      }
+      c++;
+    }
+    if(isImage){
+      let realPathArr = realPath.split('/');
+      realPathArr.splice(realPathArr.length-1,1);
+      realPath = realPathArr.join('/');
+
+      url = (`${realPath}`.replace('./operations/','')).split('/').join('$'); 
+      
+      
+    }else{
+      url = (`${realPath}`.replace('./operations/','')).split('/').join('$'); 
+    }
+    
+    return url; 
   }
 
   public requestServerFolder(url:string,success,failure){

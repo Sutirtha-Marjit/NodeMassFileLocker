@@ -17,7 +17,7 @@
 </div>
 
 <div class="view-{{elementType}}" *ngIf="this.elementType==='image'">    
-    <app-general-photo [imageSource]="this.albumData.accessPath"></app-general-photo>
+    <app-general-photo  [serial]="serial" [serverAccessPathToCurrentFolder]="this.serverAccessPathToCurrentFolder" [imageSource]="this.albumData.accessPath"></app-general-photo>
 </div>
 
 

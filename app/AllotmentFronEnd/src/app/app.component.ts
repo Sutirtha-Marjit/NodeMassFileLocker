@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {GridDataHandlingService} from './services/grid-data-handling.service';
+import {CompleteFolderResponse} from './interfaces/datatypes';
 
 
 
@@ -8,11 +9,28 @@ import {GridDataHandlingService} from './services/grid-data-handling.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   
   title = 'app';
-  
+  baseurl='';
+  baseResponseData:CompleteFolderResponse = null;
   constructor(private griddatamngr:GridDataHandlingService){
+
+    
+  }
+
+  ngOnInit(){
+    this.griddatamngr.requestServerFolder(this.baseurl,(baseResponseData)=>{
+      
+      
+      this.baseResponseData = baseResponseData;
+      this.baseResponseData.data.resultObject.forEach((d)=>{
+        d.accessPath = `/album/${this.griddatamngr.realPathToServerAccessPath(d.file)}`;
+        
+      })
+      console.log(baseResponseData);
+
+    },()=>{})
 
   }
 

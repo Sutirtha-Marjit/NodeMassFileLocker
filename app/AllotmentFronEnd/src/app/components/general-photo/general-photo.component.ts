@@ -9,7 +9,9 @@ import { Component, OnInit, Input,ViewChild } from '@angular/core';
 export class GeneralPhotoComponent implements OnInit {
 
   @Input() imageSource:string;
+  @Input() serverAccessPathToCurrentFolder:string;
   @ViewChild('photo') photo:HTMLImageElement;
+  @Input() serial:number = 0;
   isDirectURL:boolean = false;
   passivePath:string='';
   loaded:boolean = false;
@@ -25,15 +27,7 @@ export class GeneralPhotoComponent implements OnInit {
   ngOnInit() {
   
   this.passivePath = btoa(this.imageSource);  
-
-  this.route.params.subscribe((params)=>{
-    if(params['imagesource']){
-      this.imageSource = params['imagesource'];      
-      this.isDirectURL = true;
-      this.imageSource = atob(this.imageSource);
-    }
-  })
-
+  
   }
 
 }
