@@ -12,6 +12,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { GeneralPhotoComponent } from './components/general-photo/general-photo.component';
 import { AlphabetsComponent } from './components/alphabets/alphabets.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
+import { AnalyzeComponent } from './components/analyze/analyze.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CarouselComponent } from './components/carousel/carousel.component';
     PageNotFoundComponent,
     GeneralPhotoComponent,
     AlphabetsComponent,
-    CarouselComponent    
+    CarouselComponent,
+    AnalyzeComponent    
   ],
   imports: [
     BrowserModule,

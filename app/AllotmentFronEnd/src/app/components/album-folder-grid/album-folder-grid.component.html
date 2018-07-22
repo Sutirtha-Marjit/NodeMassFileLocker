@@ -31,7 +31,7 @@
 
 <div>
   <div *ngFor="let albumEl of filteredData[crPageCount]; let i=index" class="col-md-3   element-box">
-    <app-folder-element [serial]="i" [albumData]="albumEl" [containerFolder]="currentFolder"></app-folder-element>
+    <app-folder-element [serial]="(pageSize*crPageCount)+i" [albumData]="albumEl" [containerFolder]="currentFolder"></app-folder-element>
   </div>
   <div>
     

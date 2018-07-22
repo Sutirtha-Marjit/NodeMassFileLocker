@@ -13,9 +13,11 @@
         <div class="btn-group">
             <button class="btn btn-dark move-right" (click)="caroselNav(false)">left</button>
             <button class="btn btn-success" (click)="toggleActiveView()">toggle view</button>
-            <button class="btn btn-dark move-right" (click)="caroselNav(true)">right</button>
-            <span class="btn btn-dark text-light">{{positionStatusObject.index}} out of {{positionStatusObject.total}}</span>
+            <button class="btn btn-primary" routerLink="../../../album/{{foldersource}}">Back to folder</button>
+            <span [ngStyle]="{'padding':'8px'} "  class="bg-success text-light">{{positionStatusObject.index}} out of {{positionStatusObject.total}}</span>
+            <button class="btn btn-dark move-right" (click)="caroselNav(true)">right</button>            
         </div>    
+        
     </div>    
   </div>
 

@@ -63,10 +63,15 @@ export class CarouselComponent implements OnInit {
 
   caroselNav(signal:boolean){
     if(signal){
-      this.itemnumber++;
+      if(this.itemnumber<this.positionStatusObject.total-1){
+        this.itemnumber++;
+      }      
     }else{
+      if(this.itemnumber>0){
       this.itemnumber--;
+      }
     }
+
     let arr = this.router.url.split('/');
     let p = (arr.splice(0,arr.length-1).join('/'))+'/'+this.itemnumber;
     this.router.navigateByUrl(p);

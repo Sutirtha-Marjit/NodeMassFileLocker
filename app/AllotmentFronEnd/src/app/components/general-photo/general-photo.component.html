@@ -5,7 +5,7 @@
       <img [src]="imageSource" (load)="onLoad()" class="general-photo" #photo/>
   </div>
   <div class="console-panel">
-    <button class="btn btn-sm btn-success"><small>CONFIG</small></button>
+    <a routerLink="/analyze/{{passivePath}}" class="btn btn-sm btn-success"><small>ANALYZE</small></a>
   </div>
 </div>
 </a>

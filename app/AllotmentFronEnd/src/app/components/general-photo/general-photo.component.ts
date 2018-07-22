@@ -1,5 +1,6 @@
 import {ActivatedRoute} from '@angular/router';
 import { Component, OnInit, Input,ViewChild } from '@angular/core';
+import {GridDataHandlingService} from '../../services/grid-data-handling.service'
 
 @Component({
   selector: 'app-general-photo',
@@ -16,7 +17,7 @@ export class GeneralPhotoComponent implements OnInit {
   passivePath:string='';
   loaded:boolean = false;
 
-  constructor(private route: ActivatedRoute) { 
+  constructor(private route: ActivatedRoute,private grdDataMngr:GridDataHandlingService) { 
 
   }
 
@@ -25,8 +26,8 @@ export class GeneralPhotoComponent implements OnInit {
   }
 
   ngOnInit() {
-  
-  this.passivePath = btoa(this.imageSource);  
+  console.log(this.imageSource);
+  this.passivePath = this.grdDataMngr.encryptPath(this.imageSource);  
   
   }
 
