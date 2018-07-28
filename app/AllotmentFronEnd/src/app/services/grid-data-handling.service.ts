@@ -18,6 +18,8 @@ export class GridDataHandlingService {
     this.IMAGE_EXTENSIONS = ['.jpg','.jpeg','.png','.bmp','.webm'];
    }
 
+   
+
   public encryptPath(path){
     return btoa(path);  
     

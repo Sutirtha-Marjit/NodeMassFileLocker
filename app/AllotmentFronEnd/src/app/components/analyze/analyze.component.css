@@ -1,0 +1,16 @@
+.analyze-wrap{
+    position: relative;
+    width:100%;
+    min-height: 700px;
+    background: black;
+}
+
+.analyze-wrap .backdrop{
+    width:100%;
+    height:100%;
+    position: absolute;
+    background-attachment: fixed;
+    background-size: 100% auto;
+    background-blend-mode: luminosity;
+    filter: grayscale() blur(14px);
+}

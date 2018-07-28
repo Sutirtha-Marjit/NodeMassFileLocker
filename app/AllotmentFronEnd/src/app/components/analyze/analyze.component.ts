@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {GridDataHandlingService} from '../../services/grid-data-handling.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-analyze',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AnalyzeComponent implements OnInit {
 
-  constructor() { }
+  topicEl:any = {
+    src:''
+  };
+  constructor(private route: ActivatedRoute,private griddatamngr:GridDataHandlingService) { 
+
+  }
 
   ngOnInit() {
+    
+    this.route.params.subscribe((params)=>{
+      if(params.resourcePath){
+        this.topicEl.src = this.griddatamngr.decryptPath(params.resourcePath);
+      }
+
+    });
   }
 
 }
