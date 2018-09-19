@@ -126,7 +126,7 @@ export class GridDataHandlingService {
   }
 
   public requestServerFolder(url:string,success,failure){
-    
+    console.log('Req:'+url);
     let albumRequestURL = `${environment.SERVICE_HOST}${REQ_PATH.folderDetail}${url}`;
     
       if(this.MASTER_CACHE[albumRequestURL]){

@@ -1,0 +1,45 @@
+.explorer-base{
+    position: absolute;
+    top:0px;
+    left:0px;
+    background:rgba(255,255,255,0.8);
+    width:100%;
+    height:100%;
+    z-index: 2900;
+}
+
+
+.explorer-box{
+    width:50%;
+    background:white;
+    padding:20px;
+    border-radius:8px;
+    position: relative;
+    margin:130px auto;
+}
+
+.explorer-content ul{
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+} 
+
+.explorer-content ul li{
+  border-left:1px dashed #222;
+  margin-left:10px;
+  padding: 0px 10px 5px 10px;
+}
+
+.folder-link-el{
+    cursor: pointer;
+}
+
+.folder-link-el:hover{
+    color:rgb(3, 43, 46);
+    cursor: pointer;
+}
+
+img.img-card{
+    width:100%;
+    height:auto;
+}

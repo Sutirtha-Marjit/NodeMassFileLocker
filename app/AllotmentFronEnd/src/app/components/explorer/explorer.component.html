@@ -1,0 +1,64 @@
+<ng-container *ngIf="view===0">
+  <div class="explorer-base">
+      <div class="explorer-box">
+        <div class="row">
+          <div class="col"><h3 class="text-success">Folder explorer</h3></div>
+          <div class="col"><button class="btn btn-sm btn-primary" (click)="moveAction()">Move to {{getCrAccessPath(currentLocation)}}</button></div>
+          <div class="col" style="text-align:right;">
+            <div class="btn-group">
+              <button (click)="openUp()" class="btn btn-dark btn-sm">root</button>
+              <button (click)="openUp('up')" class="btn btn-success btn-sm">up</button>
+              <button (click)="close()" class="btn btn-success btn-sm">close</button>
+            </div>
+          </div>
+        </div>
+
+          <div class="explorer-content">
+            <div class="row">
+              <div class="col">
+                  <ul>
+                      <file-element-link (linkClicked)="open(item.file)"   *ngFor="let item of explorerObj" [linkData]="item"></file-element-link>
+                  </ul>
+              </div>
+              <div class="col">
+                <img class="img-card" [src]="currentTopic"/>
+              </div>
+            </div>
+              
+          </div>
+      </div>
+  </div>
+</ng-container>
+
+
+<ng-container *ngIf="view===1">
+    <div class="explorer-base">
+        <div class="explorer-box">
+          <div class="row">
+            <div class="col"><h3 class="text-success">Folder explorer</h3></div>
+            <div class="col" style="text-align:right;">
+              <div class="btn-group">
+                <button (click)="openUp()" class="btn btn-dark btn-sm">root</button>
+                <button (click)="openUp('up')" class="btn btn-success btn-sm">up</button>
+                <button (click)="close()" class="btn btn-success btn-sm">close</button>
+              </div>
+            </div>
+          </div>
+  
+            <div class="explorer-content">
+              <div class="row">
+                <div class="col">
+                    <ul>
+                        <file-element-link (linkClicked)="open(item.file)" (click)="updateImage(item)"   *ngFor="let item of explorerObj" [linkData]="item"></file-element-link>
+                    </ul>
+                </div>
+                <div class="col">
+                  <img class="img-card" [src]="currentTopic"/>
+                </div>
+              </div>
+                
+            </div>
+        </div>
+    </div>
+  </ng-container>
+  

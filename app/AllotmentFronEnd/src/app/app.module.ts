@@ -13,6 +13,7 @@ import { GeneralPhotoComponent } from './components/general-photo/general-photo.
 import { AlphabetsComponent } from './components/alphabets/alphabets.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { AnalyzeComponent } from './components/analyze/analyze.component';
+import { ExplorerComponent,FileElementLink } from './components/explorer/explorer.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,9 @@ import { AnalyzeComponent } from './components/analyze/analyze.component';
     GeneralPhotoComponent,
     AlphabetsComponent,
     CarouselComponent,
-    AnalyzeComponent    
+    AnalyzeComponent,
+    ExplorerComponent,
+    FileElementLink    
   ],
   imports: [
     BrowserModule,

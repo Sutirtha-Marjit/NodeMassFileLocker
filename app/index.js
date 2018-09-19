@@ -12,15 +12,23 @@ const folderConfig = {
     sourceRoot:'./operations/source/'
 };
 
-app.use(bodyparser.json()); // support json encoded bodies
 app.use(bodyparser.urlencoded({ extended: true })); // support encoded bodies
+app.use(bodyparser.json()); // support json encoded bodies
 
+
+/*
+app.use(express.json()); // support json encoded bodies
+app.use(express.urlencoded({ extended: true })); // support encoded bodies
+*/
 
 app.use((req, res, next)=> {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
   });
+
+
+
 
 app.get('/service/get/check-status/',(req,res)=>{
     let o = getAResultObject();
@@ -53,6 +61,7 @@ app.get('/service/get/get-folder-details/',(req,res)=>{
  
 });
 
+
 app.get('/service/get/get-folder-details/:path',(req,res)=>{
     let o = getAResultObject();
     let finalPath = `${req.params.path}`.split('$').join('/');
@@ -73,8 +82,19 @@ app.get('/service/get/get-folder-details/:path',(req,res)=>{
     }
 });
 
+app.post('/service/post/cut-and-paste',(req,res)=>{
+    
+    if(req.body.source){
+        
+    }
+    let o = getAResultObject();
+    o.meta.detailedStatus = {requestedTo:''};
+    res.json(o);
+});
 
 
+
+app.use(express.static('./AllotmentFronEnd/dist/AllotmentFronEnd/'));  
 app.use('/operations',express.static('./operations/'));
 
 

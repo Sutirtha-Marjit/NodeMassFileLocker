@@ -3,12 +3,15 @@
     <a class="navbar-brand" href="#">Allotment 2.0</a>   
     <div *ngIf="baseResponseData" class="btn-group">
       <a routerLink="{{item.accessPath}}" class="btn btn-dark" *ngFor="let item of baseResponseData.data.resultObject">{{item.file}}</a>
+      <a routerLink="analyze" class="btn btn-dark">Analyze</a>
+      <button class="btn btn-dark" (click)="openExplorer()">Explorer</button>
     </div>
   </nav>
   
   
-  <div class="container-fluid">
+  <div>
       <router-outlet></router-outlet>  
   </div>
+  <app-explorer [view]="1"  (closeExplorer)="closeExplorer()" *ngIf="openExlorer"  [currentLocation]="'outbox'"></app-explorer>
 </div>
 

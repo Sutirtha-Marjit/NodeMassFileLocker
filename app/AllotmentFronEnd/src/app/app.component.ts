@@ -12,12 +12,22 @@ import {CompleteFolderResponse} from './interfaces/datatypes';
 export class AppComponent implements OnInit{
   
   title = 'app';
+  openExlorer=false;
   baseurl='';
   baseResponseData:CompleteFolderResponse = null;
   constructor(private griddatamngr:GridDataHandlingService){
 
     
   }
+
+  closeExplorer(){
+    this.openExlorer = false;
+  }
+
+  openExplorer(){
+    this.openExlorer = true;
+  }
+
 
   ngOnInit(){
     this.griddatamngr.requestServerFolder(this.baseurl,(baseResponseData)=>{

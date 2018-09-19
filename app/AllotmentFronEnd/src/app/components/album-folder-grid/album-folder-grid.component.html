@@ -1,4 +1,4 @@
-<div>
+<div class="container-fluid">
 <div class="left-console">
 <h1 class="anton pT20">{{currentFolder.name}}</h1>
 </div>
@@ -11,7 +11,7 @@
 
 <div class="clear"></div>
 
-<div>
+<div class="container-fluid">
   <div class="btn-group left-console">
       <a routerLink="/album/{{getFolderLink(i)}}" *ngFor="let item of currentFolder.pathArray; index as i; " class="btn btn-sm btn-light">{{item}} / </a>
   </div>
@@ -29,7 +29,7 @@
 </div>
 <hr/>
 
-<div>
+<div class="container-fluid">
   <div *ngFor="let albumEl of filteredData[crPageCount]; let i=index" class="col-md-3   element-box">
     <app-folder-element [serial]="(pageSize*crPageCount)+i" [albumData]="albumEl" [containerFolder]="currentFolder"></app-folder-element>
   </div>

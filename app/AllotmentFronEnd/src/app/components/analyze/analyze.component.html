@@ -1,4 +1,81 @@
 <div class="analyze-wrap">
-    <div class="backdrop" [ngStyle]="{'backgroundImage':'url('+topicEl.src+')'}"></div>
+    <div class="backdrop" ></div>
+    <div class="analyze-content container-fluid" >
+        <h2 class="text-light"><span>Analyze operations</span>  &nbsp;&nbsp;&nbsp;<button class="btn btn-sm btn-primary" (click)="backPage()">Back</button></h2>
+        <hr class="bg-success"/>
+        <div class="row">
+            <div class="col" *ngIf="this.topicEl.src">
+                <h5 class="text-success">Current topic</h5>
+                
+                <img class="img-card" [src]="this.topicEl.src"/>
+                <hr class="bg-success"/>
+                <div class="btn-group">
+                    <button class="btn btn-sm btn-success" (click)="setItemFor('duplicate',this.topicEl.src)">duplicate</button>
+                    <button class="btn btn-sm btn-success" (click)="setItemFor('erase',this.topicEl.src)">erase</button>
+                    <button class="btn btn-sm btn-success" (click)="setItemFor('wrong',this.topicEl.src)">wrong place</button>
+                </div>
+            </div>
+            <div class="col">
+                <h5 class="text-success">Duplicates</h5>
+                    <div class="container-fluid">
+                        <ng-container *ngFor="let item of currentStoreObject.duplicate">
+                            <div class="row">
+                                <div class="image-block-detail col">
+                                    <img class="img-card" [src]="item"/>
+                                </div>
+                                <div class="image-block-detail col text text-light">
+                                    <small><span class="text-warning">Location : </span>{{getLocation(item)}}</small>
+                                    <br/>
+                                    <button (click)="removeItemFor('duplicate',item)" class="btn btn-sm btn-danger">Unlist item</button>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+            </div>
+            <div class="col">
+                <h5 class="text-success">Wrongly placed</h5>
+                <div>
+                    <ng-container *ngFor="let item of currentStoreObject.wrong">
+                            <div class="row">
+                                    <div class="image-block-detail col">
+                                        <img class="img-card" [src]="item"/>
+                                    </div>
+                                    <div class="image-block-detail col text text-light">
+                                        <small><span class="text-warning">Location : </span>{{getLocation(item)}}</small>
+                                        <br/>
+                                        <button (click)="removeItemFor('wrong',item)" class="btn btn-sm btn-danger">Unlist item</button>
+                                        <br/><br/>
+                                        <button (click)="moveItemTo(item)" class="btn btn-sm btn-primary">Move</button>
+                                    </div>
+                                </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="col">
+                <h5 class="text-success">Erase</h5>
+                <div>
+                        <ng-container *ngFor="let item of currentStoreObject.erase">
+                                <div class="row">
+                                        <div class="image-block-detail col">
+                                            <img class="img-card" [src]="item"/>
+                                        </div>
+                                        <div class="image-block-detail col text text-light">
+                                            <small><span class="text-warning">Location : </span>{{getLocation(item)}}</small>
+                                            <br/>
+                                            <button (click)="removeItemFor('erase',item)" class="btn btn-sm btn-danger">Unlist item</button>
+                                            
+                                        </div>
+                                    </div>
+                        </ng-container>
+
+                    </div>
+            </div>
+        </div>
+    </div>
+    
+    <app-explorer  (closeExplorer)="closeExplorer()" *ngIf="openExlorer" [currentTopic]="currentItemToMove" [currentLocation]="'outbox'"></app-explorer>
 </div>
-<!-- <img [src]="this.topicEl.src"/> -->
+
+<!-- <img [src]="this.topicEl.src"/>
+[ngStyle]="{'backgroundImage':'url('+topicEl.src+')'}"
+-->
