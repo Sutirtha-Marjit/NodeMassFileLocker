@@ -32,14 +32,16 @@ export class ExplorerComponent implements OnInit {
 
   updateImage(item:any){
       if(!item.isDir){
-        this.currentTopic = item.accessPath;
+        this.currentTopic = item.accessPath;  
       }
   }
 
   moveAction(){
     const c = window.confirm('Are you sure about to move the file to '+this.getCrAccessPath(this.currentLocation));
     if(c){
-      this.whenTargetFolderSelect.emit({target:this.currentLocation});
+      let sourceFile = `${this.grdatamngr.realPathToServerAccessPath(this.currentTopic,true)}$${this.currentTopic.split('/').reverse()[0]}`;
+      console.log(sourceFile);
+      this.whenTargetFolderSelect.emit({target:this.currentLocation,source:sourceFile});
       this.closeExplorer.emit('close');
     }
     
@@ -63,7 +65,7 @@ export class ExplorerComponent implements OnInit {
       this.grdatamngr.requestServerFolder(this.currentLocation,(o)=>{
         
         this.explorerObj = o.data.resultObject;
-        console.log(this.explorerObj);
+        
       },()=>{
   
       })

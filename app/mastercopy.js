@@ -116,7 +116,8 @@ function MasterCopy(fs,target,listOfFiles,callBack){
                     console.log('successfully deleted '+toDelFName);
                     });
                     
-                })
+                });
+                StatusObject.success=true;
                 callBack(StatusObject);
             }
             

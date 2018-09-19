@@ -79,6 +79,20 @@ export class AnalyzeComponent implements OnInit {
     return true;
   }
 
+  onTargetFolderSelect(e){
+      let moveConfig = e;
+      
+      this.griddatamngr.requestObjectMove(e).subscribe((movementStatus)=>{
+        
+        if(movementStatus.success){
+          this.griddatamngr.flushCache();
+        }
+        
+      },(e)=>{
+        console.log(e);
+      })
+  }
+
   closeExplorer(){
     this.openExlorer = false;
   }

@@ -4,6 +4,7 @@ import {FolderDetails} from '../interfaces/datatypes';
 import {REQ_PATH} from '../constants';
 import {environment} from '../../environments/environment';
 import * as Lodash from "lodash";
+import { Observable } from 'rxjs';
 
 
 
@@ -101,8 +102,13 @@ export class GridDataHandlingService {
     //return resultSet;
   }
 
-  public realPathToServerAccessPath(realPath:string):string{
+  public realPathToServerAccessPath(realPath:string,completeURL:boolean = false):string{
     let url='',c=0,isImage=false;
+
+    if(completeURL){
+      realPath = realPath.replace(environment.SERVICE_HOST,'');
+      realPath = realPath.replace('operations/','');
+    }
 
     while(c<this.IMAGE_EXTENSIONS.length && !isImage){
       if(realPath.endsWith(this.IMAGE_EXTENSIONS[c]) || realPath.toLowerCase().endsWith(this.IMAGE_EXTENSIONS[c])){
@@ -123,6 +129,14 @@ export class GridDataHandlingService {
     }
     
     return url; 
+  }
+
+  public requestObjectMove(moveConfig:any):Observable<any>{
+    return this.http.post(`${environment.SERVICE_HOST}service/post/cut-and-paste`,moveConfig)
+  }
+
+  public flushCache(){
+    this.MASTER_CACHE = {};
   }
 
   public requestServerFolder(url:string,success,failure){

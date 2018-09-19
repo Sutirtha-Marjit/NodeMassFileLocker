@@ -73,7 +73,7 @@
         </div>
     </div>
     
-    <app-explorer  (closeExplorer)="closeExplorer()" *ngIf="openExlorer" [currentTopic]="currentItemToMove" [currentLocation]="'outbox'"></app-explorer>
+    <app-explorer (whenTargetFolderSelect)="onTargetFolderSelect($event)"  (closeExplorer)="closeExplorer()" *ngIf="openExlorer" [currentTopic]="currentItemToMove" [currentLocation]="'outbox'"></app-explorer>
 </div>
 
 <!-- <img [src]="this.topicEl.src"/>

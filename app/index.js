@@ -85,11 +85,16 @@ app.get('/service/get/get-folder-details/:path',(req,res)=>{
 app.post('/service/post/cut-and-paste',(req,res)=>{
     
     if(req.body.source){
-        
+        const target = `./operations/${req.body.target.split('$').join('/')}`;
+        const listOfFiles = [`./operations/${req.body.source.split('$').join('/')}`];
+        console.log(target);
+        console.log(listOfFiles);
+        MasterCopy(fs,target,listOfFiles,(o)=>{
+            res.json(o);
+        })
     }
-    let o = getAResultObject();
-    o.meta.detailedStatus = {requestedTo:''};
-    res.json(o);
+    
+    
 });
 
 
