@@ -139,6 +139,14 @@ export class GridDataHandlingService {
     this.MASTER_CACHE = {};
   }
 
+  public requestServerFolderReport(url:string,success,failure){
+    console.log('Req:'+url);
+    let albumRequestURL = `${environment.SERVICE_HOST}${REQ_PATH.folderDetailUltimate}${url}`;
+    this.http.get(albumRequestURL,{}).subscribe((receivedData:any)=>{
+       success(receivedData);
+    });
+  }
+
   public requestServerFolder(url:string,success,failure){
     console.log('Req:'+url);
     let albumRequestURL = `${environment.SERVICE_HOST}${REQ_PATH.folderDetail}${url}`;

@@ -61,6 +61,29 @@ app.get('/service/get/get-folder-details/',(req,res)=>{
  
 });
 
+app.get('/service/get/get-folder-details-ultimate/:path',(req,res)=>{
+
+    let o = getAResultObject();
+    let finalPath = `${req.params.path}`.split('$').join('/');
+    finalPath = `${folderConfig.root}${finalPath}`;
+    o.meta.detailedStatus = {requestedTo:finalPath}
+    
+    if(finalPath.length>0){
+        let arr = MasterAnalyze(finalPath,'ultimate');
+        o.meta.status = arr.status;
+        o.data.total = arr.total;
+        o.data.resultArray = arr.resultArray;
+        if(!arr.status){
+            o.meta.message = `No such file or directory found as <${finalPath}>, Please check again`;
+        }
+        res.json(o);
+    }else{
+        o.meta.message = "No parameters have been passed";
+        res.json(o);
+    }
+
+
+});
 
 app.get('/service/get/get-folder-details/:path',(req,res)=>{
     let o = getAResultObject();

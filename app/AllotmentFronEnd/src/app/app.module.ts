@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
+import {ChartModule} from 'angular-highcharts';
 import {NgbPagination} from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { AlbumFolderGridComponent } from './components/album-folder-grid/album-folder-grid.component';
@@ -14,6 +15,7 @@ import { AlphabetsComponent } from './components/alphabets/alphabets.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { AnalyzeComponent } from './components/analyze/analyze.component';
 import { ExplorerComponent,FileElementLink } from './components/explorer/explorer.component';
+import { ReportDashboardComponent } from './components/report-dashboard/report-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { ExplorerComponent,FileElementLink } from './components/explorer/explore
     CarouselComponent,
     AnalyzeComponent,
     ExplorerComponent,
-    FileElementLink    
+    FileElementLink,
+    ReportDashboardComponent    
   ],
   imports: [
     BrowserModule,
@@ -34,6 +37,7 @@ import { ExplorerComponent,FileElementLink } from './components/explorer/explore
     HttpClientModule,
     BrowserAnimationsModule,
     NoopAnimationsModule,
+    ChartModule,
     NgbModule   
   ],
   providers: [],

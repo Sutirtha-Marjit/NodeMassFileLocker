@@ -4,9 +4,12 @@ import { AlbumFolderGridComponent } from './components/album-folder-grid/album-f
 import { PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 import { GeneralPhotoComponent } from './components/general-photo/general-photo.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
-import { AnalyzeComponent} from './components/analyze/analyze.component';
+import { AnalyzeComponent} from './components/analyze/analyze.component'; 
+import { ReportDashboardComponent } from './components/report-dashboard/report-dashboard.component';
 
 const routes: Routes = [
+  {path:'',redirectTo:'report/dashboard',pathMatch:'full'},
+  {path:'report/dashboard',component:ReportDashboardComponent},
   {path:'page404',component:PageNotFoundComponent},
   {path: 'album/:childpath/:pagenumber/:pagesize', component: AlbumFolderGridComponent },
   {path: 'album/:childpath/:pagenumber', component: AlbumFolderGridComponent },
