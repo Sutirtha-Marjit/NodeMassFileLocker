@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {NoopAnimationsModule, BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -16,6 +17,7 @@ import { CarouselComponent } from './components/carousel/carousel.component';
 import { AnalyzeComponent } from './components/analyze/analyze.component';
 import { ExplorerComponent,FileElementLink } from './components/explorer/explorer.component';
 import { ReportDashboardComponent } from './components/report-dashboard/report-dashboard.component';
+import { ShiftResourceComponent } from './components/shift-resource/shift-resource.component';
 
 @NgModule({
   declarations: [
@@ -29,12 +31,15 @@ import { ReportDashboardComponent } from './components/report-dashboard/report-d
     AnalyzeComponent,
     ExplorerComponent,
     FileElementLink,
-    ReportDashboardComponent    
+    ReportDashboardComponent,
+    ShiftResourceComponent    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule ,
     BrowserAnimationsModule,
     NoopAnimationsModule,
     ChartModule,

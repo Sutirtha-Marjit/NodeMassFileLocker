@@ -6,6 +6,7 @@ import { GeneralPhotoComponent } from './components/general-photo/general-photo.
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { AnalyzeComponent} from './components/analyze/analyze.component'; 
 import { ReportDashboardComponent } from './components/report-dashboard/report-dashboard.component';
+import { ShiftResourceComponent} from './components/shift-resource/shift-resource.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'report/dashboard',pathMatch:'full'},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'album/:childpath/:pagenumber/:pagesize', component: AlbumFolderGridComponent },
   {path: 'album/:childpath/:pagenumber', component: AlbumFolderGridComponent },
   {path: 'album/:childpath',component: AlbumFolderGridComponent},
+  {path: 'office/:childpath',component: ShiftResourceComponent},  
   {path: 'photo',component:GeneralPhotoComponent},
   {path: 'photo/:foldersource',component:CarouselComponent},
   {path: 'photo/:foldersource/:itemnumber',component:CarouselComponent},

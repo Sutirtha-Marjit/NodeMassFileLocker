@@ -6,6 +6,7 @@
       <a routerLink="analyze" class="btn btn-dark">Analyze</a>
       <button class="btn btn-dark" (click)="openExplorer()">Explorer</button>
       <a routerLink="report/dashboard" class="btn btn-dark">Reports</a>
+      <a routerLink="office/qq" class="btn btn-dark">Shifting</a>
     </div>
   </nav>
   
@@ -13,6 +14,6 @@
   <div>
       <router-outlet></router-outlet>  
   </div>
-  <app-explorer [view]="1"  (closeExplorer)="closeExplorer()" *ngIf="openExlorer"  [currentLocation]="'outbox'"></app-explorer>
+  <app-explorer [view]="1"  (closeExplorer)="closeExplorer()" *ngIf="openExlorer"  [currentLocation]="''"></app-explorer>
 </div>
 

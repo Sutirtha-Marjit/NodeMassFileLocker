@@ -18,6 +18,8 @@ export class ExplorerComponent implements OnInit {
   @Output() closeExplorer = new EventEmitter<any>();
   @Output() whenTargetFolderSelect = new EventEmitter<any>();
   @ViewChild('nestedList') nestedList:TemplateRef<any>;
+
+  autoCompleteSearch = "";
   masterRoot:any = {
     done:false,
     val:null
@@ -30,11 +32,7 @@ export class ExplorerComponent implements OnInit {
   }
 
 
-  updateImage(item:any){
-      if(!item.isDir){
-        this.currentTopic = item.accessPath;  
-      }
-  }
+  
 
   moveAction(){
     const c = window.confirm('Are you sure about to move the file to '+this.getCrAccessPath(this.currentLocation));
@@ -55,9 +53,42 @@ export class ExplorerComponent implements OnInit {
     return path.split('$').join('/');
   }
 
-  open(val){
-    this.currentLocation = `${this.currentLocation}$${val}`;
-    this.loadCurrentPage();
+  open(evtType,obj){
+    
+    if(evtType==='image'){
+      this.updateImage(obj);
+    }else{
+      this.currentLocation = `${this.currentLocation}$${obj.file}`;
+      this.loadCurrentPage();
+    }    
+  }
+
+  updateImage(item:any){
+    
+    if(!item.isDir){
+      this.currentTopic = item.accessPath;  
+    }
+  }
+
+  getExploreObject(){
+    this.explorerObj.forEach((obj)=>{
+        obj.searchVisible = true;
+
+        if(this.autoCompleteSearch.trim().length>0){
+          const f = obj.file.toLowerCase();
+          const a = this.autoCompleteSearch.toLowerCase();
+
+          if(f.indexOf(a)>-1){
+            obj.searchVisible = true;
+          }else{
+            obj.searchVisible = false;
+          }
+        }
+        
+
+    });
+    console.log(this.explorerObj);
+    return this.explorerObj;
   }
 
   loadCurrentPage(){
@@ -65,6 +96,7 @@ export class ExplorerComponent implements OnInit {
       this.grdatamngr.requestServerFolder(this.currentLocation,(o)=>{
         
         this.explorerObj = o.data.resultObject;
+
         
       },()=>{
   
@@ -105,14 +137,22 @@ export class ExplorerComponent implements OnInit {
   encapsulation:ViewEncapsulation.None
 })
 export class FileElementLink implements OnInit{
+  @Input() searchVisible = false;
   @Input() linkData:any = null;
   @Output() linkClicked = new EventEmitter<string>();
+  @Output() imageUpdateRequest = new EventEmitter<any>();
   constructor(){
 
   }
 
-  clicked(){
-    this.linkClicked.emit('clicked');
+  clickedForImage(){
+    
+    this.imageUpdateRequest.emit(this.linkData);
+    console.log(this.imageUpdateRequest);
+  }
+
+  clicked(requestType:string){    
+    this.linkClicked.emit(requestType);
   }
   ngOnInit(){
 

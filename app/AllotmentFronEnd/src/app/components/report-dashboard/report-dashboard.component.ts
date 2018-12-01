@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Chart,Highcharts } from 'angular-highcharts';
 import {GridDataHandlingService} from '../../services/grid-data-handling.service';
+import {Form,FormControl,FormGroup} from '@angular/forms';
+import * as _ from "lodash";
+
 
 @Component({
   selector: 'app-report-dashboard',
@@ -11,15 +14,52 @@ export class ReportDashboardComponent implements OnInit {
   
   @ViewChild('chartContainer') chartContainer:ElementRef;
   mainChart=null; 
-  constructor(private grdDataMgnt:GridDataHandlingService) { }
+  directoryList=[];
+  directoryChooseFormGroup = null;
+  constructor(private grdDataMgnt:GridDataHandlingService) {
+      
+    this.directoryChooseFormGroup = new FormGroup({
+      dirChoose:new FormControl('model')
+    });
 
-  populateChartData(whenComplete){
-    this.grdDataMgnt.requestServerFolderReport('outbox',(data)=>{
+    
+   }
+
+  populateChartData(dirVal,whenComplete){
+    this.grdDataMgnt.requestServerFolderReport(dirVal,(data)=>{
       whenComplete(data);
       
     },(failureData)=>{
       console.log(failureData);
-    })
+    });
+  }
+
+  dirValueUpdate(){
+    
+    this.populateChartData(this.directoryChooseFormGroup.get('dirChoose').value,(resultObj)=>{
+      let cData=[];
+      console.log(resultObj);
+      resultObj.data.resultArray.forEach(element => {
+        cData.push([element.path,element.total]);
+      });
+      console.log(cData);
+      cData = cData.sort((a,b)=>{
+        return a[1]-b[1];
+      });
+      console.log(cData);
+      this.generateChart(cData);  
+    });
+    
+  }
+
+  private populateDirectoryList(){
+    this.grdDataMgnt.requestServerFolder('destination',(listData)=>{
+        
+      this.directoryList=listData.data.resultObject;
+              
+    },(failureData)=>{
+      console.log(failureData);
+    });
   }
 
   generateChart(cData){
@@ -58,6 +98,10 @@ export class ReportDashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+
+   this.populateDirectoryList(); 
+   this.dirValueUpdate(); 
+   /*
     this.populateChartData((resultObj)=>{
       const cData=[];
       console.log(resultObj);
@@ -67,7 +111,7 @@ export class ReportDashboardComponent implements OnInit {
       this.generateChart(cData);  
     });
     
-    
+    */
 
 
   }

@@ -3,3 +3,11 @@ img.icon{
     height:auto;
     margin-right: 20px;
 }
+
+.searchVisible-true{
+    display: block;
+}
+
+.searchVisible-false{
+    display: none;
+}

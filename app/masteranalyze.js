@@ -26,7 +26,9 @@ function normal(folderPath){
     return o;
 }
 
-function returnNumOfFiles(folderPath){
+
+
+function returnNumOfFiles(folderPath){ 
     let count=0;
     let data = fs.readdirSync(folderPath);
     let totalSubFolderFiles=0;
@@ -34,7 +36,11 @@ function returnNumOfFiles(folderPath){
     data.forEach(function(p,n){
         var dir,resultantPath = folderPath+"/"+p;
         dir = fs.lstatSync(resultantPath).isDirectory();
-        
+        if(n===0){
+            console.log('////////////////////////');
+            console.log(fs.lstatSync(resultantPath));
+            console.log('////////////////////////');
+        }
         if(!dir){
             count++;
         }else{
@@ -66,11 +72,13 @@ function ultimate(folderPath){
         }/*else{
             c++;
         }  */  
-        
-        resultArray.push({
-            path:p,
-            total:c
-        });
+        if(dir){
+            resultArray.push({
+                path:p,
+                total:c
+            });
+        }
+       
        
 
         });
@@ -85,6 +93,7 @@ function ultimate(folderPath){
 
 function MasterAnalyze(folderPath,type){
 
+    
     if(type==='ultimate'){
         return ultimate(folderPath);   
     }else{

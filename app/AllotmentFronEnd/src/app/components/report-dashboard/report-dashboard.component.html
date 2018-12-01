@@ -1,9 +1,21 @@
 <div class="container-fluid">
   <br/>
   <div class="report-dash-board-wrap">
-    <h2>Your current resource analytics</h2>
-    <div class="chart-container" #chartContainer>
-  
+    <div class="container-fluid">
+      <div class="row">
+          <h2 class="col-md-10">Your current resource analytics</h2>
+          <div class="col-md-2">
+            <form  name="select_directory" [formGroup]="directoryChooseFormGroup">
+              <select name="select_option_list" class="form-control" formControlName="dirChoose" (change)="dirValueUpdate()">
+                <option *ngFor="let item of directoryList" value="destination${{item.file}}" >{{item.file}}</option>
+              </select>
+            </form>
+            
+          </div>
+      </div>
+    </div>
+   
+      <div class="chart-container" #chartContainer>  
     </div>
   </div>
 </div>

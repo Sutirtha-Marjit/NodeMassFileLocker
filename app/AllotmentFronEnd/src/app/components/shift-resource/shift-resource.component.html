@@ -1,0 +1,34 @@
+
+<div>
+
+  <div class="row operation-wrap">
+    <div class="col-md-12">
+        <div *ngFor="let item of getSelecteds()" style="width:20%; display:inline-block;">
+          <img style="width:100%" [src]="item.accessPath"/>
+        </div>
+    </div>
+    
+  </div>  
+
+    
+
+  <div class="slide-console bg-info" style="text-align:center; ">
+    <button class="btn btn-sm btn-info" style="margin-top:2px;" (click)="slidePanelOp()"><</button>
+    <button class="btn btn-sm btn-info" style="margin-top:2px;" (click)="openExplorer()" *ngIf="(getSelecteds()).length>0">Go</button>
+    
+  </div>
+
+  <div class="broadtable {{closeSlidePanel}}">
+    <div class="col-el" *ngFor="let item of appliedData" [ngStyle]="{'width':(100/appliedData.length)+'%'}">
+        <div *ngFor="let pic of item">
+          <img (click)="selectToMoveList(pic.selected,pic)" class="selected-{{pic.selected}}" [src]="pic.accessPath" />          
+        </div>
+    </div>
+  </div>
+  
+  <app-explorer *ngIf="closeExplorerFlag" [currentLocation]="'destination'" (closeExplorer)="closeExplorer()"></app-explorer>
+</div>
+
+
+
+
